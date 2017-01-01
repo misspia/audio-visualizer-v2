@@ -1,35 +1,30 @@
 import React, { Component } from 'react';
 import Clock from './Clock';
-
+import Ticker from './Ticker';
 // http://stackoverflow.com/questions/32880484/react-js-live-clock-update
 
 class App extends Component {
     constructor() {
       super();
-      this.state = {time: ''};
+      this.state = {currentTime: ''};
     }
-    
-    updateTime() {
 
+    updateTime() {      
       const currentTime = new Date();
       const hours = currentTime.getHours();
       const minutes = currentTime.getMinutes();
       const seconds = currentTime.getSeconds();
- 
-      console.log(currentTime);
-      console.log(hours);
-      console.log(minutes);
-      console.log(seconds);
 
+      this.setState({
+        currentTime: [hours, minutes, seconds]
+      })
     }
 
     componentWillMount() {
-
       this.updateTime();
     }
 
     componentDidMount() {
-
       window.setInterval(function() {
 
         this.updateTime();
@@ -38,18 +33,18 @@ class App extends Component {
     }
 
     render() {
-   
+
         return (
             <li className="col">
                 <ul className="col center align-center full-width-height">
 
-                    <Clock/>
+                    <Clock time={this.state.currentTime}/>
+                    <Ticker time={this.state.currentTime} />
                 
                 </ul>
             </li>
         );
     }
 }
-
 
 export default App;
