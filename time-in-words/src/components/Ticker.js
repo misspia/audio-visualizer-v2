@@ -7,7 +7,7 @@ class Ticker extends Component {
 	}
 	componentWillReceiveProps(nextProps) {
 		const time = this.props.time;
-		var displayTime = [];
+		let displayTime = [];
 		
 		displayTime = time.map(function(num) {
 			num = num.toString();
@@ -22,7 +22,7 @@ class Ticker extends Component {
 	}
 	render() {
 		return (
-			<li>{this.state.time}</li>
+			<li className="row center align-center">{this.state.time}</li>
 		);
 	}
 }

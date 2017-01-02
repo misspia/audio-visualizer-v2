@@ -1,0 +1,31 @@
+{
+	"words": [
+		"it's", 
+		"a",
+		"half",
+		"ten",
+		"quarter",
+		"twenty",
+		"five",
+		"minutes",
+		"to",
+		"past",
+		"midnight",
+		"noon"
+	],
+	"hours": [
+		"one",
+		"two",
+		"three",
+		"four",
+		"five",
+		"six",
+		"seven",
+		"eight",
+		"nine",
+		"ten",
+		"eleven",
+		"twelve",
+		"o'clock"
+	]
+}

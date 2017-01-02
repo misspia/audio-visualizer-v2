@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Clock from './Clock';
 import Ticker from './Ticker';
-// http://stackoverflow.com/questions/32880484/react-js-live-clock-update
 
 class App extends Component {
     constructor() {
@@ -37,10 +36,8 @@ class App extends Component {
         return (
             <li className="col">
                 <ul className="col center align-center full-width-height">
-
                     <Clock time={this.state.currentTime}/>
-                    <Ticker time={this.state.currentTime} />
-                
+                    <Ticker time={this.state.currentTime} />                
                 </ul>
             </li>
         );
