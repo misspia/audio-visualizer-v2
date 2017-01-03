@@ -20,7 +20,6 @@ class ClockPeriod extends Component {
 
 				periods: { am: false, pm: true }
 			})
-
 		}
 	}
 	componentWillReceiveProps(nextProps) {

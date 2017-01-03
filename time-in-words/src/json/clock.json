@@ -1,31 +1,31 @@
 {
-	"words": [
-		"it's", 
-		"a",
-		"half",
-		"ten",
-		"quarter",
-		"twenty",
-		"five",
-		"minutes",
-		"to",
-		"past",
-		"midnight",
-		"noon"
-	],
-	"hours": [
-		"one",
-		"two",
-		"three",
-		"four",
-		"five",
-		"six",
-		"seven",
-		"eight",
-		"nine",
-		"ten",
-		"eleven",
-		"twelve",
-		"o'clock"
-	]
+	"words": {
+		"it's": true, 
+		"a": false,
+		"half": false,
+		"ten": false,
+		"quarter": false,
+		"twenty": false,
+		"five": false,
+		"minutes": false,
+		"to": false,
+		"past": false,
+		"midnight": false,
+		"noon": false
+	},
+	"hours": {
+		"one": false,
+		"two": false,
+		"three": false,
+		"four": false,
+		"five": false,
+		"six": false,
+		"seven": false,
+		"eight": false,
+		"nine": false,
+		"ten": false,
+		"eleven": false,
+		"twelve": false,
+		"o'clock": false
+	}
 }
