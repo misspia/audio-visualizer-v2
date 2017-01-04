@@ -9,24 +9,19 @@ class ClockWord extends Component {
 			activeClass: ''
 		}
 	}
-	setProps() {
-		this.setState({
-			word: this.props.dataWord,
-			active: this.props.active,
-			activeClass: this.state.active ? 'active': '---'
-		})
-	}
 	componentWillMount() {
-		this.setProps();
+		this.setState({
+			word: this.props.dataWord
+		});
 	}
 	componentWillReceiveProps(nextProps) {
-		this.setProps();
-
-
+		this.setState({
+			active: nextProps.active
+		})
 	}
 	render() {
 		return (
-			<li className={this.state.activeClass} >
+			<li className={this.state.active ? 'active' : '--'} >
 				{this.state.word}
 			</li>		
 		);

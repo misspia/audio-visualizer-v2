@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ClockDisplay from './ClockDisplay';
+import ClockWordContainer from './ClockWordContainer';
 import ClockPeriod from './ClockPeriod';
 
 class Clock extends Component {
@@ -28,7 +28,7 @@ class Clock extends Component {
 		return(
 			<li id="clock">
 				<ul className="col space-between full-width-height">
-					<ClockDisplay hour={this.state.hour} minute={this.state.minuteRounded}/>
+					<ClockWordContainer hour={this.state.hour} minute={this.state.minuteRounded}/>
 					<ClockPeriod hour={this.state.hour}/>
 				</ul>
 			</li>
