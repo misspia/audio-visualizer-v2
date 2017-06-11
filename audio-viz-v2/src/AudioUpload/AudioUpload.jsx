@@ -5,31 +5,44 @@ class AudioUpload extends Component {
 	constructor() {
 		super();
 		this.state = {
-			fileBlob: null,
-
+			fileBlob: [],
+			audioElement: []
 		}
 		this.handleFileUpload = this.handleFileUpload.bind(this)
 	}
 	handleFileUpload(e) {
 		const files = e.target.files;
-		console.log(files)
-		this.setState({ fileBlob:  this.createFileUrl(files) });
-		// this.setState(previousState => ({
-		// 	fileBlob: [...previousState.fileBlob, createFileUrl(files)]
-		// }));
+		// this.setState({ fileBlob:  this.createFileUrl(files) });
+		this.setState(previousState => ({
+			fileBlob: [...previousState.fileBlob, this.createFileUrl(files)]
+		}));
 	}
 	createFileUrl(files) {
-		const fileArr = [];
+		let fileArr = [];
 		for(let key in files) { 
 			if(typeof files[key] === 'object') { fileArr.push( URL.createObjectURL(files[key])) }	
 		};
 		return fileArr;
 	}
+	createAudioElement(urls) {
+		let audio = [];
+		console.log(urls)
+		if(urls[0]) {
+			audio = urls[0].map( (url, index) => {
+				return <audio key={"audio-" + index} src={url} controls autoPlay/>;		
+			})
+		}
+		return audio;
+
+	}
 	render() {
 		return (
 			<div>
-				<audio src={this.state.fileBlob} controls autoPlay/>
 				<input type="file" accept="audio/*" onChange={this.handleFileUpload} multiple/>
+				
+				<audio src={this.state.fileBlob[0]} controls autoPlay/>
+				{this.state.fileBlob}
+				{this.createAudioElement(this.state.fileBlob)}
 			</div>
 			
 		);
@@ -37,8 +50,6 @@ class AudioUpload extends Component {
 }
 
 export default AudioUpload;
-
-
 
 
 // this.setState(previousState => ({
