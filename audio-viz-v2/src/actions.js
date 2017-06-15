@@ -1,4 +1,5 @@
 const dispatch = require('pico-flux').dispatch;
+const Store = require('./store.js');
 
 const Actions = {
 	addFile: (files) => {
@@ -7,3 +8,6 @@ const Actions = {
 }
 
 module.exports = Actions;
+
+// https://github.com/thalmic/opal/blob/master/tools/kona/exitPupil/pupil.store.js
+// https://www.npmjs.com/package/pico-flux

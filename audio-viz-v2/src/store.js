@@ -12,8 +12,6 @@ const Store = flux.createStore({
 	}
 });
 
-Store.getFiles = () => {
-	return State.files;
-};
+Store.getFiles = () => { return State.files; };
 
 module.exports = Store;
