@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Store from '../store.js';
 import Actions from '../actions.js';
 
-import './AudioUpload.css';
+import './AudioUpload.scss';
 
 
 class AudioUpload extends Component {
@@ -18,6 +18,7 @@ class AudioUpload extends Component {
 	}
 	createAudioElement() {
 		let audio = Store.getFiles().map( (url, index) => { return <audio key={"audio-" + index} src={url} controls autoPlay/>;})
+		// let audio = this.props.files.map( (url, index) => { return <audio key={"audio-" + index} src={url} controls autoPlay/>;})
 		return audio;
 	}
 	render() {
@@ -25,6 +26,8 @@ class AudioUpload extends Component {
 			<div>
 				<input type="file" accept="audio/*" onChange={this.handleFileUpload} multiple/>
 				{this.state.audioElement}
+				test
+				<span>supp</span>
 			</div>
 			
 		);
