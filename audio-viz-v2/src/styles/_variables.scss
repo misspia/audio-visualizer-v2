@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,700');
+// @import url('https://fonts.googleapis.com/css?family=Nunito+Sans:300,700');
+
+@mixin fontBody() {
+	font-family: 'Roboto', sans-serif;
+	// font-family: 'Nunito Sans', sans-serif;
+	font-weight: 300;
+}
+
+@mixin fontHead() {
+	font-family: 'Roboto', sans-serif;
+	// font-family: 'Nunito Sans', sans-serif;
+	font-weight: 700;
+}
+
+$baseColor: #1e1e1e;
+$assetBaseColor: #000000;
+$coolColor: #6bdef7;
+
+$transition: all 0.3s;
+
+@mixin circle($width) {
+	height:$width; width: $width;
+	border-radius: 50%;
+}
+@mixin rect($width, $height){
+	height: $height; width: $width;
+	border-radius:0;
+}
+@mixin rectMinSize($width, $height){
+	min-height: $height; min-width: $width;
+}
