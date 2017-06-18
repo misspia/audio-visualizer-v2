@@ -1,5 +1,4 @@
 const dispatch = require('pico-flux').dispatch;
-const Store = require('./store.js');
 
 const Actions = {
 	addFile: (files) => {

@@ -1,7 +1,6 @@
-const flux = require('pico-flux');
-const Store = require('../store.js');
-const AudioUpload = require('./AudioUpload.jsx');
+import Store from '../store.js';
+import AudioUpload from './AudioUpload.jsx';
 
 module.exports = Store.createSmartComponent(AudioUpload, 
-	(props) => { return {files: Store.getFiles()} }
+	(props) => { return {}; }
 );

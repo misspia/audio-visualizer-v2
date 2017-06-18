@@ -7,7 +7,9 @@ let State = {
 const Store = flux.createStore({
 	ADD_FILE: (files) => {
 		for(let key in files) { 
-			if(typeof files[key] === 'object') { State.files.push( URL.createObjectURL(files[key])) }	
+			if(typeof files[key] === 'object') { 
+				State.files.push( { name: files[key].name, url: URL.createObjectURL(files[key])} )
+			}	
 		};
 	}
 });

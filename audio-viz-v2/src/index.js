@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import AudioUpload from './AudioUpload/AudioUpload';
-import './index.scss';
+import App from './App';
 
 ReactDOM.render(
-  <AudioUpload />,
+  <App />,
   document.getElementById('root')
 );
