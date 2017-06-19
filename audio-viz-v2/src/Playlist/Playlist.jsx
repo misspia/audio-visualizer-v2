@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PlaylistItem from './PlaylistItem/PlaylistItem';
+import Track from './Track/Track';
 
 import './Playlist.scss';
 
@@ -7,17 +7,18 @@ import './Playlist.scss';
 class Playlist extends Component {
 	constructor() {
 		super();
-		this.state = { playlistItem: [] }
+		this.state = { tracks: [] }
 	}
 	populateList(files) {
-		let audio = files.map( (file, index) => { return <PlaylistItem key={"audio-" + index} src={file.url} name={file.name}/>;})
+		let audio = files.map( (file, index) => { return <Track key={"audio-" + index} src={file.url} name={file.name}/>;})
 		return audio;
 	}
 	componentWillReceiveProps(nextProps) {
-		this.setState({ playlistItem: this.populateList(nextProps.files)});
+		this.setState({ tracks: this.populateList(nextProps.files)});
 	}
 	render() {
-		return <ul> {this.state.playlistItem} </ul>;
+		// console.log(this.state.tracks);
+		return <ul> {this.state.tracks} </ul>;
 	}
 }
 
