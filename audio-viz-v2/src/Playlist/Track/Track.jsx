@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Actions from '../../actions.js';
 
 import './Track.scss';
 
@@ -17,10 +18,17 @@ class Track extends Component {
 	componentDidMount() {
 		this.refs.audio.src = this.props.src;
 	}
+	componentWillReceiveProps(nextProps) {
+		console.log(this.props)
+		// if(this.props.paused) { this.togglePlayState(); }
+		// if(this.props.paused) { this.togglePlayState(); }
+	}
 	togglePlayState() {
-		if(this.refs.audio.paused) { 
+		// if(this.refs.audio.paused) { 
+		if(this.props.paused) { 
 			this.refs.audio.play();
-			this.setState({playStateIcon: "fa-pause"})
+			this.setState({playStateIcon: "fa-pause"});
+			Actions.playTrack(this.props.index);
 		}
 		else { 
 			this.refs.audio.pause(); 
@@ -45,6 +53,3 @@ class Track extends Component {
 }
 
 export default Track;
-
-// https://github.com/aadsm/jsmediatags
-// https://stackoverflow.com/questions/29881237/how-can-i-get-the-cover-of-an-mp3-file

@@ -10,7 +10,10 @@ class Playlist extends Component {
 		this.state = { tracks: [] }
 	}
 	populateList(files) {
-		let audio = files.map( (file, index) => { return <Track key={"audio-" + index} src={file.url} name={file.name}/>;})
+		let audio = files.map( (file, index) => { 
+			// console.log(file);
+			return <Track key={"audio-" + index} src={file.url} name={file.name} paused={file.paused} index={index}/>;
+		})
 		return audio;
 	}
 	componentWillReceiveProps(nextProps) {
