@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Actions from '../../actions.js';
+// import Actions from '../../actions.js';
 
 import './Track.scss';
 
@@ -18,23 +18,24 @@ class Track extends Component {
 	componentDidMount() {
 		this.refs.audio.src = this.props.src;
 	}
-	componentWillReceiveProps(nextProps) {
-		console.log(this.props)
-		// if(this.props.paused) { this.togglePlayState(); }
-		// if(this.props.paused) { this.togglePlayState(); }
-	}
+	// componentWillReceiveProps(nextProps) {
+	// 	console.log(this.props)
+	// 	if(this.props.paused) { 
+	// 		this.refs.audio.play();
+	// 		this.setState({playStateIcon: "fa-pause"});
+	// 	} else {
+	// 		this.refs.audio.pause(); 
+	// 		this.setState({playStateIcon: "fa-play"})	
+	// 	}
+	// 	// if(this.props.paused) { this.togglePlayState(); }
+	// }
 	togglePlayState() {
-		// if(this.refs.audio.paused) { 
-		if(this.props.paused) { 
-			this.refs.audio.play();
-			this.setState({playStateIcon: "fa-pause"});
-			Actions.playTrack(this.props.index);
-		}
-		else { 
-			this.refs.audio.pause(); 
-			this.setState({playStateIcon: "fa-play"})
-		}
+		// if(this.props.paused) { 
+		if(this.refs.audio.paused) { this.playAudio(); /*Actions.playTrack(this.props.index);*/ }
+		else { this.pauseAudio();}
 	}
+	playAudio() { this.refs.audio.play(); this.setState({playStateIcon: "fa-pause"})}
+	pauseAudio() { this.refs.audio.pause(); this.setState({playStateIcon: "fa-play"})}
 	updateAudioPosition() { if(this.refs.seek) this.refs.audio.currentTime = this.refs.seek.value; }
 	updateSeekPosition(e) { if(this.refs.audio) this.refs.seek.value = this.refs.audio.currentTime; }
 	render() {
