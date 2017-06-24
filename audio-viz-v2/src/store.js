@@ -17,24 +17,15 @@ const Store = flux.createStore({
 			}	
 		};
 	},
-	// PLAY_TRACK: (trackIndex) => {
-	// 	for (let i = 0; i < State.files.length; i ++) {
-	// 		if(trackIndex === i) {
-	// 			State.files[i].paused = false;
-	// 		} else {
-	// 			State.files[i].paused = true;
-	// 		}
-	// 	}
-	// }
 	PLAY_TRACK: (trackIndex) => {
 		for (let i = 0; i < State.files.length; i ++) {
 
 			let file = State.files[i];
-			if(trackIndex === i && file.playing == true && file.selected == true) { // pause
+			if(trackIndex === i && file.playing === true && file.selected === true) { // pause
 				file.playing = false;
 			} else if(trackIndex === i) { // play
 				file.playing = true;
-				file.playing = true;
+				file.selected = true;
 			} else { // stop
 				file.playing = false;
 				file.selected = false;
