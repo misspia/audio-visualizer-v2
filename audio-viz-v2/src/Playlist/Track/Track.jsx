@@ -9,8 +9,21 @@ class Track extends Component {
 		this.state = { playStateIcon: "fa-play" }
 		this.togglePlayState = this.togglePlayState.bind(this);
 	}	
+	componentWillReceiveProps(nextProps) {
+		if(nextProps.playing === true) {
+			this.playTrack();
+		} else {
+			this.pauseTrack();
+		}
+	}
 	togglePlayState() {
-		Actions.playTrack(this.props.index);
+		Actions.playTrack(this.props.url);
+	}
+	playTrack() { 
+		this.setState({playStateIcon: "fa-pause"});
+	}
+	pauseTrack() { 
+		 this.setState({playStateIcon: "fa-play"});
 	}
 	render() {
 		return (

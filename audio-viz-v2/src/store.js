@@ -12,25 +12,24 @@ const Store = flux.createStore({
 					name: files[key].name,
 					url: URL.createObjectURL(files[key]),
 					playing: false,
-					selected: false
+					selected: false,
+					loop: false
 				})
 			}	
 		};
 	},
-	PLAY_TRACK: (trackIndex) => {
-		for (let i = 0; i < State.files.length; i ++) {
-
-			let file = State.files[i];
-			if(trackIndex === i && file.playing === true && file.selected === true) { // pause
+	PLAY_TRACK: (url) => {
+		State.files.forEach((file)=>{
+			if(url === file.url && file.playing === true && file.selected === true) { // pause
 				file.playing = false;
-			} else if(trackIndex === i) { // play
+			} else if(url === file.url) { // play
 				file.playing = true;
 				file.selected = true;
 			} else { // stop
-				file.playing = false;
+				file.playing = false
 				file.selected = false;
 			}
-		}
+		})
 	}
 });
 
