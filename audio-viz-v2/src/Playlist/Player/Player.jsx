@@ -17,6 +17,7 @@ class Player extends Component {
 		if(!selected) return;
 		this.replaceSource(selected.url);
 		this.handleExternalPlayState(selected);
+		this.loopCurrent(selected.loop);
 	}
 	playAudio() { 
 		this.refs.audio.play();
@@ -40,6 +41,13 @@ class Player extends Component {
 		});
 		return selected;
 	}
+	loopCurrent(loopState) {
+		if(loopState) {
+			this.refs.audio.loop = true;
+		} else {
+			this.refs.audio.loop = false;
+		}
+	}
 	replaceSource(selectedUrl) {
 		if(selectedUrl !== this.refs.audio.src) this.refs.audio.src = selectedUrl;
 	}
@@ -59,7 +67,7 @@ class Player extends Component {
 				<button id="play_state" onClick={this.handleInternalPlayState}>
 					<i className={"fa " + this.state.playStateIcon} aria-hidden="true"></i>
 				</button>
-				<audio ref="audio" src="" onTimeUpdate={this.updateSeekPosition}/>
+				<audio ref="audio" src="" onTimeUpdate={this.updateSeekPosition} loop={this.props.loop}/>
 				<input id="seek" ref="seek" type="range" step="0.1" min="0" 
 					max={this.refs.audio ? this.refs.audio.duration : 0} 
 					onChange={this.updateAudioPosition} />

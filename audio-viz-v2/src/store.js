@@ -30,6 +30,15 @@ const Store = flux.createStore({
 				file.selected = false;
 			}
 		})
+	},
+	LOOP_TRACK: (url) => {
+		State.files.forEach((file)=>{
+			if(url === file.url && file.loop === false) {
+				file.loop = true;
+			} else {
+				file.loop = false;
+			}
+		})
 	}
 });
 

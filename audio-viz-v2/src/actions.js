@@ -4,8 +4,11 @@ const Actions = {
 	addFile: (files) => {
 		dispatch('ADD_FILE', files);
 	},
-	playTrack: (index) => {
-		dispatch('PLAY_TRACK', index);
+	playTrack: (url) => {
+		dispatch('PLAY_TRACK', url);
+	},
+	loopTrack: (url) => {
+		dispatch('LOOP_TRACK', url);
 	}
 }
 
