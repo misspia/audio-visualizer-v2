@@ -12,35 +12,35 @@ class Player extends Component {
 		this.updateAudioPosition = this.updateAudioPosition.bind(this);
 		this.handleAudioEnd = this.handleAudioEnd.bind(this);
 	}
-	componentWillReceiveProps(nextProps) {	
+	componentWillReceiveProps(nextProps) {
 		const selected = this.getCurrent(nextProps.files);
 
 		if(!selected) return;
+		if(this.props.playlist.ended === true) {this.resetSeeker(); return;}
 		this.replaceSource(selected.url);
 		this.handleExternalPlayState(selected);
 		this.loopCurrent(selected.loop);
 	}
-	playAudio() { 
+	playAudio() {
 		this.refs.audio.play();
 		this.setState({playStateIcon: "fa-pause"});
 	}
-	pauseAudio() { 
+	pauseAudio() {
 		 this.refs.audio.pause();
 		 this.setState({playStateIcon: "fa-play"});
 	}
-	updateAudioPosition() { 
-		if(this.refs.seek) this.refs.audio.currentTime = this.refs.seek.value; 
+	updateAudioPosition() {
+		if(this.refs.seek) this.refs.audio.currentTime = this.refs.seek.value;
 	}
-	updateSeekPosition(e) { 
+	updateSeekPosition(e) {
 		if(this.refs.audio) this.refs.seek.value = this.refs.audio.currentTime; }
-	
+
 	getCurrent(files) {
 		let selected;
 
 		files.forEach((file)=>{
 			if(file.selected) { selected = file; }
 		});
-		// set source to blank if reached end of list
 		return selected;
 	}
 	loopCurrent(loopState) {
@@ -62,9 +62,14 @@ class Player extends Component {
 	}
 	handleInternalPlayState() {
 		Actions.playTrack(this.refs.audio.src);
-	} 
+	}
 	handleAudioEnd() {
 		if(this.refs.audio.loop === false) Actions.playNextTrack(this.refs.audio.src);
+	}
+	resetSeeker() {
+		//account for  cases when loop playlist
+		this.refs.seek.value = 0;
+		this.refs.seek.max = 0;
 	}
 	render() {
 		return (
@@ -73,12 +78,12 @@ class Player extends Component {
 					<i className={"fa " + this.state.playStateIcon} aria-hidden="true"></i>
 				</button>
 				<audio ref="audio" src="" onTimeUpdate={this.updateSeekPosition} loop={this.props.loop} onEnded={this.handleAudioEnd}/>
-				<input id="seek" ref="seek" type="range" step="0.1" min="0" 
-					max={this.refs.audio ? this.refs.audio.duration : 0} 
+				<input id="seek" ref="seek" type="range" step="0.1" min="0"
+					max={this.refs.audio ? this.refs.audio.duration : 0}
 					onChange={this.updateAudioPosition} />
 			</li>
-			
-		);	
+
+		);
 	}
 }
 

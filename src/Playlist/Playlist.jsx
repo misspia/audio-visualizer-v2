@@ -11,7 +11,7 @@ class Playlist extends Component {
 		this.state = { tracks: [], audioSrc: "" , current: ""}
 	}
 	populateList(files) {
-		let audio = files.map( (file, index) => { 
+		let audio = files.map( (file, index) => {
 			return <Track key={index} name={file.name} url={file.url} playing={file.playing} selected={file.selected}/>
 		})
 		return audio;
@@ -21,12 +21,12 @@ class Playlist extends Component {
 	}
 	render() {
 		return (
-			<ul> 
+			<ul>
 				<Controls />
 				<Player/>
 				{this.state.tracks}
 			</ul>
-		);		
+		);
 	}
 }
 

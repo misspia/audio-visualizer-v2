@@ -3,24 +3,24 @@ import Actions from './actions.js';
 
 let State = {
 	playlist: {
-		loop: false
+		loop: false,
+		ended: false
 	},
 	files: []
 };
 
 const Store = flux.createStore({
 	ADD_FILE: (files) => {
-		for(let key in files) { 
-			if(typeof files[key] === 'object') { 
-				State.files.push({ 
+		for(let key in files) {
+			if(typeof files[key] === 'object') {
+				State.files.push({
 					name: files[key].name,
 					url: URL.createObjectURL(files[key]),
 					playing: false,
 					selected: false,
-					loop: false,
-					ended: false
+					loop: false
 				})
-			}	
+			}
 		};
 	},
 	PLAY_TRACK: (url) => {
@@ -47,14 +47,16 @@ const Store = flux.createStore({
 	},
 	PLAY_NEXT_TRACK: (url) => {
 		for(let i = 0; i < State.files.length; i ++) {
-			if(i === State.files.length - 1 && State.playlist.loop === false) { 
-				Actions.stopAllTracks();
+			if(i === State.files.length - 1 && State.playlist.loop === false) {
+				console.log("last track");
+				// Actions.stopAllTracks();
+				State.playlist.ended = true;
 				break;
 			}
 			if(i === State.files.length - 1 && State.playlist.loop === true) {
 				Actions.playTrack(State.files[0].url);
 				break;
-			}	
+			}
 			if(url === State.files[i].url) {
 				Actions.playTrack(State.files[i + 1].url);
 				break;
@@ -73,5 +75,6 @@ const Store = flux.createStore({
 });
 
 Store.getFiles = () => { return State.files; };
+Store.getPlaylistSettings = () => { return State.playlist; }
 
 module.exports = Store;
