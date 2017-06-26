@@ -1,6 +1,10 @@
-const flux = require('pico-flux');
+import flux from 'pico-flux';
+import Actions from './actions.js';
 
 let State = {
+	playlist: {
+		loop: false
+	},
 	files: []
 };
 
@@ -13,7 +17,8 @@ const Store = flux.createStore({
 					url: URL.createObjectURL(files[key]),
 					playing: false,
 					selected: false,
-					loop: false
+					loop: false,
+					ended: false
 				})
 			}	
 		};
@@ -38,6 +43,31 @@ const Store = flux.createStore({
 			} else {
 				file.loop = false;
 			}
+		})
+	},
+	PLAY_NEXT_TRACK: (url) => {
+		for(let i = 0; i < State.files.length; i ++) {
+			if(i === State.files.length - 1 && State.playlist.loop === false) { 
+				Actions.stopAllTracks();
+				break;
+			}
+			if(i === State.files.length - 1 && State.playlist.loop === true) {
+				Actions.playTrack(State.files[0].url);
+				break;
+			}	
+			if(url === State.files[i].url) {
+				Actions.playTrack(State.files[i + 1].url);
+				break;
+			}
+		}
+	},
+	LOOP_PLAYLIST: () => {
+		State.playlist.loop = !State.playlist.loop;
+	},
+	STOP_ALL_TRACKS: () => {
+		State.files.forEach((file)=>{
+			file.selected = false;
+			file.playing = false;
 		})
 	}
 });

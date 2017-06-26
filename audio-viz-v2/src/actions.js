@@ -9,6 +9,15 @@ const Actions = {
 	},
 	loopTrack: (url) => {
 		dispatch('LOOP_TRACK', url);
+	},
+	playNextTrack: (url) => {
+		dispatch('PLAY_NEXT_TRACK', url);
+	}, 
+	loopPlaylist: () => {
+		dispatch('LOOP_PLAYLIST');
+	},
+	stopAllTracks: () => {
+		dispatch('STOP_ALL_TRACKS');
 	}
 }
 
