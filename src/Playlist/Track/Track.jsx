@@ -11,24 +11,17 @@ class Track extends Component {
 		this.loopTrack = this.loopTrack.bind(this);
 	}
 	componentWillReceiveProps(nextProps) {
+		if(nextProps.playlistEnded === true) { this.pauseTrack(); return; }
 		if(nextProps.playing === true) {
 			this.playTrack();
 		} else {
 			this.pauseTrack();
 		}
 	}
-	togglePlayState() {
-		Actions.playTrack(this.props.url);
-	}
-	playTrack() {
-		this.setState({playStateIcon: "fa-pause"});
-	}
-	pauseTrack() {
-		 this.setState({playStateIcon: "fa-play"});
-	}
-	loopTrack() {
-		Actions.loopTrack(this.props.url);
-	}
+	togglePlayState() { Actions.playTrack(this.props.url); }
+	playTrack() { this.setState({playStateIcon: "fa-pause"}); }
+	pauseTrack() { this.setState({playStateIcon: "fa-play"}); }
+	loopTrack() { Actions.loopTrack(this.props.url); }
 	render() {
 		return (
 			<li>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Actions from '../../actions.js';
+// import Seeker from './Seeker/Seeker.jsx';
+import Actions from '../actions.js';
 
 import './Player.scss';
 
@@ -33,8 +34,9 @@ class Player extends Component {
 		if(this.refs.seek) this.refs.audio.currentTime = this.refs.seek.value;
 	}
 	updateSeekPosition(e) {
-		if(this.refs.audio) this.refs.seek.value = this.refs.audio.currentTime; }
-
+		if(this.refs.audio) this.refs.seek.value = this.refs.audio.currentTime;
+		if(this.refs.audio) this.refs.seekTest.test = this.refs.audio.currentTime;
+	}
 	getCurrent(files) {
 		let selected;
 
@@ -88,3 +90,4 @@ class Player extends Component {
 }
 
 export default Player;
+// <Seeker ref="seekTest" max={this.refs.audio ? this.refs.audio.duration : 0}/>

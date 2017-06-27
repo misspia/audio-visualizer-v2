@@ -1,4 +1,5 @@
 import flux from 'pico-flux';
+import jsmediatags from 'jsmediatags';
 import Actions from './actions.js';
 
 let State = {
@@ -13,6 +14,15 @@ const Store = flux.createStore({
 	ADD_FILE: (files) => {
 		for(let key in files) {
 			if(typeof files[key] === 'object') {
+				const url = URL.createObjectURL(files[key]);
+				jsmediatags.read(url, {
+				  onSuccess: function(tag) {
+				    console.log(tag);
+				  },
+				  onError: function(error) {
+				    console.log(error);
+				  }
+				});
 				State.files.push({
 					name: files[key].name,
 					url: URL.createObjectURL(files[key]),
