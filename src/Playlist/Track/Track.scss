@@ -1,0 +1,13 @@
+@import '../../styles/variables';
+.track {
+	transition: $transition;
+	border: solid transparent 0.1em;
+	border-bottom-color: lighten($primaryLight, 10%); 
+	height: 3em;
+	width: 100%;
+	color: darken($primaryLight, 40%);
+	cursor: pointer;
+	&.active {
+		box-shadow: 1px 3px 2px $primaryLight;
+	}
+}

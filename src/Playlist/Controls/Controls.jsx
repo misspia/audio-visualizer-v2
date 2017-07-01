@@ -14,10 +14,10 @@ class Controls extends Component {
 	render() {
 		return (
 			<div>
-				<button onClick={this.loopPlaylist}>
+				<button className="button primary" onClick={this.loopPlaylist}>
 					<i className="fa fa-repeat" aria-hidden="true"></i>
 				</button>
-				<button>
+				<button className="button secondary round">
 					<i className="fa fa-random" aria-hidden="true"></i>
 				</button>
 			</div>

@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
-import AudioUpload from './AudioUpload/AudioUpload.smart.jsx';
-import Playlist from './Playlist/Playlist.smart.jsx';
 
 import './App.scss';
+
+import AudioUpload from './AudioUpload/AudioUpload.smart.jsx';
+import Playlist from './Playlist/Playlist.smart.jsx';
+import Player from './Player/Player.smart.jsx';
+import Visualizer from './Visualizer/Visualizer.smart.jsx';
+
+
 
 
 class App extends Component {
@@ -11,6 +16,8 @@ class App extends Component {
 			<div>
 				<AudioUpload/>
 				<Playlist />
+				<Player />
+				<Visualizer />
 			</div>			
 		);
 	}

@@ -1,23 +1,23 @@
 @import './styles/variables';
 @import './styles/layout';
-// @import './styles/font-awesome/css/font-awesome.min.css';
+@import './styles/assets';
 
 body {
 	@include fontBody();
-}
-
-// UX
-// https://medium.muz.li/ui-interactions-of-the-week-64-b7de246ca8c5
-// Darren.wan 	Leo Leung 	Yaroslav Zubko 	Johny vino(2)  Alexandr Ivchenko 	
+	color: $primaryDark;
+}	
 
 
 // Gradient bg
 // https://thefwa.com/cases/save-tropical-house
 
+// playlist info
 // https://dribbble.com/shots/3574772-Redaw
-// https://dribbble.com/shots/3316100-Day-90-Equalizer
+
+// buttons/assets
 // https://dribbble.com/shots/3027784-QWERTY-Sample-app
-// https://dribbble.com/shots/2733068-Traktor/attachments/554271
+// https://dribbble.com/shots/3316100-Day-90-Equalizer
 
 // visualizations
 // https://play.google.com/store/apps/details?id=com.h6ah4i.android.music_visualizer2 		pixel hearts, hexagons
+// https://medium.muz.li/ui-interactions-of-the-week-64-b7de246ca8c5 	//2nd last

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Track from './Track/Track.jsx';
-import Player from '../Player/Player.smart.jsx';
 import Controls from './Controls/Controls.jsx';
 import './Playlist.scss';
 
@@ -14,6 +13,7 @@ class Playlist extends Component {
 		let audio = files.map( (file, index) => {
 			return <Track key={index} name={file.name} url={file.url} 
 					playing={file.playing} selected={file.selected}
+					loop={file.loop}
 					playlistEnded={this.props.playlist.ended}/>
 		})
 		return audio;
@@ -23,9 +23,8 @@ class Playlist extends Component {
 	}
 	render() {
 		return (
-			<ul>
+			<ul id="playlist">
 				<Controls />
-				<Player/>
 				{this.state.tracks}
 			</ul>
 		);

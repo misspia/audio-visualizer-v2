@@ -1,11 +1,11 @@
 import flux from 'pico-flux';
-import jsmediatags from 'jsmediatags';
 import Actions from './actions.js';
 
 let State = {
 	playlist: {
 		loop: false,
-		ended: false
+		ended: false,
+		current: {}
 	},
 	files: []
 };
@@ -14,16 +14,8 @@ const Store = flux.createStore({
 	ADD_FILE: (files) => {
 		for(let key in files) {
 			if(typeof files[key] === 'object') {
-				const url = URL.createObjectURL(files[key]);
-				jsmediatags.read(url, {
-				  onSuccess: function(tag) {
-				    console.log(tag);
-				  },
-				  onError: function(error) {
-				    console.log(error);
-				  }
-				});
 				State.files.push({
+					raw: files[key],
 					name: files[key].name,
 					url: URL.createObjectURL(files[key]),
 					playing: false,
@@ -34,12 +26,14 @@ const Store = flux.createStore({
 		};
 	},
 	PLAY_TRACK: (url) => {
+		State.playlist.ended = false;
 		State.files.forEach((file)=>{
 			if(url === file.url && file.playing === true && file.selected === true) { // pause
 				file.playing = false;
 			} else if(url === file.url) { // play
 				file.playing = true;
 				file.selected = true;
+				State.playlist.current = file;
 			} else { // stop
 				file.playing = false
 				file.selected = false;
@@ -58,8 +52,6 @@ const Store = flux.createStore({
 	PLAY_NEXT_TRACK: (url) => {
 		for(let i = 0; i < State.files.length; i ++) {
 			if(i === State.files.length - 1 && State.playlist.loop === false) {
-				console.log("last track");
-				// Actions.stopAllTracks();
 				State.playlist.ended = true;
 				break;
 			}
@@ -76,12 +68,6 @@ const Store = flux.createStore({
 	LOOP_PLAYLIST: () => {
 		State.playlist.loop = !State.playlist.loop;
 	},
-	STOP_ALL_TRACKS: () => {
-		State.files.forEach((file)=>{
-			file.selected = false;
-			file.playing = false;
-		})
-	}
 });
 
 Store.getFiles = () => { return State.files; };

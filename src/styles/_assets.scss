@@ -1,0 +1,39 @@
+@mixin buttonPrimaryColor($color) {
+	color: $primaryLight;
+	&:hover, &.active {
+		color: $color;
+	}
+}
+@mixin buttonSecondaryColor($color) {
+	color: $primaryDark;
+	background-color: $primaryLight;
+	border-color: $primaryLight;
+	&:hover, &.active{
+		background-color: transparent;
+		color: $color;
+		border-color: $color;
+	}
+}
+
+.button {
+	padding: 0;
+
+	height: 2.5em; width: 2.5em; 
+	text-align: center;
+	background-color: transparent;
+	border-style: solid;
+	border-radius: 15%;
+	transition: $transition;
+	cursor: pointer;
+	
+	&.primary {
+		border-color:transparent;
+		@include buttonPrimaryColor($purple);
+	}
+	&.secondary {
+		@include buttonSecondaryColor($purple);
+	}
+	&.large { height: 5em; width: 5em;  }
+	&.round { border-radius: 50%; }
+	&:focus, &:active { outline: 0; }
+}
