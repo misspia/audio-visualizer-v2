@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import Actions from '../../actions.js';
+import Utils from '../../utils.js';
 
 import './Track.scss';
 
 class Track extends Component {
 	constructor() {
 		super();
-		this.state = { playStateIcon: "fa-play", duration: 0 }
+		this.state = { playStateIcon: "fa-play", duration: "" }
 		this.togglePlayState = this.togglePlayState.bind(this);
 		this.loopTrack = this.loopTrack.bind(this);
 	}
@@ -28,7 +29,7 @@ class Track extends Component {
 	loopTrack() { Actions.loopTrack(this.props.url); }
 	getTrackDuration() {
 		if(!this.refs.audio) return;
-		this.refs.audio.oncanplaythrough = ()=>{ this.setState({duration: this.refs.audio.duration}) };
+		this.refs.audio.oncanplaythrough = ()=>{ this.setState({duration: Utils.secondsToHMS(this.refs.audio.duration)}) };
 	}
 	render() {
 		return <li className={`track ${this.props.selected ? 'active': ''} row align_center`} onClick={this.togglePlayState}>
@@ -40,7 +41,7 @@ class Track extends Component {
 				<i className="fa fa-repeat" aria-hidden="true" onClick={this.loopTrack}></i>
 			</button>
 			<span className="audio_name">{this.props.name}</span>
-			<span>{this.state.duration}</span>
+			<span className="audio_time">{this.state.duration}</span>
 		</li>;
 	}
 }

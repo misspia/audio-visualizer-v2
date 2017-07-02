@@ -1,22 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,700');
-// @import url('https://fonts.googleapis.com/css?family=Nunito+Sans:300,700');
-
-@mixin fontBody() {
-	font-family: 'Roboto', sans-serif;
-	// font-family: 'Nunito Sans', sans-serif;
-	font-weight: 300;
-}
-
-@mixin fontHead() {
-	font-family: 'Roboto', sans-serif;
-	// font-family: 'Nunito Sans', sans-serif;
-	font-weight: 700;
-}
-
-$bg: #fff;
-$primaryLight: #d1d3df;
-$primaryDark: #8d8d8d;
-
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:300,400');
 
 $purple: #b974aa;
 $blue: #63bce8;
@@ -24,7 +6,26 @@ $red: #e57973;
 $orange: #edab71;
 $yellow: #f6d662;
 
+$bg: #fff;
+$primaryLight: #d1d3df;
+$primaryDark: #8d8d8d;
+$accent: $purple;
+
 $transition: all 0.3s;
+
+@mixin fontBody() {
+	font-family: 'Nunito Sans', sans-serif;
+	font-weight: 300;
+}
+
+@mixin fontHead() {
+	font-family: 'Nunito Sans', sans-serif;
+	font-weight: 400;
+	font-size: 1.2em;
+	// font-weight:600;
+}
+
+
 
 @mixin circle($width) {
 	height:$width; width: $width;

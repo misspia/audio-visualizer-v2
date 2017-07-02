@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Actions from '../actions.js';
+import Utils from '../utils.js';
 import './Player.scss';
 
 class Player extends Component {
@@ -35,10 +36,7 @@ class Player extends Component {
 	}
 	updateSeekPosition(e) {
 		if(this.refs.audio) this.refs.seek.value = this.refs.audio.currentTime;
-		this.setState({ progress: this.refs.seek.value / this.refs.audio.duration * 100});
-		// this.setState({ progress: this.refs.seek.value / this.refs.audio.max * 100});
-		// this.setState({ progress: this.refs.seek.value});
-		console.log(this.refs.seek.value, this.refs.audio.duration, this.refs.audio.max);
+		this.setState({ progress: this.refs.seek.value / this.state.duration * 100});
 	}
 	getCurrent(files) {
 		let selected;
@@ -73,8 +71,8 @@ class Player extends Component {
 		this.refs.audio.oncanplaythrough = ()=>{ this.setState({duration: this.refs.audio.duration}) };
 	}
 	render() {
-		const progressStyle = { width: this.state.progress + '%'}
-		// console.log(this.state.progress)
+		const progressStyle = { width: this.state.progress + '%'};
+		const durationFormatted = Utils.secondsToHMS(this.state.duration);
 
 		return <li className="player col space_around align_center">
 			<div className="row center align_center full_width">
@@ -88,9 +86,9 @@ class Player extends Component {
 						onChange={this.updateAudioPosition} />
 				</div>
 				
-				<span>{Math.round(this.state.duration / 60)}</span>
+				<span className="audio_duration">{durationFormatted}</span>
 			</div>
-			<span id="current_song_title">{this.props.playlist.current.name}</span>
+			<span className="audio_title">{this.props.playlist.current.name}</span>
 		</li>
 	}
 }

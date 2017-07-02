@@ -1,20 +1,21 @@
 @import '../../styles/variables';
+
 .track {
 	z-index:0;
 	transition: $transition;
 	border: solid transparent 0.1em;
-	// border-bottom-color: lighten($primaryLight, 10%); 
 	height: 3em;
 	width: 100%;
-	color: darken($primaryLight, 40%);
+	color: $primaryDark;
 	cursor: pointer;
 	&:hover {
 		// background-color: $primaryLight;
 	}
 	&.active {
-		box-shadow: 1px 3px 2px $primaryLight;
+		box-shadow: 1px 3px 5px 1px $primaryLight;
 	}
-	.button {
-		z-index: 10;
+	.audio_time {
+		font-size: 0.7em;
+		margin: auto 3% auto auto;
 	}
 }
