@@ -11,6 +11,11 @@ let State = {
 	files: []
 };
 
+const getRandomIndex = () => {
+	const min = 0, max = State.files.length - 1;
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 const Store = flux.createStore({
 	ADD_FILE: (files) => {
 		for(let key in files) {
@@ -51,6 +56,10 @@ const Store = flux.createStore({
 		})
 	},
 	PLAY_NEXT_TRACK: (url) => {
+		if(State.playlist.shuffle === true) {
+			Actions.playTrack(State.files[getRandomIndex()].url);
+			return;
+		}
 		for(let i = 0; i < State.files.length; i ++) {
 			if(i === State.files.length - 1 && State.playlist.loop === false) {
 				State.playlist.ended = true;
@@ -66,9 +75,28 @@ const Store = flux.createStore({
 			}
 		}
 	},
+	PLAY_PREV_TRACK: (url) => {
+		if(State.playlist.shuffle === true) {
+			Actions.playTrack(State.files[getRandomIndex()].url);
+			return;
+		}
+		for(let i = 0; i < State.files.length; i ++) {
+			if(url === State.files[i].url && i === 0 && State.playlist.loop === true) {
+				Actions.playTrack(State.files[State.files.length - 1].url);
+				break;
+			}
+			if(url === State.files[i].url) {
+				Actions.playTrack(State.files[i - 1].url);
+				break;
+			}
+		}
+	},
 	LOOP_PLAYLIST: () => {
 		State.playlist.loop = !State.playlist.loop;
 	},
+	SHUFFLE_PLAYLIST: () => {
+		State.playlist.shuffle = !State.playlist.shuffle;
+	}
 });
 
 Store.getTracks = () => { return State.files; };

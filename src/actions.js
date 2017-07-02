@@ -13,8 +13,14 @@ const Actions = {
 	playNextTrack: (url) => {
 		dispatch('PLAY_NEXT_TRACK', url);
 	}, 
+	playPrevTrack: (url) => {
+		dispatch('PLAY_PREV_TRACK', url);
+	},
 	loopPlaylist: () => {
 		dispatch('LOOP_PLAYLIST');
+	},
+	shufflePlaylist: () => {
+		dispatch('SHUFFLE_PLAYLIST');
 	}
 }
 
