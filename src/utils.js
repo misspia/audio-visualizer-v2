@@ -1,4 +1,12 @@
 module.exports = {
+	icons: {
+		play: 'ion-ios-play',
+		pause:'ion-ios-pause',
+		next:'ion-ios-skipforward',
+		prev:'ion-ios-skipbackward',
+		loop:'ion-ios-loop-strong',
+		shuffle: 'ion-ios-shuffle-strong'
+	},
 	secondsToHMS: (seconds) => { 
 		const h = Math.floor(seconds / 3600);
 	    const m = Math.floor(seconds % 3600 / 60);

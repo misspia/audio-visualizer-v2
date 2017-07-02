@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Controls from './Controls/Controls.smart.jsx';
 import Actions from '../actions.js';
 import Utils from '../utils.js';
 import './Player.scss';
@@ -6,8 +7,7 @@ import './Player.scss';
 class Player extends Component {
 	constructor() {
 		super();
-		this.state = { playStateIcon: "fa-play", duration: 0, progress:0 }
-		this.handleInternalPlayState = this.handleInternalPlayState.bind(this);
+		this.state = { duration: 0, progress:0}
 		this.updateSeekPosition = this.updateSeekPosition.bind(this);
 		this.updateAudioPosition = this.updateAudioPosition.bind(this);
 		this.handleAudioEnd = this.handleAudioEnd.bind(this);
@@ -18,18 +18,12 @@ class Player extends Component {
 		if(!selected) return;
 		if(this.props.playlist.ended === true) {this.resetSeeker(); return;}
 		this.replaceSource(selected.url);
-		this.handleExternalPlayState(selected);
+		this.handlePlayState(selected);
 		this.loopCurrent(selected.loop);
 	}
 	componentDidUpdate() { this.getAudioDuration();	}
-	playAudio() {
-		this.refs.audio.play();
-		this.setState({playStateIcon: "fa-pause"});
-	}
-	pauseAudio() {
-		 this.refs.audio.pause();
-		 this.setState({playStateIcon: "fa-play"});
-	}
+	playAudio() { this.refs.audio.play(); }
+	pauseAudio() { this.refs.audio.pause(); }
 	updateAudioPosition() {
 		if(this.refs.seek) this.refs.audio.currentTime = this.refs.seek.value;
 		this.refs.audio.max = this.refs.audio.duration;
@@ -53,15 +47,16 @@ class Player extends Component {
 	replaceSource(selectedUrl) {
 		if(selectedUrl !== this.refs.audio.src) this.refs.audio.src = selectedUrl;
 	}
-	handleExternalPlayState(file) {
+	handlePlayState(file) {
 		if(file.playing === true ) { // play
 			this.playAudio();
 		} else {
 			this.pauseAudio();
 		}
 	}
-	handleInternalPlayState() { Actions.playTrack(this.refs.audio.src); }
-	handleAudioEnd() { if(this.refs.audio.loop === false) Actions.playNextTrack(this.refs.audio.src); }
+	handleAudioEnd() { 
+		if(this.refs.audio.loop === false) Actions.playNextTrack(this.refs.audio.src);
+	}
 	resetSeeker() {
 		this.refs.seek.value = 0; //account for  cases when loop playlist
 		this.refs.seek.max = 0;
@@ -75,20 +70,20 @@ class Player extends Component {
 		const durationFormatted = Utils.secondsToHMS(this.state.duration);
 
 		return <li className="player col space_around align_center">
+			<span className="audio_title">
+				{this.props.playlist.current.name  ? this.props.playlist.current.name : "Select a song"}
+			</span>
 			<div className="row center align_center full_width">
-				<button className="button primary" onClick={this.handleInternalPlayState}>
-					<i className={"fa " + this.state.playStateIcon} aria-hidden="true"></i>
-				</button>
-				<audio ref="audio" src="" onTimeUpdate={this.updateSeekPosition} loop={this.props.loop} onEnded={this.handleAudioEnd}/>
+				<audio ref="audio" src="" onTimeUpdate={this.updateSeekPosition} 
+					loop={this.props.loop} onEnded={this.handleAudioEnd}/>
 				<div id="seek_container">
 					<div id="seek_progress" style={progressStyle} ></div>
 					<input ref="seek" type="range" step="0.1" min="0" max={this.state.duration}
 						onChange={this.updateAudioPosition} />
 				</div>
-				
 				<span className="audio_duration">{durationFormatted}</span>
 			</div>
-			<span className="audio_title">{this.props.playlist.current.name}</span>
+			<Controls/>
 		</li>
 	}
 }

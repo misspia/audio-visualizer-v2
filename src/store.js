@@ -3,8 +3,9 @@ import Actions from './actions.js';
 
 let State = {
 	playlist: {
-		loop: false,
+		loop: true,
 		ended: false,
+		shuffle: false,
 		current: {}
 	},
 	files: []
@@ -70,7 +71,7 @@ const Store = flux.createStore({
 	},
 });
 
-Store.getFiles = () => { return State.files; };
-Store.getPlaylistSettings = () => { return State.playlist; }
+Store.getTracks = () => { return State.files; };
+Store.getPlaylist = () => { return State.playlist; };
 
 module.exports = Store;

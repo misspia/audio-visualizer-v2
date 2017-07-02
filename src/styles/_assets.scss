@@ -16,8 +16,8 @@
 }
 
 .button {
+	// border: solid 1px red;
 	padding: 0;
-
 	height: 2.5em; width: 2.5em; 
 	text-align: center;
 	background-color: transparent;
@@ -25,6 +25,7 @@
 	border-radius: 15%;
 	transition: $transition;
 	cursor: pointer;
+	// font-size: 1em;
 	
 	&.primary {
 		border-color:transparent;
@@ -33,7 +34,9 @@
 	&.secondary {
 		@include buttonSecondaryColor($accent);
 	}
-	&.large { height: 5em; width: 5em;  }
+	&.large { 
+		// height: 3em; width: 3em; 
+		font-size: 1.1em; }
 	&.round { border-radius: 50%; }
 	&:focus, &:active { outline: 0; }
 }

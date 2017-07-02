@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Track from './Track/Track.jsx';
-import Controls from './Controls/Controls.jsx';
 import './Playlist.scss';
-
 
 class Playlist extends Component {
 	constructor() {
@@ -24,7 +22,6 @@ class Playlist extends Component {
 	render() {
 		return (
 			<ul id="playlist">
-				<Controls />
 				{this.state.tracks}
 			</ul>
 		);
@@ -32,6 +29,4 @@ class Playlist extends Component {
 }
 
 export default Playlist;
-
-// https://dribbble.com/shots/1114707-FREE-PSDs-iGravertical-Screen-Layers-iOS-7-Screen-Converter
 

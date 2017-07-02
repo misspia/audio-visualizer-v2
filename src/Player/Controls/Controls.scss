@@ -1,0 +1,12 @@
+@import '../../styles/variables';
+
+.player_controls {
+	font-size: 1.1em;
+	.button {
+
+		color: $primaryDark;
+		&.active {
+			color: $accent;
+		}
+	}
+}

@@ -9,7 +9,6 @@ class Track extends Component {
 		super();
 		this.state = { playStateIcon: "fa-play", duration: "" }
 		this.togglePlayState = this.togglePlayState.bind(this);
-		this.loopTrack = this.loopTrack.bind(this);
 	}
 	componentWillReceiveProps(nextProps) {
 		if(nextProps.playlistEnded === true) { this.pauseTrack(); return; }
@@ -24,9 +23,8 @@ class Track extends Component {
 	togglePlayState(e) { 
 		e.stopPropagation();
 		Actions.playTrack(this.props.url); }
-	playTrack() { this.setState({playStateIcon: "fa-pause"}); }
-	pauseTrack() { this.setState({playStateIcon: "fa-play"}); }
-	loopTrack() { Actions.loopTrack(this.props.url); }
+	playTrack() { this.setState({playStateIcon: Utils.icons.pause}); }
+	pauseTrack() { this.setState({playStateIcon: Utils.icons.play}); }
 	getTrackDuration() {
 		if(!this.refs.audio) return;
 		this.refs.audio.oncanplaythrough = ()=>{ this.setState({duration: Utils.secondsToHMS(this.refs.audio.duration)}) };
@@ -35,10 +33,7 @@ class Track extends Component {
 		return <li className={`track ${this.props.selected ? 'active': ''} row align_center`} onClick={this.togglePlayState}>
 			<audio ref="audio" />
 			<button className={`button primary ${this.props.playing ? 'active' : ''}`} onClick={this.togglePlayState}>
-				<i className={`fa ${this.state.playStateIcon}`} aria-hidden="true"></i>
-			</button>
-			<button className={`button primary ${this.props.loop ? 'active' : ''}`}>
-				<i className="fa fa-repeat" aria-hidden="true" onClick={this.loopTrack}></i>
+				<i className={`fa ${this.state.playStateIcon}`}></i>
 			</button>
 			<span className="audio_name">{this.props.name}</span>
 			<span className="audio_time">{this.state.duration}</span>
