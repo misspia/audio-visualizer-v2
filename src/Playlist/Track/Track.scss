@@ -2,11 +2,11 @@
 
 $blur: 4px;
 $spacing: $blur + 2;
+
 .track {
 	z-index:0;
 	margin: $spacing 0;
 	transition: $transition;
-	// border: solid transparent 0.1em;
 	border: solid lighten($primaryLight, 10%) 0.1em;
 	height: 3em;
 	width: 100%;

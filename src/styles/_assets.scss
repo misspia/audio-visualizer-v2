@@ -25,7 +25,6 @@
 	border-radius: 15%;
 	transition: $transition;
 	cursor: pointer;
-	// font-size: 1em;
 	
 	&.primary {
 		border-color:transparent;
@@ -34,9 +33,11 @@
 	&.secondary {
 		@include buttonSecondaryColor($accent);
 	}
-	&.large { 
-		// height: 3em; width: 3em; 
-		font-size: 1.1em; }
+	&.large { font-size: 1.1em;}
 	&.round { border-radius: 50%; }
+	&.longround {
+		width: auto;
+		border-radius: 1.5em;
+	}
 	&:focus, &:active { outline: 0; }
 }

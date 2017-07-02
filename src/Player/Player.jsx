@@ -4,6 +4,8 @@ import Actions from '../actions.js';
 import Utils from '../utils.js';
 import './Player.scss';
 
+//progress time
+
 class Player extends Component {
 	constructor() {
 		super();
@@ -71,7 +73,7 @@ class Player extends Component {
 
 		return <li className="player col space_around align_center">
 			<span className="audio_title">
-				{this.props.playlist.current.name  ? this.props.playlist.current.name : "Select a song"}
+				{this.props.playlist.current.name  ? this.props.playlist.current.name : " --- "}
 			</span>
 			<div className="row center align_center full_width">
 				<audio ref="audio" src="" onTimeUpdate={this.updateSeekPosition} 
@@ -81,7 +83,7 @@ class Player extends Component {
 					<input ref="seek" type="range" step="0.1" min="0" max={this.state.duration}
 						onChange={this.updateAudioPosition} />
 				</div>
-				<span className="audio_duration">{durationFormatted}</span>
+				<span className="audio_time">{durationFormatted}</span>
 			</div>
 			<Controls/>
 		</li>

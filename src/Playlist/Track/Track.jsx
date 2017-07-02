@@ -3,7 +3,7 @@ import Actions from '../../actions.js';
 import Utils from '../../utils.js';
 
 import './Track.scss';
-
+// Cut off title text if too long
 class Track extends Component {
 	constructor() {
 		super();

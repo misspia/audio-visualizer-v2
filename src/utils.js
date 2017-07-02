@@ -5,7 +5,8 @@ module.exports = {
 		next:'ion-ios-skipforward',
 		prev:'ion-ios-skipbackward',
 		loop:'ion-ios-loop-strong',
-		shuffle: 'ion-ios-shuffle-strong'
+		shuffle: 'ion-ios-shuffle-strong',
+		plus: 'ion-plus-round'
 	},
 	secondsToHMS: (seconds) => { 
 		const h = Math.floor(seconds / 3600);

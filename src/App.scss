@@ -5,7 +5,14 @@
 body {
 	@include fontBody();
 	color: $primaryDark;
+	height: 100vh;
+	width: 100vh;
+	overflow: hidden;
 }	
+#playlist_container {
+	position:relative;
+	width: 20em;
+}
 
 
 // Gradient bg

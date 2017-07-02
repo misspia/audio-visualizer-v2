@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Track from './Track/Track.jsx';
 import './Playlist.scss';
 
+
 class Playlist extends Component {
 	constructor() {
 		super();
@@ -20,11 +21,9 @@ class Playlist extends Component {
 		this.setState({ tracks: this.populateList(nextProps.files) });
 	}
 	render() {
-		return (
-			<ul id="playlist">
+		return <ul id="playlist">
 				{this.state.tracks}
-			</ul>
-		);
+			</ul>;
 	}
 }
 

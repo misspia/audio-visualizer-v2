@@ -8,18 +8,18 @@ import Player from './Player/Player.smart.jsx';
 import Visualizer from './Visualizer/Visualizer.smart.jsx';
 
 
-
+// <AudioUpload/>
 
 class App extends Component {
 	render() {
-		return (
-			<div>
-				<AudioUpload/>
+		return <div>
+			<div id="playlist_container" className="col align-center">
+				<AudioUpload id="playlist_uploader"/>
 				<Playlist />
-				<Player />
-				<Visualizer />
-			</div>			
-		);
+			</div>
+			<Player />
+			<Visualizer />
+		</div>;
 	}
 }
 

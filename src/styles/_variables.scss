@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito+Sans:300,400');
 
+$playerHeight: 15vh;
+$audioUploadHeight: 4.2vh;
+$audioUploadTopMargin: 1vh;
+
 $purple: #b974aa;
 $blue: #63bce8;
 $red: #e57973;
@@ -22,9 +26,7 @@ $transition: all 0.3s;
 	font-family: 'Nunito Sans', sans-serif;
 	font-weight: 400;
 	font-size: 1.2em;
-	// font-weight:600;
 }
-
 
 
 @mixin circle($width) {

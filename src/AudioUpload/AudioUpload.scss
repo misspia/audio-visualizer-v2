@@ -1,1 +1,20 @@
-// @import '../index.scss';
+@import '../styles/variables';
+
+.input_file {
+	margin-top: $audioUploadTopMargin;
+	font-size: 14px;
+	background-color:red;
+	overflow: hidden;
+	position:relative;
+	height: $audioUploadHeight;
+	
+	input[type=file] {
+	    cursor: inherit;
+	    opacity: 0;
+	    min-height: 100%;
+	    min-width: 100%;
+	    position: absolute;
+	    right: 0;
+	    top: 0;
+	}
+}
