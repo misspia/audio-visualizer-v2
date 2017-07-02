@@ -15,9 +15,6 @@ const Actions = {
 	}, 
 	loopPlaylist: () => {
 		dispatch('LOOP_PLAYLIST');
-	},
-	stopAllTracks: () => {
-		dispatch('STOP_ALL_TRACKS');
 	}
 }
 

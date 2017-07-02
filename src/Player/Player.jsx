@@ -20,9 +20,7 @@ class Player extends Component {
 		this.handleExternalPlayState(selected);
 		this.loopCurrent(selected.loop);
 	}
-	componentDidUpdate() {
-		this.getAudioDuration();	
-	}
+	componentDidUpdate() { this.getAudioDuration();	}
 	playAudio() {
 		this.refs.audio.play();
 		this.setState({playStateIcon: "fa-pause"});
@@ -67,8 +65,7 @@ class Player extends Component {
 	handleInternalPlayState() { Actions.playTrack(this.refs.audio.src); }
 	handleAudioEnd() { if(this.refs.audio.loop === false) Actions.playNextTrack(this.refs.audio.src); }
 	resetSeeker() {
-		//account for  cases when loop playlist
-		this.refs.seek.value = 0;
+		this.refs.seek.value = 0; //account for  cases when loop playlist
 		this.refs.seek.max = 0;
 	}
 	getAudioDuration() {

@@ -20,10 +20,9 @@ class Track extends Component {
 		this.refs.audio.src = nextProps.url;
 		this.getTrackDuration();
 	}
-	componentDidUpdate() {
-		
-	}
-	togglePlayState() { Actions.playTrack(this.props.url); }
+	togglePlayState(e) { 
+		e.stopPropagation();
+		Actions.playTrack(this.props.url); }
 	playTrack() { this.setState({playStateIcon: "fa-pause"}); }
 	pauseTrack() { this.setState({playStateIcon: "fa-play"}); }
 	loopTrack() { Actions.loopTrack(this.props.url); }
@@ -32,23 +31,18 @@ class Track extends Component {
 		this.refs.audio.oncanplaythrough = ()=>{ this.setState({duration: this.refs.audio.duration}) };
 	}
 	render() {
-		return (
-			<li className={`track ${this.props.selected ? 'active': ''} row align_center`} onClick={this.togglePlayState}>
-				<audio ref="audio" />
-				<button className={`button primary ${this.props.playing ? 'active' : ''}`} onClick={this.togglePlayState}>
-					<i className={`fa ${this.state.playStateIcon}`} aria-hidden="true"></i>
-				</button>
-				<button className={`button primary ${this.props.loop ? 'active' : ''}`}>
-					<i className="fa fa-repeat" aria-hidden="true" onClick={this.loopTrack}></i>
-				</button>
-				<span className="audio_name">{this.props.name}</span>
-				<span>{this.state.duration}</span>
-			</li>
-		);
+		return <li className={`track ${this.props.selected ? 'active': ''} row align_center`} onClick={this.togglePlayState}>
+			<audio ref="audio" />
+			<button className={`button primary ${this.props.playing ? 'active' : ''}`} onClick={this.togglePlayState}>
+				<i className={`fa ${this.state.playStateIcon}`} aria-hidden="true"></i>
+			</button>
+			<button className={`button primary ${this.props.loop ? 'active' : ''}`}>
+				<i className="fa fa-repeat" aria-hidden="true" onClick={this.loopTrack}></i>
+			</button>
+			<span className="audio_name">{this.props.name}</span>
+			<span>{this.state.duration}</span>
+		</li>;
 	}
 }
 
 export default Track;
-// this.refs.audio.addEventListener('loadedmetadata', () => {
-// 	       console.log('duration',this.refs.audio.duration);
-// 	    });
