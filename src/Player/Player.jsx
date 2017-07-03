@@ -5,25 +5,40 @@ import Utils from '../utils.js';
 import './Player.scss';
 
 //progress time
+// https://dribbble.com/shots/2769913-Web-Radio-Interface
+//shuffle bug when same song url consecutively
+// break apart component
 
 class Player extends Component {
 	constructor() {
 		super();
-		this.state = { duration: 0, progress:0}
+		this.state = { duration: 0, progress:0, frequencyData: [], analyser: null}
 		this.updateSeekPosition = this.updateSeekPosition.bind(this);
 		this.updateAudioPosition = this.updateAudioPosition.bind(this);
 		this.handleAudioEnd = this.handleAudioEnd.bind(this);
 	}
+	componentDidMount(){
+		let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+		let audioElement = this.refs.audio;
+		let audioSrc = audioCtx.createMediaElementSource(audioElement);
+		let analyser = audioCtx.createAnalyser();
+		audioSrc.connect(analyser);
+		audioSrc.connect(audioCtx.destination);
+
+		this.setState({analyser: analyser, frequencyData: new Uint8Array(200)});
+	}
 	componentWillReceiveProps(nextProps) {
 		const selected = this.getCurrent(nextProps.files);
-
+		
 		if(!selected) return;
 		if(this.props.playlist.ended === true) {this.resetSeeker(); return;}
 		this.replaceSource(selected.url);
 		this.handlePlayState(selected);
 		this.loopCurrent(selected.loop);
 	}
-	componentDidUpdate() { this.getAudioDuration();	}
+	componentDidUpdate() { 
+		this.getAudioDuration();
+	}
 	playAudio() { this.refs.audio.play(); }
 	pauseAudio() { this.refs.audio.pause(); }
 	updateAudioPosition() {
@@ -33,6 +48,9 @@ class Player extends Component {
 	updateSeekPosition(e) {
 		if(this.refs.audio) this.refs.seek.value = this.refs.audio.currentTime;
 		this.setState({ progress: this.refs.seek.value / this.state.duration * 100});
+
+		this.state.analyser.getByteFrequencyData(this.state.frequencyData) // decouple with new function
+		Actions.updateFrequencyData(this.state.frequencyData);
 	}
 	getCurrent(files) {
 		let selected;

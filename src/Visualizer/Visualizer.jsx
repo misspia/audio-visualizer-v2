@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 
 class Visualizer extends Component {
 	componentWillReceiveProps(nextProps){
-		// console.log('visualizer', nextProps);
-		// let audioContext =  new (window.AudioContext || window.webkitAudioContext)();
-		// let analyser = audioContext.createAnalyser();
-		// https://github.com/misspia/d3-audio-visualizer/blob/master/js/visualizations/components.js
+		if(nextProps.audioElement === null) return;
+		console.log('visualizer', nextProps.audioContext.frequencyData);
 	}
 	render() {
 		return <li ref="canvas"></li>

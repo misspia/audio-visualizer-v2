@@ -11,6 +11,9 @@ import Visualizer from './Visualizer/Visualizer.smart.jsx';
 // <AudioUpload/>
 
 class App extends Component {
+	componentDidMount() {
+		
+	}
 	render() {
 		return <div>
 			<div id="playlist_container" className="col align-center">

@@ -8,7 +8,8 @@ let State = {
 		shuffle: false,
 		current: {}
 	},
-	files: []
+	files: [],
+	audioContext: {}
 };
 
 const getRandomIndex = () => {
@@ -30,6 +31,9 @@ const Store = flux.createStore({
 				})
 			}
 		};
+	},
+	UPDATE_FREQUENCY_DATA: (data) => {
+		State.audioContext.frequencyData = data; 		
 	},
 	PLAY_TRACK: (url) => {
 		State.playlist.ended = false;
@@ -101,5 +105,6 @@ const Store = flux.createStore({
 
 Store.getTracks = () => { return State.files; };
 Store.getPlaylist = () => { return State.playlist; };
+Store.getAudioContext = () => { return State.audioContext; }
 
 module.exports = Store;
