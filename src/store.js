@@ -51,7 +51,7 @@ const Store = flux.createStore({
 		};
 	},
 	UPDATE_FREQUENCY_DATA: (data) => {
-		State.audioContext.frequencyData = data; 		
+		State.audioContext.frequencyData = data;
 	},
 	PLAY_TRACK: (url) => {
 		State.playlist.ended = false;

@@ -7,16 +7,18 @@ class Visualizer extends Component {
 		this.state = { frequencyData: []}
 	}
 	componentWillReceiveProps(nextProps){
-		if(nextProps.audioElement === null) return;
-		this.state.frequencyData.push(nextProps.audioContext.frequencyData)
-		// console.log('visualizer', nextProps.audioContext.frequencyData);
+		console.log(nextProps.frequencyByte);
+		if(nextProps.frequencyByte === undefined) return;
+		this.state.frequencyData.push(nextProps.frequencyByte)
 	}
 	render() {
-		return <li id="visualizer" ref="canvas"></li>
-		// return <li>
-		// 	<p>{this.props.audioContext.frequencyData} </p>
-		// 	<p>{this.state.frequencyData}</p>
-		// </li>
+		console.log(this.state.frequencyData);
+		// return <li id="visualizer" ref="canvas"></li>
+		return <li id="visualizer" className="row">
+			<p>i is here</p>
+			<p>{this.props.frequencyByte} </p>
+			<p>{this.state.frequencyData}</p>
+		</li>
 	}
 
 };

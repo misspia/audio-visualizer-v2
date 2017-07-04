@@ -29,14 +29,14 @@ class Player extends Component {
 	}
 	componentWillReceiveProps(nextProps) {
 		const selected = this.getCurrent(nextProps.files);
-		
+
 		if(!selected) return;
 		if(this.props.playlist.ended === true) {this.resetSeeker(); return;}
 		this.replaceSource(selected.url);
 		this.handlePlayState(selected);
 		this.loopCurrent(selected.loop);
 	}
-	componentDidUpdate() { 
+	componentDidUpdate() {
 		this.getAudioDuration();
 	}
 	getCurrent(files) {
@@ -53,7 +53,7 @@ class Player extends Component {
 	updateSeekPosition(e) {
 		if(this.refs.audio) this.refs.seek.value = this.refs.audio.currentTime;
 
-		this.setState({ 
+		this.setState({
 			progress: this.refs.seek.value / this.state.duration * 100,
 			currentTime: this.refs.audio.currentTime
 		});
@@ -72,8 +72,8 @@ class Player extends Component {
 		if(file.playing) {this.playAudio(); return;}
 		this.pauseAudio();
 	}
-	handleAudioEnd() { 
-		if(this.refs.audio.loop === false) Actions.playNextTrack(this.refs.audio.src);
+	handleAudioEnd() {
+		if(this.refs.audio.loop === false) {Actions.playNextTrack(this.refs.audio.src)};
 	}
 	resetSeeker() {
 		this.refs.seek.value = 0; //account for cases when loop playlist
@@ -93,7 +93,7 @@ class Player extends Component {
 				{this.props.playlist.current.name  ? this.props.playlist.current.name : " --- "}
 			</span>
 			<div className="row center align_center full_width">
-				<audio ref="audio" src="" onTimeUpdate={this.updateSeekPosition} 
+				<audio ref="audio" src="" onTimeUpdate={this.updateSeekPosition}
 					loop={this.props.loop} onEnded={this.handleAudioEnd}/>
 				<ProgressTime progress={this.state.currentTime}/>
 				<div id="seek_container">

@@ -1,6 +1,8 @@
 import Store from '../store.js';
 import Visualizer from './Visualizer.jsx';
 
-module.exports = Store.createSmartComponent(Visualizer, 
-	(props) => { return { audioContext: Store.getAudioContext() }; }
+module.exports = Store.createSmartComponent(Visualizer,
+	(props) => { return {
+        frequencyByte: Store.getAudioContext().frequencyData
+    }; }
 );

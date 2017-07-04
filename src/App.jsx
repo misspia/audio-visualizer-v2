@@ -12,7 +12,7 @@ import Visualizer from './Visualizer/Visualizer.smart.jsx';
 
 class App extends Component {
 	componentDidMount() {
-		
+
 	}
 	render() {
 		return <div className="col content_container">
@@ -23,7 +23,7 @@ class App extends Component {
 				</div>
 				<Visualizer />
 			</div>
-			<Player />		
+			<Player />
 		</div>;
 	}
 }

@@ -16,14 +16,11 @@ class AudioUpload extends Component {
 	render() {
 		return <button className="button secondary longround input_file">
 			<i className={icons.plus}></i> Upload a song
-			<input type="file" accept="audio/*" 
+			<input type="file" accept="audio/*"
 			onChange={this.handleFileUpload} multiple/>
-			
+
 		</button>;
 	}
 }
 
 export default AudioUpload;
-
-// <input type="file" accept="audio/*" 
-// 			onChange={this.handleFileUpload} multiple/>
