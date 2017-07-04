@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import Controls from './Controls/Controls.smart.jsx';
+import DurationTime from './TimeDisplay/Duration.jsx';
+import ProgressTime from './TimeDisplay/Progress.jsx';
+import ProgressBar from './Seeker/ProgressBar.jsx';
 import Actions from '../actions.js';
-import Utils from '../utils.js';
 import './Player.scss';
 
-//progress time
 // https://dribbble.com/shots/2769913-Web-Radio-Interface
 // break apart component
 
@@ -38,27 +39,27 @@ class Player extends Component {
 	componentDidUpdate() { 
 		this.getAudioDuration();
 	}
-	playAudio() { 
-		this.refs.audio.oncanplay = ()=>{ this.refs.audio.play(); };
+	getCurrent(files) {
+		let selected;
+		files.forEach((file)=>{ if(file.selected) { selected = file; } });
+		return selected;
 	}
+	playAudio() { this.refs.audio.play(); }
 	pauseAudio() { this.refs.audio.pause(); }
 	updateAudioPosition() {
 		if(this.refs.seek) this.refs.audio.currentTime = this.refs.seek.value;
 		this.refs.audio.max = this.refs.audio.duration;
 	}
 	updateSeekPosition(e) {
-		if(this.refs.audio) {
-			this.refs.seek.value = this.refs.audio.currentTime;
-		}
-		this.setState({ progress: this.refs.seek.value / this.state.duration * 100});
+		if(this.refs.audio) this.refs.seek.value = this.refs.audio.currentTime;
+
+		this.setState({ 
+			progress: this.refs.seek.value / this.state.duration * 100,
+			currentTime: this.refs.audio.currentTime
+		});
 
 		this.state.analyser.getByteFrequencyData(this.state.frequencyData) // decouple with new function
 		Actions.updateFrequencyData(this.state.frequencyData);
-	}
-	getCurrent(files) {
-		let selected;
-		files.forEach((file)=>{ if(file.selected) { selected = file; } });
-		return selected;
 	}
 	loopCurrent(loopState) {
 		if(loopState) { this.refs.audio.loop = true; return;}
@@ -87,9 +88,6 @@ class Player extends Component {
 		return 0;
 	}
 	render() {
-		const progressStyle = { width: this.state.progress + '%'};
-		const durationFormatted = Utils.secondsToHMS(this.state.duration);
-
 		return <li className="player col space_around align_center">
 			<span className="audio_title">
 				{this.props.playlist.current.name  ? this.props.playlist.current.name : " --- "}
@@ -97,12 +95,13 @@ class Player extends Component {
 			<div className="row center align_center full_width">
 				<audio ref="audio" src="" onTimeUpdate={this.updateSeekPosition} 
 					loop={this.props.loop} onEnded={this.handleAudioEnd}/>
+				<ProgressTime progress={this.state.currentTime}/>
 				<div id="seek_container">
-					<div id="seek_progress" style={progressStyle} ></div>
+					<ProgressBar progress={this.state.progress}/>
 					<input ref="seek" type="range" step="0.1" min="0" max={this.state.duration}
 						onChange={this.updateAudioPosition} />
 				</div>
-				<span className="audio_time">{durationFormatted}</span>
+				<DurationTime duration={this.state.duration} progress={this.state.currentTime}/>
 			</div>
 			<Controls/>
 		</li>
