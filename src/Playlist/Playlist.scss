@@ -1,8 +1,9 @@
 @import '../styles/variables';
 
 #playlist {
+	// border: solid green 1px;
 	width: 100%;
+	flex:1;
 	overflow-y: scroll; 
-	height: 95vh - ($playerHeight + $audioUploadHeight + $audioUploadTopMargin); 
 	padding: 0.5em;
 }

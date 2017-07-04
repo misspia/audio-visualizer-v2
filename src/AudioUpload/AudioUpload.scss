@@ -1,12 +1,12 @@
 @import '../styles/variables';
 
 .input_file {
-	margin-top: $audioUploadTopMargin;
+	margin-top: 0.5em;
 	font-size: 14px;
 	background-color:red;
 	overflow: hidden;
 	position:relative;
-	height: $audioUploadHeight;
+	height: 40px;
 	
 	input[type=file] {
 	    cursor: inherit;

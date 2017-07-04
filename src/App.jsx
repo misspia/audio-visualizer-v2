@@ -15,13 +15,15 @@ class App extends Component {
 		
 	}
 	render() {
-		return <div>
-			<div id="playlist_container" className="col align-center">
-				<AudioUpload id="playlist_uploader"/>
-				<Playlist />
+		return <div className="col content_container">
+			<div id="primary_content" className="row">
+				<div id="playlist_container" className="col align-center">
+					<AudioUpload id="playlist_uploader"/>
+					<Playlist />
+				</div>
+				<Visualizer />
 			</div>
-			<Player />
-			<Visualizer />
+			<Player />		
 		</div>;
 	}
 }

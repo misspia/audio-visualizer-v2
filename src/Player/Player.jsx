@@ -6,7 +6,6 @@ import './Player.scss';
 
 //progress time
 // https://dribbble.com/shots/2769913-Web-Radio-Interface
-//shuffle bug when same song url consecutively
 // break apart component
 
 class Player extends Component {
@@ -39,7 +38,9 @@ class Player extends Component {
 	componentDidUpdate() { 
 		this.getAudioDuration();
 	}
-	playAudio() { this.refs.audio.play(); }
+	playAudio() { 
+		this.refs.audio.oncanplay = ()=>{ this.refs.audio.play(); };
+	}
 	pauseAudio() { this.refs.audio.pause(); }
 	updateAudioPosition() {
 		if(this.refs.seek) this.refs.audio.currentTime = this.refs.seek.value;
@@ -78,7 +79,7 @@ class Player extends Component {
 		if(this.refs.audio.loop === false) Actions.playNextTrack(this.refs.audio.src);
 	}
 	resetSeeker() {
-		this.refs.seek.value = 0; //account for  cases when loop playlist
+		this.refs.seek.value = 0; //account for cases when loop playlist
 		this.refs.seek.max = 0;
 	}
 	getAudioDuration() {

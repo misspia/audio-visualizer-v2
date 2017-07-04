@@ -24,6 +24,7 @@ class Controls extends Component {
 		Actions.shufflePlaylist();
 	}
  	playAudio() {
+ 		// if no src, play first / shuffle
 		this.setState({playStateIcon: icons.pause});
 	}
 	pauseAudio() {

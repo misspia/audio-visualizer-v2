@@ -6,10 +6,18 @@ body {
 	@include fontBody();
 	color: $primaryDark;
 	height: 100vh;
-	width: 100vh;
+	width: 100vw;
 	overflow: hidden;
+}
+#root, .content_container {
+	width: inherit;
+	height: inherit;
+}
+#primary_content {
+	flex:1;
 }	
 #playlist_container {
+	height: 100%;
 	position:relative;
 	width: 20em;
 }
