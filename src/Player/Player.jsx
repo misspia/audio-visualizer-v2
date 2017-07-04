@@ -11,7 +11,7 @@ import './Player.scss';
 class Player extends Component {
 	constructor() {
 		super();
-		this.state = { duration: 0, progress:0, frequencyData: [], analyser: null}
+		this.state = { duration: 0, progress:0, frequencyData: [], analyser: null, currentTime: 0}
 		this.updateSeekPosition = this.updateSeekPosition.bind(this);
 		this.updateAudioPosition = this.updateAudioPosition.bind(this);
 		this.handleAudioEnd = this.handleAudioEnd.bind(this);
@@ -47,7 +47,9 @@ class Player extends Component {
 		this.refs.audio.max = this.refs.audio.duration;
 	}
 	updateSeekPosition(e) {
-		if(this.refs.audio) this.refs.seek.value = this.refs.audio.currentTime;
+		if(this.refs.audio) {
+			this.refs.seek.value = this.refs.audio.currentTime;
+		}
 		this.setState({ progress: this.refs.seek.value / this.state.duration * 100});
 
 		this.state.analyser.getByteFrequencyData(this.state.frequencyData) // decouple with new function
@@ -59,21 +61,15 @@ class Player extends Component {
 		return selected;
 	}
 	loopCurrent(loopState) {
-		if(loopState) {
-			this.refs.audio.loop = true;
-		} else {
-			this.refs.audio.loop = false;
-		}
+		if(loopState) { this.refs.audio.loop = true; return;}
+		this.refs.audio.loop = false;
 	}
 	replaceSource(selectedUrl) {
 		if(selectedUrl !== this.refs.audio.src) this.refs.audio.src = selectedUrl;
 	}
 	handlePlayState(file) {
-		if(file.playing === true ) { // play
-			this.playAudio();
-		} else {
-			this.pauseAudio();
-		}
+		if(file.playing) {this.playAudio(); return;}
+		this.pauseAudio();
 	}
 	handleAudioEnd() { 
 		if(this.refs.audio.loop === false) Actions.playNextTrack(this.refs.audio.src);
@@ -85,6 +81,10 @@ class Player extends Component {
 	getAudioDuration() {
 		if(!this.refs.audio) return;
 		this.refs.audio.oncanplaythrough = ()=>{ this.setState({duration: this.refs.audio.duration}) };
+	}
+	getCurrentTime() {
+		if(this.refs.audio) return this.refs.audio.currentTime;
+		return 0;
 	}
 	render() {
 		const progressStyle = { width: this.state.progress + '%'};
