@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import Controls from './Controls/Controls.smart.jsx';
-import DurationTime from './TimeDisplay/Duration.jsx';
-import ProgressTime from './TimeDisplay/Progress.jsx';
-import ProgressBar from './Seeker/ProgressBar.jsx';
+import DurationTime from './ProgressDisplay/Duration.jsx';
+import ProgressTime from './ProgressDisplay/Progress.jsx';
+import ProgressBar from './ProgressDisplay/ProgressBar.jsx';
 import Actions from '../actions.js';
 import './Player.scss';
 
 // https://dribbble.com/shots/2769913-Web-Radio-Interface
-// break apart component
 
 class Player extends Component {
 	constructor() {
