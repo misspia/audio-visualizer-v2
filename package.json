@@ -49,7 +49,8 @@
     "jsmediatags": "^3.6.1",
     "pico-flux": "^2.1.2",
     "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "react-dom": "^15.5.4",
+    "serve": "^6.0.2"
   },
   "scripts": {
     "start": "node scripts/start.js",
