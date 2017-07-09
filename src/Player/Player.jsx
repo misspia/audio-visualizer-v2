@@ -18,10 +18,10 @@ class Player extends Component {
 		this.handleAudioEnd = this.handleAudioEnd.bind(this);
 	}
 	componentDidMount(){
-		let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-		let audioElement = this.refs.audio;
-		let audioSrc = audioCtx.createMediaElementSource(audioElement);
-		let analyser = audioCtx.createAnalyser();
+		const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+		const audioElement = this.refs.audio;
+		const audioSrc = audioCtx.createMediaElementSource(audioElement);
+		const analyser = audioCtx.createAnalyser();
 		audioSrc.connect(analyser);
 		audioSrc.connect(audioCtx.destination);
 
@@ -44,7 +44,11 @@ class Player extends Component {
 		files.forEach((file)=>{ if(file.selected) { selected = file; } });
 		return selected;
 	}
-	playAudio() { this.refs.audio.play(); }
+	playAudio() { 
+		this.refs.audio.oncanplay = () => {
+			this.refs.audio.play();
+		};	
+	}
 	pauseAudio() { this.refs.audio.pause(); }
 	updateAudioPosition() {
 		if(this.refs.seek) this.refs.audio.currentTime = this.refs.seek.value;
@@ -57,7 +61,6 @@ class Player extends Component {
 			progress: this.refs.seek.value / this.state.duration * 100,
 			currentTime: this.refs.audio.currentTime
 		});
-
 		this.state.analyser.getByteFrequencyData(this.state.frequencyData) // decouple with new function
 		Actions.updateFrequencyData(this.state.frequencyData);
 	}
@@ -76,7 +79,7 @@ class Player extends Component {
 		if(this.refs.audio.loop === false) {Actions.playNextTrack(this.refs.audio.src)};
 	}
 	resetSeeker() {
-		this.refs.seek.value = 0; //account for cases when loop playlist
+		this.refs.seek.value = 0;
 		this.refs.seek.max = 0;
 	}
 	getAudioDuration() {
@@ -90,7 +93,7 @@ class Player extends Component {
 	render() {
 		return <li className="player col space_around align_center">
 			<span className="audio_title">
-				{this.props.playlist.current.name  ? this.props.playlist.current.name : " --- "}
+				{this.props.playlist.current  ? this.props.playlist.current.name : " --- "}
 			</span>
 			<div className="row center align_center full_width">
 				<audio ref="audio" src="" onTimeUpdate={this.updateSeekPosition}
@@ -101,7 +104,9 @@ class Player extends Component {
 					<input ref="seek" type="range" step="0.1" min="0" max={this.state.duration}
 						onChange={this.updateAudioPosition} />
 				</div>
-				<DurationTime duration={this.state.duration} progress={this.state.currentTime}/>
+				<DurationTime duration={this.state.duration} 
+					progress={this.state.currentTime}
+					ended={this.refs.audio ? this.refs.audio.ended : false} />
 			</div>
 			<Controls/>
 		</li>

@@ -6,12 +6,7 @@ let State = {
 		loop: true,
 		ended: false,
 		shuffle: false,
-		current: {
-			file: {},
-			// not being used anymore -- keep for now in case
-			progress: 0,
-			duration: 0
-		},
+		current: {},
 	},
 	files: [],
 	audioContext: {}
@@ -25,7 +20,7 @@ const StoreUtils = {
 		},
 		pickRandUrl: () => {
 			const rand = StoreUtils.shuffle.getRandomIndex();
-			if(State.files[rand].url === State.playlist.current.file.url) {
+			if(State.files[rand].url === State.playlist.current.url) {
 				Actions.playNextTrack();
 				return;
 			}
@@ -61,7 +56,7 @@ const Store = flux.createStore({
 			} else if(url === file.url) { // play
 				file.playing = true;
 				file.selected = true;
-				State.playlist.current.file = file;
+				State.playlist.current = file;
 			} else { // stop
 				file.playing = false
 				file.selected = false;

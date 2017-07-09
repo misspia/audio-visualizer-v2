@@ -7,12 +7,12 @@ class Visualizer extends Component {
 		this.state = { frequencyData: []}
 	}
 	componentWillReceiveProps(nextProps){
-		console.log(nextProps.frequencyByte);
+		// console.log(nextProps.frequencyByte);
 		if(nextProps.frequencyByte === undefined) return;
 		this.state.frequencyData.push(nextProps.frequencyByte)
 	}
 	render() {
-		console.log(this.state.frequencyData);
+		// console.log(this.state.frequencyData);
 		// return <li id="visualizer" ref="canvas"></li>
 		return <li id="visualizer" className="row">
 			<p>i is here</p>
