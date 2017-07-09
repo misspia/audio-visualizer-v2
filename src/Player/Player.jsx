@@ -44,9 +44,7 @@ class Player extends Component {
 		return selected;
 	}
 	playAudio() { 
-		this.refs.audio.oncanplay = () => {
-			this.refs.audio.play();
-		};	
+		this.refs.audio.oncanplay = () => { this.refs.audio.play(); };	
 	}
 	pauseAudio() { this.refs.audio.pause(); }
 	updateAudioPosition() {

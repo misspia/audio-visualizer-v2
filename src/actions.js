@@ -25,13 +25,6 @@ const Actions = {
 	shufflePlaylist: () => {
 		dispatch('SHUFFLE_PLAYLIST');
 	},
-	// not being used anymore -- keep for now in case
-	updateTrackProgress: (time) => {
-		dispatch('UPDATE_TRACK_PROGRESS', time);
-	},
-	updateTrackDuration: (time) => {
-		dispatch('UPDATE_TRACK_DURATION', time);
-	}
 }
 
 module.exports = Actions;

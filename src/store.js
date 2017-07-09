@@ -108,13 +108,6 @@ const Store = flux.createStore({
 	SHUFFLE_PLAYLIST: () => {
 		State.playlist.shuffle = !State.playlist.shuffle;
 	},
-	// not being used anymore -- keep for now in case
-	UPDATE_TRACK_PROGRESS: (time) => {
-		State.playlist.current.progress = time;
-	},
-	UPDATE_TRACK_DURATION: (time) => {
-		State.playlist.current.duration = time;
-	}
 });
 
 Store.getTracks = () => { return State.files; };
