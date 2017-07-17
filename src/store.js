@@ -9,7 +9,9 @@ let State = {
 		current: {},
 	},
 	files: [],
-	audioContext: {}
+	audioContext: {
+		frequency: []
+	}
 };
 
 const StoreUtils = {
@@ -46,7 +48,7 @@ const Store = flux.createStore({
 		};
 	},
 	UPDATE_FREQUENCY_DATA: (data) => {
-		State.audioContext.frequencyData = data;
+		State.audioContext.frequency = data;
 	},
 	PLAY_TRACK: (url) => {
 		State.playlist.ended = false;

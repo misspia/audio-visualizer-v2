@@ -28,6 +28,3 @@ const Actions = {
 }
 
 module.exports = Actions;
-
-// https://github.com/thalmic/opal/blob/master/tools/kona/exitPupil/pupil.store.js
-// https://www.npmjs.com/package/pico-flux

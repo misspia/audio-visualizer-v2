@@ -3,6 +3,6 @@ import Visualizer from './Visualizer.jsx';
 
 module.exports = Store.createSmartComponent(Visualizer,
 	(props) => { return {
-        frequencyByte: Store.getAudioContext().frequencyData
+        frequencyByte: Store.getAudioContext().frequency
     }; }
 );
