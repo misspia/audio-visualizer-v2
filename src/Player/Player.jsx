@@ -11,7 +11,7 @@ import './Player.scss';
 class Player extends Component {
 	constructor() {
 		super();
-		this.state = { duration: 0, progress:0, frequencyData: [], analyser: null, currentTime: 0}
+		this.state = { duration: 0, progress:0, analyser: null, currentTime: 0}
 		this.updateSeekPosition = this.updateSeekPosition.bind(this);
 		this.updateAudioPosition = this.updateAudioPosition.bind(this);
 		this.handleAudioEnd = this.handleAudioEnd.bind(this);
@@ -24,7 +24,7 @@ class Player extends Component {
 		audioSrc.connect(analyser);
 		audioSrc.connect(audioCtx.destination);
 
-		this.setState({analyser: analyser, frequencyData: new Uint8Array(200)});
+		this.setState({analyser: analyser});
 	}
 	componentWillReceiveProps(nextProps) {
 		const selected = this.getCurrent(nextProps.files);
@@ -44,14 +44,19 @@ class Player extends Component {
 		return selected;
 	}
 	playAudio() { 
-		console.log(':::: player ::::');
-		 this.refs.audio.play()
+		this.refs.audio.play();
 		// this.refs.audio.oncanplay = () => {
-		// 	console.log('shall play the track~'); this.refs.audio.play();
-		// 	console.log('paused? ', this.refs.audio.paused)
+		// this.refs.audio.oncanplaythrough = () => {
+		// 	console.log('can play ')
+		// 	this.refs.audio.play();
 		// };	
+		// console.log(this.refs.audio.readyState);
+		// if(this.refs.audio.readyState > 1) {
+		// 	console.log(this.refs.readyState);
+		// 	this.refs.audio.play();
+		// }
 	}
-	pauseAudio() { console.log('PAUSING--> paused? ', this.refs.audio.paused); this.refs.audio.pause(); }
+	pauseAudio() { this.refs.audio.pause(); }
 	updateAudioPosition() {
 		if(this.refs.seek) this.refs.audio.currentTime = this.refs.seek.value;
 		this.refs.audio.max = this.refs.audio.duration;
@@ -63,9 +68,8 @@ class Player extends Component {
 			progress: this.refs.seek.value / this.state.duration * 100,
 			currentTime: this.refs.audio.currentTime
 		});
-		this.state.analyser.getByteFrequencyData(this.state.frequencyData) // decouple with new function
-		// Actions.updateFrequencyData(this.state.frequencyData);
-		Actions.updateFrequencyData(this.state.analyser);
+
+		Actions.updateAnalyser(this.state.analyser);
 	}
 	loopCurrent(loopState) {
 		if(loopState) { this.refs.audio.loop = true; return;}

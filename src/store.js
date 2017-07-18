@@ -10,7 +10,7 @@ let State = {
 	},
 	files: [],
 	audioContext: {
-		frequency: []
+		analyser: []
 	}
 };
 
@@ -47,8 +47,8 @@ const Store = flux.createStore({
 			}
 		};
 	},
-	UPDATE_FREQUENCY_DATA: (data) => {
-		State.audioContext.frequency = data;
+	UPDATE_ANALYSER: (analyser) => {
+		State.audioContext.analyser = analyser;
 	},
 	PLAY_TRACK: (url) => {
 		State.playlist.ended = false;
@@ -114,6 +114,6 @@ const Store = flux.createStore({
 
 Store.getTracks = () => { return State.files; };
 Store.getPlaylist = () => { return State.playlist; };
-Store.getAudioContext = () => { return State.audioContext; }
+Store.getAnalyser = () => { return State.audioContext.analyser; }
 
 module.exports = Store;

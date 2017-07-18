@@ -5,22 +5,21 @@ import Bar from './visualizations/bar.js';
 class Visualizer extends Component {
 	constructor() {
 		super();
-		this.state = { canvas: null, ctx: null, frequencyData: []}
+		this.state = { canvas: null, ctx: null, frequencyData: null}
 	}
 	componentDidMount() {
 		this.resize();
 		// this.setState({ canvas: this.refs.canvas.getContext('webgl', {antialias: false}) });
-		const canvas = this.refs.canvas;
 		this.setState({ 
-			canvas: canvas,
-			ctx: canvas.getContext('2d')
+			canvas: this.refs.canvas,
+			ctx: this.refs.canvas.getContext('2d'),
+			frequencyData: new Uint8Array(200)
 		});
 
 	}
 	componentWillReceiveProps(nextProps){
-		if(nextProps.frequencyByte === undefined) return;
-		this.state.frequencyData.push(nextProps.frequencyByte);
-		Bar(this.state.canvas, this.state.ctx, this.props.frequencyByte);
+		if(nextProps.analyser === undefined) return;
+		Bar(this.state.canvas, this.state.ctx, this.props.analyser);
 	}
 	resize() {
 		this.refs.canvas.width = this.refs.container.clientWidth;

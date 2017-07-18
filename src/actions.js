@@ -4,8 +4,8 @@ const Actions = {
 	addFile: (files) => {
 		dispatch('ADD_FILE', files);
 	},
-	updateFrequencyData: (data) => {
-		dispatch('UPDATE_FREQUENCY_DATA', data);
+	updateAnalyser: (data) => {
+		dispatch('UPDATE_ANALYSER', data);
 	},
 	playTrack: (url) => {
 		dispatch('PLAY_TRACK', url);
