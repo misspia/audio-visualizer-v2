@@ -9,7 +9,7 @@ function Bar (ctx, x, y, width, height, color) {
 	};
 }
 
-function viz(canvas, ctx, analyser) {
+function animate(canvas, ctx, analyser) {
 	if(!analyser.frequencyBinCount) return;
 	
 	const frequencyData = new Uint8Array(analyser.frequencyBinCount);
@@ -19,8 +19,6 @@ function viz(canvas, ctx, analyser) {
 
 		analyser.getByteFrequencyData(frequencyData);
 		// analyser.getByteTimeDomainData(frequencyData);
-
-		console.log(analyser, frequencyData) 
 
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -47,4 +45,4 @@ function generateColor(variant) {
 
 
 
-module.exports = viz;
+module.exports = animate;

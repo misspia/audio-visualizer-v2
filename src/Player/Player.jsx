@@ -44,17 +44,12 @@ class Player extends Component {
 		return selected;
 	}
 	playAudio() { 
-		this.refs.audio.play();
-		// this.refs.audio.oncanplay = () => {
+		// this.refs.audio.play();
+		this.refs.audio.oncanplay = () => {
 		// this.refs.audio.oncanplaythrough = () => {
-		// 	console.log('can play ')
-		// 	this.refs.audio.play();
-		// };	
-		// console.log(this.refs.audio.readyState);
-		// if(this.refs.audio.readyState > 1) {
-		// 	console.log(this.refs.readyState);
-		// 	this.refs.audio.play();
-		// }
+			console.log('can play ')
+			this.refs.audio.play();
+		};	
 	}
 	pauseAudio() { this.refs.audio.pause(); }
 	updateAudioPosition() {
