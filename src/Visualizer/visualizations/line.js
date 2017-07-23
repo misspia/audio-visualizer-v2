@@ -4,7 +4,7 @@ function Line( ctx, begin={}, end={}, color) {
 
 	this.draw = () => {
 		ctx.beginPath(); 
-		ctx.lineWidth = "1";
+		ctx.lineWidth = "2";
 		ctx.strokeStyle = color;
 		ctx.moveTo(this.begin.x , this.begin.y);
 		ctx.lineTo(this.end.x, this.end.y);
@@ -24,15 +24,23 @@ function animate(canvas, ctx, analyser) {
 
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		
-		let lines = [];
+		
 		const canvasMidHeight = canvas.height / 2;
+		const xDistance = canvas.width / frequencyData.length;
+		let lines = [];
+		let xStart = 0, xEnd = 0;
 
 		for( let i = 0; i < frequencyData.length; i ++) {
-			const begin = {x: i, y: canvasMidHeight - frequencyData[i] },
-				end = { x: i + 1, y: canvasMidHeight - frequencyData[i + 1]},
+			
+			xEnd = i * ( 1 + xDistance );
+
+			const begin = {x: xStart, y: canvasMidHeight - frequencyData[i] },
+				end = { x: xEnd, y: canvasMidHeight - frequencyData[i + 1]},
 				color = generateColor(frequencyData[i]);
 
 			lines.push( new Line(ctx, begin, end, color) );
+
+			xStart = xEnd;
 		};
 		lines.forEach((line) => { line.draw(); })
 	}

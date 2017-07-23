@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './Visualizer.scss';
-// import Bar from './visualizations/bar.js';
+import Bar from './visualizations/bar.js';
 // import Line from './visualizations/line.js';
-import MultiCircle from './visualizations/multiCircle.js';
+// import MultiCircle from './visualizations/multiCircle.js';
 
 class Visualizer extends Component {
 	constructor() {
@@ -21,9 +21,9 @@ class Visualizer extends Component {
 	}
 	componentWillReceiveProps(nextProps){
 		if(nextProps.analyser === undefined) return;
-		// Bar(this.state.canvas, this.state.ctx, this.props.analyser);
+		Bar(this.state.canvas, this.state.ctx, this.props.analyser);
 		// Line(this.state.canvas, this.state.ctx, this.props.analyser);
-		MultiCircle(this.state.canvas, this.state.ctx, this.props.analyser);
+		// MultiCircle(this.state.canvas, this.state.ctx, this.props.analyser);
 	}
 	resize() {
 		this.refs.canvas.width = this.refs.container.clientWidth;

@@ -24,9 +24,10 @@ function animate(canvas, ctx, analyser) {
 
 		const barWidth = canvas.width / frequencyData.length;
 		let bars = [];
+
 		frequencyData.forEach((node, index) => {
-			const x =  2 * Math.pow(barWidth, 2) + barWidth * index,
-				barHeight = node * 2,
+			const x =  index * (1 + barWidth),
+				barHeight = node,
 				y = (canvas.height - barHeight) / 2,
 				color = generateColor(node);
 
