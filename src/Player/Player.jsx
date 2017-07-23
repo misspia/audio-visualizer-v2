@@ -46,7 +46,6 @@ class Player extends Component {
 	playAudio() { 
 		// this.refs.audio.play();
 		this.refs.audio.oncanplay = () => {
-		// this.refs.audio.oncanplaythrough = () => {
 			console.log('can play ')
 			this.refs.audio.play();
 		};	
@@ -74,7 +73,7 @@ class Player extends Component {
 		if(selectedUrl !== this.refs.audio.src) this.refs.audio.src = selectedUrl;
 	}
 	handlePlayState(file) {
-		if(file.playing) {this.playAudio(); return;}
+		if(file.playing) { this.playAudio(); return;}
 		this.pauseAudio();
 	}
 	handleAudioEnd() {

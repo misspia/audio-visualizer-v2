@@ -10,7 +10,13 @@ let State = {
 	},
 	files: [],
 	audioContext: {
-		analyser: []
+		analyser: [],
+		frequencyData: null
+	},
+	visualizer: {
+		canvas: null,
+		ctx: null,
+	
 	}
 };
 
@@ -110,10 +116,18 @@ const Store = flux.createStore({
 	SHUFFLE_PLAYLIST: () => {
 		State.playlist.shuffle = !State.playlist.shuffle;
 	},
+
+	// canvas
+	SET_CANVAS: (canvas, ctx, frequencyData) => {
+		State.visualizer.canvas = canvas;
+		State.visualizer.ctx = ctx;
+		State.audioContext.frequencyData = frequencyData;
+	}
 });
 
 Store.getTracks = () => { return State.files; };
 Store.getPlaylist = () => { return State.playlist; };
-Store.getAnalyser = () => { return State.audioContext.analyser; }
+Store.getAnalyser = () => { return State.audioContext.analyser; };
+Store.getCanvas = () => { return State.visualizer; };
 
 module.exports = Store;

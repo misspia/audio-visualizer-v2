@@ -15,4 +15,4 @@ const Visualizations = {
 	}
 }
 
-module.exports = visualizations;
+module.exports = Visualizations;
