@@ -26,13 +26,7 @@ const Actions = {
 	},
 	shufflePlaylist: () => {
 		dispatch('SHUFFLE_PLAYLIST');
-	},
-
-	// canvas
-	setCanvas: (canvas, ctx, frequencyData) => {
-		dispatch('SET_CANVAS', canvas, ctx, frequencyData);
-	},
-	
+	},	
 }
 
 module.exports = Actions;

@@ -11,7 +11,7 @@ function Bar (ctx, x, y, width, height, color) {
 
 function animate(canvas, ctx, analyser) {
 	if(!analyser.frequencyBinCount) return;
-	
+	console.log(canvas, ctx, analyser);
 	const frequencyData = new Uint8Array(analyser.frequencyBinCount);
 
 	function renderBars() {
@@ -33,7 +33,6 @@ function animate(canvas, ctx, analyser) {
 
 			bars.push(new Bar(ctx, x, y, barWidth, barHeight, color))
 		});
-
 		bars.forEach((bar) => { bar.draw(); })
 
 	}

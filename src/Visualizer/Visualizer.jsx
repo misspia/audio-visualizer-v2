@@ -1,28 +1,29 @@
 import React, { Component } from 'react';
-import Actions from '../actions.js';
 import './Visualizer.scss';
-// import Bar from './visualizations/bar.js';
-import Line from './visualizations/line.js';
+import Bar from './visualizations/bar.js';
+// import Line from './visualizations/line.js';
 // import MultiCircle from './visualizations/multiCircle.js';
-// import Visualizations from './map.visualizations.js';
+// import GL from './webgl.js';
 
 class Visualizer extends Component {
+	constructor() {
+		super();
+		this.state = { ctx: {} }
+	}
 	componentDidMount() {
 		this.resize();
-		// this.setState({ canvas: this.refs.canvas.getContext('webgl', {antialias: false}) });
+		// this.setState({ ctx: this.refs.canvas.getContext('webgl') });
+		this.setState({ ctx: this.refs.canvas.getContext('2d') });
 
-		const canvas = this.refs.canvas;
-		const ctx = this.refs.canvas.getContext('2d');
-		const frequencyData = new Uint8Array(200);
-		Actions.setCanvas(canvas, ctx, frequencyData);
+		// GL(ctx);
 
 	}
 	componentWillReceiveProps(nextProps){
 		if(nextProps.analyser === undefined) return;
-		// Bar(this.props.canvas, this.props.ctx, this.props.analyser);
-		Line(this.props.canvas, this.props.ctx, this.props.analyser);
+		Bar(this.refs.canvas, this.state.ctx, this.props.analyser);
+		// Line(this.props.canvas, this.props.ctx, this.props.analyser);
 		// MultiCircle(this.props.canvas, this.props.ctx, this.props.analyser);
-		// Visualizations(this.props.canvas, this.props.ctx, this.props.analyser, "bar")
+
 	}
 	resize() {
 		this.refs.canvas.width = this.refs.container.clientWidth;
