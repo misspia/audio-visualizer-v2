@@ -5,10 +5,8 @@ import './App.scss';
 import AudioUpload from './AudioUpload/AudioUpload.smart.jsx';
 import Playlist from './Playlist/Playlist.smart.jsx';
 import Player from './Player/Player.smart.jsx';
-import Visualizer from './Visualizer/Visualizer.smart.jsx';
+// import Visualizer from './Visualizer/Visualizer.smart.jsx';
 
-
-// <AudioUpload/>
 
 class App extends Component {
 	componentDidMount() {
@@ -21,7 +19,7 @@ class App extends Component {
 					<AudioUpload id="playlist_uploader"/>
 					<Playlist />
 				</div>
-				<Visualizer />
+
 			</div>
 			<Player />
 		</div>;
