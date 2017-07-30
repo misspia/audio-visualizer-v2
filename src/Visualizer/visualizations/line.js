@@ -1,3 +1,5 @@
+import Color from './color.js';
+
 function Line( ctx, begin={}, end={}, color) {
 	this.begin = begin;
 	this.end = end;
@@ -14,7 +16,7 @@ function Line( ctx, begin={}, end={}, color) {
 
 function animate(canvas, ctx, analyser) {
 	if(!analyser.frequencyBinCount) return;
-	
+
 	const frequencyData = new Uint8Array(analyser.frequencyBinCount);
 
 	function renderLine() {
@@ -36,7 +38,7 @@ function animate(canvas, ctx, analyser) {
 
 			const begin = {x: xStart, y: canvasMidHeight - frequencyData[i] },
 				end = { x: xEnd, y: canvasMidHeight - frequencyData[i + 1]},
-				color = generateColor(frequencyData[i]);
+				color = Color.bluePink(frequencyData[i]);
 
 			lines.push( new Line(ctx, begin, end, color) );
 
@@ -46,11 +48,6 @@ function animate(canvas, ctx, analyser) {
 	}
 	renderLine();
 }
-
-function generateColor(variant) {
-	return `rgba(218, 70, ${variant}, 0.6)`
-}
-
 
 
 module.exports = animate;

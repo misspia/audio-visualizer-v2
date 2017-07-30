@@ -11,20 +11,20 @@ import './Player.scss';
 class Player extends Component {
 	constructor() {
 		super();
-		this.state = { duration: 0, progress:0, analyser: null, currentTime: 0}
+		this.state = { duration: 0, progress:0, currentTime: 0}
 		this.updateSeekPosition = this.updateSeekPosition.bind(this);
 		this.updateAudioPosition = this.updateAudioPosition.bind(this);
 		this.handleAudioEnd = this.handleAudioEnd.bind(this);
 	}
 	componentDidMount(){
-		// const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-		// const audioSrc = audioCtx.createMediaElementSource(this.refs.audio);
-		// const analyser = audioCtx.createAnalyser();
+		const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+		const audioSrc = audioCtx.createMediaElementSource(this.refs.audio);
+		const analyser = audioCtx.createAnalyser();
 
-		// audioSrc.connect(analyser);
-		// audioSrc.connect(audioCtx.destination);
+		audioSrc.connect(analyser);
+		audioSrc.connect(audioCtx.destination);
 
-		// this.setState({analyser: analyser});
+		Actions.updateAnalyser(analyser);
 	}
 	componentWillReceiveProps(nextProps) {
 		const selected = this.getCurrent(nextProps.files);
@@ -59,8 +59,6 @@ class Player extends Component {
 			progress: this.refs.seek.value / this.state.duration * 100,
 			currentTime: this.refs.audio.currentTime
 		});
-
-		// Actions.updateAnalyser(this.state.analyser);
 	}
 	loopCurrent(loopState) {
 		if(loopState) { this.refs.audio.loop = true; return;}

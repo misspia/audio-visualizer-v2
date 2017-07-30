@@ -1,3 +1,6 @@
+import Color from './color.js';
+import Utils from '../visualizer.utils.js';
+
 function Bar (ctx, x, y, width, height, color) {
 	this.x = x;
 	this.y = y;
@@ -11,26 +14,25 @@ function Bar (ctx, x, y, width, height, color) {
 
 function animate(canvas, ctx, analyser) {
 	if(!analyser.frequencyBinCount) return;
-	console.log(canvas, ctx, analyser);
-	const frequencyData = new Uint8Array(analyser.frequencyBinCount);
+
+	const frequencyData = new Uint8Array(200);
 
 	function renderBars() {
 		requestAnimationFrame(renderBars);
 
 		analyser.getByteFrequencyData(frequencyData);
-		// analyser.getByteTimeDomainData(frequencyData);
 
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+		
 		const barWidth = canvas.width / frequencyData.length;
+		const maxHeight = canvas.height * 0.7;
 		let bars = [];
 
 		frequencyData.forEach((node, index) => {
 			const x =  index * (1 + barWidth),
-				barHeight = node,
+				barHeight = Utils.upTo(maxHeight, Utils.maxNode, node),
 				y = (canvas.height - barHeight) / 2,
-				color = generateColor(node);
-
+				color = Color.pinkOrange(node);
 			bars.push(new Bar(ctx, x, y, barWidth, barHeight, color))
 		});
 		bars.forEach((bar) => { bar.draw(); })
@@ -39,9 +41,7 @@ function animate(canvas, ctx, analyser) {
 	renderBars();
 }
 
-function generateColor(variant) {
-	return `rgba(218, 70, ${variant}, 0.6)`
-}
+
 
 
 

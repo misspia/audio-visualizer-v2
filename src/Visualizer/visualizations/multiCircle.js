@@ -1,3 +1,6 @@
+import Color from './color.js';
+import Utils from '../visualizer.utils.js';
+
 function Circle( ctx, center={}, radius, color) {
 	this.center = center;
 	this.radius = radius;
@@ -5,6 +8,7 @@ function Circle( ctx, center={}, radius, color) {
 	this.draw = () => {
 		ctx.beginPath();
 		ctx.strokeStyle = color;
+		ctx.lineWidth = "1";
 		ctx.arc( this.center.x, this.center.y, this.radius, 0 , 2 * Math.PI );
 		ctx.stroke();
 	};
@@ -13,7 +17,7 @@ function Circle( ctx, center={}, radius, color) {
 function animate(canvas, ctx, analyser) {
 	if(!analyser.frequencyBinCount) return;
 	
-	const frequencyData = new Uint8Array(analyser.frequencyBinCount);
+	const frequencyData = new Uint8Array(50);
 
 	function renderCircle() {
 		requestAnimationFrame(renderCircle);
@@ -23,26 +27,23 @@ function animate(canvas, ctx, analyser) {
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		
 		let circles = [];
+		const maxRadius = canvas.height / 2 * 0.8;
 		const centerCoord = {
 			x: canvas.width / 2,
 			y: canvas.height / 2
 		};
 		
 		frequencyData.forEach((node, index) => {
-			const color = generateColor(node);		
+			const radius = Utils.upTo(maxRadius, Utils.maxNode, node),
+				color = Color.pink(node);
 	
-			circles.push( new Circle(ctx, centerCoord, node, color) );
+			circles.push( new Circle(ctx, centerCoord, radius, color) );
 		});
 
 		circles.forEach((circle) => { circle.draw(); })
 	}
 	renderCircle();
 }
-
-function generateColor(variant) {
-	return `rgba(218, 70, ${variant}, 0.6)`
-}
-
 
 
 module.exports = animate;
