@@ -17,14 +17,14 @@ class Player extends Component {
 		this.handleAudioEnd = this.handleAudioEnd.bind(this);
 	}
 	componentDidMount(){
-		const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-		const audioElement = this.refs.audio;
-		const audioSrc = audioCtx.createMediaElementSource(audioElement);
-		const analyser = audioCtx.createAnalyser();
-		audioSrc.connect(analyser);
-		audioSrc.connect(audioCtx.destination);
+		// const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+		// const audioSrc = audioCtx.createMediaElementSource(this.refs.audio);
+		// const analyser = audioCtx.createAnalyser();
 
-		this.setState({analyser: analyser});
+		// audioSrc.connect(analyser);
+		// audioSrc.connect(audioCtx.destination);
+
+		// this.setState({analyser: analyser});
 	}
 	componentWillReceiveProps(nextProps) {
 		const selected = this.getCurrent(nextProps.files);
@@ -44,11 +44,8 @@ class Player extends Component {
 		return selected;
 	}
 	playAudio() { 
-		// this.refs.audio.play();
-		this.refs.audio.oncanplay = () => {
-			console.log('can play ')
-			this.refs.audio.play();
-		};	
+		this.refs.audio.oncanplay = () => { return this.refs.audio.play(); };	
+		if(this.refs.audio.readyState > 3) return this.refs.audio.play();
 	}
 	pauseAudio() { this.refs.audio.pause(); }
 	updateAudioPosition() {
@@ -63,7 +60,7 @@ class Player extends Component {
 			currentTime: this.refs.audio.currentTime
 		});
 
-		Actions.updateAnalyser(this.state.analyser);
+		// Actions.updateAnalyser(this.state.analyser);
 	}
 	loopCurrent(loopState) {
 		if(loopState) { this.refs.audio.loop = true; return;}
