@@ -9,15 +9,15 @@ class Visualizer extends Component {
 		this.state = { ctx: {} }
 	}
 	componentDidMount() {
-		this.resize();
+		
 		// this.setState({ ctx: this.refs.canvas.getContext('webgl') });
 		this.setState({ ctx: this.refs.canvas.getContext('2d') });
 
 		// GL(ctx);
-
 	}
 	componentWillReceiveProps(nextProps){
 		if(nextProps.analyser === undefined) return;
+		this.resize();
 		Visualizations('bar', this.refs.canvas, this.state.ctx, this.props.analyser);
 	}
 	resize() {
@@ -25,10 +25,11 @@ class Visualizer extends Component {
 		this.refs.canvas.height = this.refs.container.clientHeight;
 	}
 	render() {
-		return <div ref="container" className="canvas_container">
-			<canvas ref="canvas"></canvas>
-		</div>;
-		
+		return <div  className='canvas_container'>
+			<div ref='container' className='canvas_frame'>
+				<canvas ref='canvas'></canvas>
+			</div>	
+		</div>;	
 	}
 
 };

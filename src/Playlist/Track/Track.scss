@@ -1,7 +1,7 @@
 @import '../../styles/variables';
 
-$blur: 4px;
-$spacing: $blur + 2;
+$blur: 3px;
+$spacing: $blur + 3;
 
 .track {
 	z-index:0;
@@ -9,14 +9,15 @@ $spacing: $blur + 2;
 	transition: $transition;
 	border: solid lighten($primaryLight, 10%) 0.1em;
 	height: 3em;
-	width: 100%;
+	width: 95%;
 	color: $primaryDark;
 	cursor: pointer;
 	&:hover {
-		// background-color: $primaryLight;
+		background-color: rgba($primaryLight, 0.2);
+		transform: translateX(10px);
 	}
 	&.active {
-		box-shadow: 1px 3px $blur $primaryLight;
+		box-shadow: 1px 3px $blur rgba($primaryLight, 0.7);
 	}
 	.audio_time {
 		font-size: 0.7em;

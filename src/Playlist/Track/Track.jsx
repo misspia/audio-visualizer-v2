@@ -32,14 +32,14 @@ class Track extends Component {
 		this.refs.audio.oncanplaythrough = ()=>{ this.setState({duration: Utils.secondsToHMS(this.refs.audio.duration)}) };
 	}
 	render() {
-		return <li className={`track ${this.props.selected ? 'active': ''} row align_center`} onClick={this.togglePlayState}>
+		return <div className={`track ${this.props.selected ? 'active': ''} row align_center`} onClick={this.togglePlayState}>
 			<audio ref="audio" />
 			<button className={`button primary ${this.props.playing ? 'active' : ''}`} onClick={this.togglePlayState}>
 				<i className={`fa ${this.state.playStateIcon}`}></i>
 			</button>
 			<span className="audio_name">{this.props.name}</span>
 			<span className="audio_time">{this.state.duration}</span>
-		</li>;
+		</div>;
 	}
 }
 

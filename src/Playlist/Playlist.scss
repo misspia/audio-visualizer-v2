@@ -1,9 +1,13 @@
 @import '../styles/variables';
 
-#playlist {
-	// border: solid green 1px;
+.playlist {
 	width: 100%;
 	flex:1;
 	overflow-y: scroll; 
 	padding: 0.5em;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; 
 }

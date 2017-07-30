@@ -16,10 +16,10 @@ body {
 #primary_content {
 	flex:1;
 }
-#playlist_container {
+.playlist_container {
 	height: 100%;
 	position:relative;
-	width: 20em;
+	width: $playlistWidth;
 }
 
 

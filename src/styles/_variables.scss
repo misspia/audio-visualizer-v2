@@ -14,6 +14,9 @@ $primaryDark: #8d8d8d;
 $accent: $purple;
 
 $transition: all 0.3s;
+$playlistWidth: 30vw;
+$canvasMargin: 2.5vw;
+$canvasWidth: 100vw - $playlistWidth;
 
 @mixin fontBody() {
 	font-family: 'Nunito Sans', sans-serif;

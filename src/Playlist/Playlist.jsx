@@ -21,9 +21,9 @@ class Playlist extends Component {
 		this.setState({ tracks: this.populateList(nextProps.files) });
 	}
 	render() {
-		return <ul id="playlist">
+		return <div className='playlist'>
 				{this.state.tracks}
-			</ul>;
+			</div>;
 	}
 }
 
