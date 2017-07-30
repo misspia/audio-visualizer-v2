@@ -9,9 +9,11 @@ let State = {
 		current: {},
 	},
 	files: [],
-	audioContext: {
-		analyser: []
-	},
+	analyser: [],
+	visualizer: {
+		canvas: {},
+		ctx: {}
+	}
 };
 
 const StoreUtils = {
@@ -48,7 +50,7 @@ const Store = flux.createStore({
 		};
 	},
 	UPDATE_ANALYSER: (analyser) => {
-		State.audioContext.analyser = analyser;
+		State.analyser = analyser;
 	},
 	PLAY_TRACK: (url) => {
 		State.playlist.ended = false;
@@ -110,10 +112,16 @@ const Store = flux.createStore({
 	SHUFFLE_PLAYLIST: () => {
 		State.playlist.shuffle = !State.playlist.shuffle;
 	},
+
+	//canvas
+	SET_CANVAS: (canvas) => {
+		State.visualizer.canvas = canvas;
+	}
 });
 
 Store.getTracks = () => { return State.files; };
 Store.getPlaylist = () => { return State.playlist; };
-Store.getAnalyser = () => { return State.audioContext.analyser; };
+Store.getAnalyser = () => { return State.analyser; };
+Store.getCanvas = () => { return State.visualizer.canvas };
 
 module.exports = Store;

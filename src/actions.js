@@ -27,6 +27,13 @@ const Actions = {
 	shufflePlaylist: () => {
 		dispatch('SHUFFLE_PLAYLIST');
 	},	
+
+	//canvas
+	setCanvas: (canvas) => {
+		dispatch('SET_CANVAS', canvas);
+	},
+	
+
 }
 
 module.exports = Actions;

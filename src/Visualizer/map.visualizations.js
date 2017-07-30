@@ -3,8 +3,9 @@ import Line from './visualizations/line.js';
 import MultiCircle from './visualizations/multiCircle.js';
 import SunBars from './visualizations/sunBars.js';
 
-const Visualizations = (name, canvas, ctx, analyser) => {
-	switch(name) {
+const Visualizations = (type, canvas, ctx, analyser) => {
+	console.log('mapping...')
+	switch(type) {
 		case "bar":
 			Bar(canvas, ctx, analyser);
 			break;

@@ -1,32 +1,26 @@
 import React, { Component } from 'react';
+import Actions from '../actions.js';
 import './Visualizer.scss';
 // import GL from './webgl.js';
-import Visualizations from './map.visualizations.js';
+import Controls from './controls/controls.smart.jsx';
 
 class Visualizer extends Component {
-	constructor() {
-		super();
-		this.state = { ctx: {} }
-	}
 	componentDidMount() {
-		
-		// this.setState({ ctx: this.refs.canvas.getContext('webgl') });
-		this.setState({ ctx: this.refs.canvas.getContext('2d') });
-
+		Actions.setCanvas(this.refs.canvas);
 		// GL(ctx);
 	}
 	componentWillReceiveProps(nextProps){
 		if(nextProps.analyser === undefined) return;
 		this.resize();
-		Visualizations('bar', this.refs.canvas, this.state.ctx, this.props.analyser);
 	}
 	resize() {
 		this.refs.canvas.width = this.refs.container.clientWidth;
 		this.refs.canvas.height = this.refs.container.clientHeight;
 	}
 	render() {
-		return <div  className='canvas_container'>
-			<div ref='container' className='canvas_frame'>
+		return <div  className='canvas_outer'>
+			<Controls />
+			<div ref='container' className='canvas_inner'>
 				<canvas ref='canvas'></canvas>
 			</div>	
 		</div>;	

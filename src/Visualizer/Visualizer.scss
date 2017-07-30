@@ -1,12 +1,12 @@
 @import '../styles/variables';
 
-.canvas_container {
+.canvas_outer {
 	flex:1;
 	display:flex;
 	justify-content: center;
 	align-items: center;
 	position:relative;
-	.canvas_frame {
+	.canvas_inner {
 		height: 80%;
 		width: 80%;
 		box-shadow: 0px 3px 11px 2px $primaryLight;
