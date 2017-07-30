@@ -28,10 +28,7 @@ function animate(canvas, ctx, analyser) {
 		
 		let circles = [];
 		const maxRadius = canvas.height / 2 * 0.8;
-		const centerCoord = {
-			x: canvas.width / 2,
-			y: canvas.height / 2
-		};
+		const centerCoord = Utils.centerCoord(canvas);
 		
 		frequencyData.forEach((node, index) => {
 			const radius = Utils.upTo(maxRadius, Utils.maxNode, node),
