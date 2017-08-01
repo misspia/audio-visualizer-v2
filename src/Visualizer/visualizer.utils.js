@@ -5,7 +5,7 @@ const Utils = {
 	},
 	centerCoord: (canvas) => {
 		return {
-			x: canvas.width / 2, 
+			x: canvas.width / 2,
 			y: canvas.height / 2
 		}
 	},
@@ -15,6 +15,11 @@ const Utils = {
 	// circles
 	circumference: (radius) => {
 		return 2 * Math.PI * radius;
+	},
+
+	//color
+	withinRange: (variant, min, max) => {
+		return variant * ( min / max ) + max - min;
 	},
 
 };

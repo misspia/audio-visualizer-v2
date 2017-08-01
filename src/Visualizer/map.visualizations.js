@@ -1,6 +1,6 @@
 import Bar from './visualizations/bar.js';
 import Line from './visualizations/line.js';
-import MultiCircle from './visualizations/multiCircle.js';
+import SolidCircle from './visualizations/solidCircle.js';
 import Sun from './visualizations/sun.js';
 import Dripping from './visualizations/dripping.js';
 
@@ -13,8 +13,8 @@ const Visualizations = (graph, canvas, ctx, analyser, color) => {
 		case 'line':
 			Line(canvas, ctx, analyser, color);
 			break;
-		case 'multiCircle':
-			MultiCircle(canvas, ctx, analyser, color);
+		case 'solidCircle':
+			SolidCircle(canvas, ctx, analyser, color);
 			break;
 		case 'sun':
 			Sun(canvas, ctx, analyser, color);

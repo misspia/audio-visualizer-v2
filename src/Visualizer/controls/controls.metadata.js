@@ -8,8 +8,8 @@ const metadata = {
 		line: {
 			label: 'Line'
 		},
-		multiCircle: {
-			label: 'circles'
+		solidCircle: {
+			label: 'beat'
 		},
 		sun: {
 			label: 'sun'
