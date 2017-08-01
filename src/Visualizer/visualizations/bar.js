@@ -1,4 +1,3 @@
-import Color from './color.js';
 import Utils from '../visualizer.utils.js';
 
 function Bar (ctx, x, y, width, height, color) {
@@ -12,7 +11,7 @@ function Bar (ctx, x, y, width, height, color) {
 	};
 }
 
-function animate(canvas, ctx, analyser) {
+function animate(canvas, ctx, analyser, colorGenerator) {
 	if(!analyser.frequencyBinCount) return;
 
 	const frequencyData = new Uint8Array(200);
@@ -32,7 +31,7 @@ function animate(canvas, ctx, analyser) {
 			const x =  index * (1 + barWidth),
 				barHeight = Utils.upTo(maxHeight, Utils.maxNode, node),
 				y = (canvas.height - barHeight) / 2,
-				color = Color.pinkOrange(node);
+				color = colorGenerator(node);
 			bars.push(new Bar(ctx, x, y, barWidth, barHeight, color))
 		});
 		bars.forEach((bar) => { bar.draw(); })

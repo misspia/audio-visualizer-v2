@@ -28,9 +28,15 @@ const Actions = {
 		dispatch('SHUFFLE_PLAYLIST');
 	},	
 
-	//canvas
+	//visualizer
 	setCanvas: (canvas) => {
 		dispatch('SET_CANVAS', canvas);
+	},
+	selectGraph: (graph) => {
+		dispatch('SELECT_GRAPH', graph);
+	},
+	selectColor: (color) => {
+		dispatch('SELECT_COLOR', color);
 	},
 	
 

@@ -3,23 +3,23 @@ import Line from './visualizations/line.js';
 import MultiCircle from './visualizations/multiCircle.js';
 import SunBars from './visualizations/sunBars.js';
 
-const Visualizations = (type, canvas, ctx, analyser) => {
-	console.log('mapping...')
-	switch(type) {
-		case "bar":
-			Bar(canvas, ctx, analyser);
+const Visualizations = (graph, canvas, ctx, analyser, color) => {
+	console.log('mapping...', graph,"color...", color);
+	switch(graph) {
+		case 'bar':
+			Bar(canvas, ctx, analyser, color);
 			break;
-		case "line":
-			Line(canvas, ctx, analyser);
+		case 'line':
+			Line(canvas, ctx, analyser, color);
 			break;
-		case "multiCircle":
-			MultiCircle(canvas, ctx, analyser);
+		case 'multiCircle':
+			MultiCircle(canvas, ctx, analyser, color);
 			break;
-		case "sunBars":
-			SunBars(canvas, ctx, analyser);
+		case 'sunBars':
+			SunBars(canvas, ctx, analyser, color);
 			break;
 		default:
-			Bar(canvas, ctx, analyser);
+			Bar(canvas, ctx, analyser, color);
 	}
 }
 

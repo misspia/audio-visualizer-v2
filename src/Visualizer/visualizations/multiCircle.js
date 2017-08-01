@@ -1,4 +1,3 @@
-import Color from './color.js';
 import Utils from '../visualizer.utils.js';
 
 function Circle( ctx, center={}, radius, color) {
@@ -14,7 +13,7 @@ function Circle( ctx, center={}, radius, color) {
 	};
 }
 
-function animate(canvas, ctx, analyser) {
+function animate(canvas, ctx, analyser, colorGenerator) {
 	if(!analyser.frequencyBinCount) return;
 	
 	const frequencyData = new Uint8Array(50);
@@ -32,7 +31,7 @@ function animate(canvas, ctx, analyser) {
 		
 		frequencyData.forEach((node, index) => {
 			const radius = Utils.upTo(maxRadius, Utils.maxNode, node),
-				color = Color.pink(node);
+				color = colorGenerator(node);
 	
 			circles.push( new Circle(ctx, centerCoord, radius, color) );
 		});

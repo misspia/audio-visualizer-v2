@@ -12,7 +12,8 @@ let State = {
 	analyser: [],
 	visualizer: {
 		canvas: {},
-		ctx: {}
+		graph: 'bar',
+		color:'pink'
 	}
 };
 
@@ -113,15 +114,23 @@ const Store = flux.createStore({
 		State.playlist.shuffle = !State.playlist.shuffle;
 	},
 
-	//canvas
+	//visualizer
 	SET_CANVAS: (canvas) => {
 		State.visualizer.canvas = canvas;
+	},
+	SELECT_GRAPH: (graph) => {
+		console.log("STORE", graph);
+		State.visualizer.graph = graph;
+	},
+	SELECT_COLOR: (color) => {
+		State.visualizer.color = color;
 	}
 });
 
 Store.getTracks = () => { return State.files; };
 Store.getPlaylist = () => { return State.playlist; };
 Store.getAnalyser = () => { return State.analyser; };
-Store.getCanvas = () => { return State.visualizer.canvas };
+// Store.getCanvas = () => { return State.visualizer.canvas };
+Store.getVisualizer = () => { return State.visualizer; }
 
 module.exports = Store;
