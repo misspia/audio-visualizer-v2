@@ -22,8 +22,8 @@ class Visualizer extends Component {
 			<Controls />
 			<div ref='container' className='canvas_inner'>
 				<canvas ref='canvas'></canvas>
-			</div>	
-		</div>;	
+			</div>
+		</div>;
 	}
 
 };

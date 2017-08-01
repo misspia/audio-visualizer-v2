@@ -12,7 +12,7 @@ class Controls extends Component {
 		this.selectVisualization = this.selectVisualization.bind(this);
 	}
 	componentWillMount() {
-		Actions.selectGraph('bar')
+		Actions.selectGraph('sunBars')
 		Actions.selectColor(Metadata.colors.pink.generator);
 	}
 	componentWillReceiveProps(nextProps){
@@ -62,7 +62,7 @@ class Controls extends Component {
 			</div>
 			<div className='colors'>
 				{this.renderColorOptions()}
-			</div>	
+			</div>
 		</div>;
 	}
 };

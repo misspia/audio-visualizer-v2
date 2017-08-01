@@ -3,7 +3,7 @@ function Line( ctx, begin={}, end={}, color) {
 	this.end = end;
 
 	this.draw = () => {
-		ctx.beginPath(); 
+		ctx.beginPath();
 		ctx.lineWidth = "2";
 		ctx.strokeStyle = color;
 		ctx.moveTo(this.begin.x , this.begin.y);
@@ -23,15 +23,15 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 		analyser.getByteFrequencyData(frequencyData);
 
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
-		
-		
+
+
 		const canvasMidHeight = canvas.height / 2;
 		const xDistance = canvas.width / frequencyData.length;
 		let lines = [];
 		let xStart = 0, xEnd = 0;
 
 		for( let i = 0; i < frequencyData.length; i ++) {
-			
+
 			xEnd = i * ( 1 + xDistance );
 
 			const begin = {x: xStart, y: canvasMidHeight - frequencyData[i] },

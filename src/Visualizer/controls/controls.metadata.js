@@ -11,8 +11,11 @@ const metadata = {
 		multiCircle: {
 			label: 'circles'
 		},
-		sunBars: {
+		sun: {
 			label: 'sun'
+		},
+		dripping: {
+			label: 'dripping'
 		}
 	},
 	colors: {
@@ -28,7 +31,7 @@ const metadata = {
 			label: 'bluePink',
 			generator: Color.bluePink
 		}
-	}		
+	}
 };
 
 module.exports = metadata;

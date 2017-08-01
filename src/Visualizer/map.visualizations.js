@@ -1,7 +1,8 @@
 import Bar from './visualizations/bar.js';
 import Line from './visualizations/line.js';
 import MultiCircle from './visualizations/multiCircle.js';
-import SunBars from './visualizations/sunBars.js';
+import Sun from './visualizations/sun.js';
+import Dripping from './visualizations/dripping.js';
 
 const Visualizations = (graph, canvas, ctx, analyser, color) => {
 	console.log('mapping...', graph,"color...", color);
@@ -15,8 +16,11 @@ const Visualizations = (graph, canvas, ctx, analyser, color) => {
 		case 'multiCircle':
 			MultiCircle(canvas, ctx, analyser, color);
 			break;
-		case 'sunBars':
-			SunBars(canvas, ctx, analyser, color);
+		case 'sun':
+			Sun(canvas, ctx, analyser, color);
+			break;
+		case 'dripping':
+			Dripping(canvas, ctx, analyser, color);
 			break;
 		default:
 			Bar(canvas, ctx, analyser, color);
