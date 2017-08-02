@@ -9,7 +9,7 @@ import './track.scss';
 class Track extends Component {
 	constructor() {
 		super();
-		this.state = { playStateIcon: "fa-play", duration: "" }
+		this.state = { playStateIcon: Utils.icons.play , duration: "" }
 		this.togglePlayState = this.togglePlayState.bind(this);
 	}
 	componentDidMount() {
@@ -24,7 +24,7 @@ class Track extends Component {
 			this.pauseTrack();
 		}
 	}
-	togglePlayState(e) { 
+	togglePlayState(e) {
 		e.stopPropagation();
 		Actions.playTrack(this.props.url); }
 	playTrack() { this.setState({playStateIcon: Utils.icons.pause}); }

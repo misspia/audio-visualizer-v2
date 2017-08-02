@@ -27,9 +27,8 @@ class AudioMenu extends Component {
 					<div className={`container_outer col ${this.isMenuOpen()}`}>
 						<AudioUpload />
 						<div className='container_inner'>
-							
 							<Playlist />
-						</div>	
+						</div>
 					</div>
 				</div>;
 	}
