@@ -119,7 +119,6 @@ const Store = flux.createStore({
 		State.visualizer.canvas = canvas;
 	},
 	SELECT_GRAPH: (graph) => {
-		console.log("STORE", graph);
 		State.visualizer.graph = graph;
 	},
 	SELECT_COLOR: (color) => {
@@ -130,7 +129,6 @@ const Store = flux.createStore({
 Store.getTracks = () => { return State.files; };
 Store.getPlaylist = () => { return State.playlist; };
 Store.getAnalyser = () => { return State.analyser; };
-// Store.getCanvas = () => { return State.visualizer.canvas };
 Store.getVisualizer = () => { return State.visualizer; }
 
 module.exports = Store;
