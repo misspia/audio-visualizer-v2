@@ -1,0 +1,29 @@
+@import '../styles/variables';
+
+.audio_menu {
+	border: solid blue 1px;
+	// height: 100%;
+	// width:$playlistWidth;
+	height: 3em;
+	position:fixed;
+	top: 5px;
+	left: 5px;
+	z-index:100;
+	.button {
+		z-index:101;
+
+	}
+	.content {
+		border:solid 1px green;
+		height: 90vh;
+		width:$playlistWidth;
+		position: absolute;
+		top: 100%;
+		&.opened {
+			display: flex;
+		}
+		&.closed {
+			display: none;
+		}
+	}
+}

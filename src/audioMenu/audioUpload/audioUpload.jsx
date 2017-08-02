@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Actions from '../actions.js';
-import {icons} from '../utils.js';
+import Actions from '../../actions.js';
+import {icons} from '../../utils.js';
 
-import './AudioUpload.scss';
+import './audioUpload.scss';
 
 class AudioUpload extends Component {
 	constructor() {

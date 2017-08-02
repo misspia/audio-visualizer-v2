@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Actions from '../../actions.js';
-import Utils from '../../utils.js';
+import Actions from '../../../actions.js';
+import Utils from '../../../utils.js';
 
-import './Track.scss';
+import './track.scss';
 // Cut off title text if too long
 // https://dribbble.com/shots/3295962-Music-App
 

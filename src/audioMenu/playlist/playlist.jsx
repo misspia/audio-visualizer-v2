@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Track from './Track/Track.jsx';
-import './Playlist.scss';
+import Track from './track/track.jsx';
+import './playlist.scss';
 
 
 class Playlist extends Component {
@@ -22,7 +22,9 @@ class Playlist extends Component {
 	}
 	render() {
 		return <div className='playlist'>
-				{this.state.tracks}
+				<div className='list'>
+					{this.state.tracks}
+				</div>
 			</div>;
 	}
 }

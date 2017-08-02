@@ -12,7 +12,7 @@ class Controls extends Component {
 		this.selectVisualization = this.selectVisualization.bind(this);
 	}
 	componentWillMount() {
-		Actions.selectGraph('solidCircle')
+		Actions.selectGraph('sun');
 		Actions.selectColor(Metadata.colors.pink.generator);
 	}
 	componentWillReceiveProps(nextProps){

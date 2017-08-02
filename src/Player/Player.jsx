@@ -6,7 +6,6 @@ import ProgressBar from './ProgressDisplay/ProgressBar.jsx';
 import Actions from '../actions.js';
 import './Player.scss';
 
-// https://dribbble.com/shots/2769913-Web-Radio-Interface
 
 class Player extends Component {
 	constructor() {
