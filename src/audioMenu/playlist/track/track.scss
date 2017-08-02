@@ -7,17 +7,19 @@ $spacing: $blur + 3;
 	z-index:0;
 	margin: $spacing 0;
 	transition: $transition;
-	border: solid lighten($primaryLight, 10%) 0.1em;
+	// border: solid lighten($primaryLight, 10%) 0.1em;
 	height: 3em;
-	width: 95%;
+	// width: 95%;
+	width: 99%;
 	color: $primaryDark;
 	cursor: pointer;
 	&:hover {
 		background-color: rgba($primaryLight, 0.2);
-		transform: translateX(10px);
+		// transform: translateX(10px);
 	}
 	&.active {
-		box-shadow: 1px 3px $blur rgba($primaryLight, 0.7);
+		// box-shadow: 1px 3px $blur rgba($primaryLight, 0.7);
+		box-shadow: 0px 1px $blur 1px rgba($primaryLight, 0.7);
 	}
 	.audio_time {
 		font-size: 0.7em;

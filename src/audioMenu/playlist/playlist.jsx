@@ -22,9 +22,7 @@ class Playlist extends Component {
 	}
 	render() {
 		return <div className='playlist'>
-				<div className='list'>
-					{this.state.tracks}
-				</div>
+				{this.state.tracks}
 			</div>;
 	}
 }
