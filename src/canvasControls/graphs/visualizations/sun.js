@@ -1,4 +1,4 @@
-import Utils from '../visualizer.utils.js';
+import Utils from '../../visualizer.utils.js';
 
 function Line( ctx, begin={}, end={}, lineWidth, color) {
 	this.begin = begin;

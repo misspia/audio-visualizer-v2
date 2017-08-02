@@ -1,4 +1,4 @@
-import Utils from '../visualizer.utils.js';
+import Utils from '../../visualizer.utils.js';
 
 function Bar (ctx, x, y, width, height, angle, color) {
 	this.x = x;
@@ -7,13 +7,13 @@ function Bar (ctx, x, y, width, height, angle, color) {
 	this.height = height;
 	this.draw = () => {
 		ctx.fillStyle = color;
-		ctx.fillRect(x, y, width, height);		
+		ctx.fillRect(x, y, width, height);
 	};
 }
 
 function animate(canvas, ctx, analyser, colorGenerator) {
 	if(!analyser.frequencyBinCount) return;
-	
+
 	const frequencyData = new Uint8Array(200);
 
 	function renderSun() {
@@ -22,7 +22,7 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 		analyser.getByteFrequencyData(frequencyData);
 
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
-		
+
 		const radius = canvas.height / 2 * 0.6;
 		const maxBarHeight = canvas.height * 0.2;
 		const barWidth = Utils.circumference(radius) / frequencyData.length;

@@ -11,9 +11,6 @@ class Colors extends Component {
 	selectColor(color) {
 		Actions.selectColor(color);
 	}
-	componentWillReceiveProps(nextProps){
-
-	}
 	renderColorOptions() {
 		return Object.keys(metadata).map((colorName) => {
 			const color = metadata[colorName];

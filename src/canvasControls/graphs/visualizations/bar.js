@@ -1,4 +1,4 @@
-import Utils from '../visualizer.utils.js';
+import Utils from '../../visualizer.utils.js';
 
 function Bar (ctx, x, y, width, height, color) {
 	this.x = x;
@@ -6,7 +6,7 @@ function Bar (ctx, x, y, width, height, color) {
 	this.width = width;
 	this.height = height;
 	this.draw = () => {
-		ctx.fillStyle = color;
+	ctx.fillStyle = color;
 		ctx.fillRect(x, y, width, height);
 	};
 }

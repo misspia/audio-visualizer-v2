@@ -1,4 +1,4 @@
-import Utils from '../visualizer.utils.js';
+import Utils from '../../visualizer.utils.js';
 
 function Circle( ctx, center={}, radius, color) {
 	this.center = center;
