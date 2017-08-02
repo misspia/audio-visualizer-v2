@@ -8,20 +8,21 @@ import {icons} from '../utils.js';
 class Controls extends Component {
 	constructor() {
 		super();
-		this.state = { reveal: true }
+		this.state = { open: true }
+		this.toggleControls = this.toggleControls.bind(this);
 	}
-	toggleControle() {
-		this.setState({ reveal: !this.state.reveal });
+	toggleControls() {
+		this.setState({ open: !this.state.open });
 	}
-	isRevealed() {
-		return this.state.reveal ? '' : 'hidden';
+	isOpen() {
+		return this.state.open ? 'opened' : 'closed';
 	}
 	render() {
-		return <div className='canvas_controls'>
+		return <div className='canvas_controls row'>
 			<button className={`${icons.brush} button large secondary`}
 				onClick={this.toggleControls}
 			></button>
-			<div className='container'>
+			<div className={`container ${this.isOpen()}`}>
 				<Graphs />
 				<Colors />
 			</div>

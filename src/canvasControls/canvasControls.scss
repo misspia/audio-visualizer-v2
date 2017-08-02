@@ -1,10 +1,23 @@
+@import '../styles/variables';
+
+
 .canvas_controls{
-	position: absolute;
-	top: 0;
-	right: 0;
-	height: 3em;
-	width: 50%;
-	z-index: 1;
 	background-color: #fff;
-	border: red solid 1px;
+	height: 100%;
+
+	.container {
+		box-shadow: 0px 0px 10px 1px $primaryLight;
+		padding: 0.4em 0.3em;
+		background-color: #fff;
+		position: absolute;
+		top: 0%;
+		left: 110%;
+		width: 400px;
+		&.opened {
+			display: flex;
+		}
+		&.closed {
+			display: none;
+		}
+	}
 }

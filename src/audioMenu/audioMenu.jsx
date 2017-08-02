@@ -10,21 +10,21 @@ import {icons} from '../utils.js';
 class AudioMenu extends Component {
 	constructor() {
 		super();
-		this.state = { reveal: true }
+		this.state = { open: true }
 		this.toggleMenu = this.toggleMenu.bind(this);
 	}
-	isRevealed() {
-		return this.state.reveal ? 'opened' : 'closed';
+	isOpen() {
+		return this.state.open ? 'opened' : 'closed';
 	}
 	toggleMenu() {
-		this.setState({ reveal: !this.state.reveal });
+		this.setState({ open: !this.state.open });
 	}
 	render() {
 		return <div className="audio_menu col">
 					<button className={`${icons.music} button large secondary`}
 						onClick={this.toggleMenu}
 					></button>
-					<div className={`container_outer col ${this.isRevealed()}`}>
+					<div className={`container_outer col ${this.isOpen()}`}>
 						<AudioUpload />
 						<div className='container_inner'>
 							<Playlist />

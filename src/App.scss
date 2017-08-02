@@ -16,3 +16,14 @@ body {
 #primary_content {
 	flex:1;
 }
+#nav {
+	position: fixed;
+	top: 5px;
+	left: 5px;
+	height: 3em;
+	display: flex;
+	z-index: 1;
+	&>div {
+		margin: 0 5px;
+	}
+}
