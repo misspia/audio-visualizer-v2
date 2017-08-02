@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
-import Actions from '../../actions.js';
-import Utils from '../../utils.js';
+import Actions from '../../../actions.js';
+import Utils from '../../../utils.js';
 
-import './Track.scss';
+import './track.scss';
 // Cut off title text if too long
 // https://dribbble.com/shots/3295962-Music-App
 
 class Track extends Component {
 	constructor() {
 		super();
-		this.state = { playStateIcon: "fa-play", duration: "" }
+		this.state = { playStateIcon: Utils.icons.play , duration: "" }
 		this.togglePlayState = this.togglePlayState.bind(this);
+	}
+	componentDidMount() {
+		this.refs.audio.src = this.props.url;
+		this.getTrackDuration();
 	}
 	componentWillReceiveProps(nextProps) {
 		if(nextProps.playlistEnded === true) { this.pauseTrack(); return; }
@@ -19,10 +23,8 @@ class Track extends Component {
 		} else {
 			this.pauseTrack();
 		}
-		this.refs.audio.src = nextProps.url;
-		this.getTrackDuration();
 	}
-	togglePlayState(e) { 
+	togglePlayState(e) {
 		e.stopPropagation();
 		Actions.playTrack(this.props.url); }
 	playTrack() { this.setState({playStateIcon: Utils.icons.pause}); }
@@ -33,11 +35,11 @@ class Track extends Component {
 	}
 	render() {
 		return <div className={`track ${this.props.selected ? 'active': ''} row align_center`} onClick={this.togglePlayState}>
-			<audio ref="audio" />
+			<audio ref="audio" src=''/>
 			<button className={`button primary ${this.props.playing ? 'active' : ''}`} onClick={this.togglePlayState}>
 				<i className={`fa ${this.state.playStateIcon}`}></i>
 			</button>
-			<span className="audio_name">{this.props.name}</span>
+			<div className="audio_name">{this.props.name}</div>
 			<span className="audio_time">{this.state.duration}</span>
 		</div>;
 	}

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Actions from '../actions.js';
-import {icons} from '../utils.js';
+import Actions from '../../actions.js';
+import {icons} from '../../utils.js';
 
-import './AudioUpload.scss';
+import './audioUpload.scss';
 
 class AudioUpload extends Component {
 	constructor() {
@@ -14,12 +14,11 @@ class AudioUpload extends Component {
 		Actions.addFile(files);
 	}
 	render() {
-		return <button className="button secondary longround input_file">
+		return <div className="input_file">
 			<i className={icons.plus}></i> Upload a song
 			<input type="file" accept="audio/*"
 			onChange={this.handleFileUpload} multiple/>
-
-		</button>;
+		</div>;
 	}
 }
 

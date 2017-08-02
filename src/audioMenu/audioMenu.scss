@@ -1,0 +1,36 @@
+@import '../styles/variables';
+
+@mixin playlistWidth() {
+	min-width: 300px;
+	width: 25vw;
+	max-width: 400px;
+}
+
+.audio_menu {
+	height: 3em;
+	position:fixed;
+	top: 5px;
+	left: 5px;
+	z-index:100;
+	.button {
+		z-index:101;
+	}
+	.container_outer {
+		box-shadow: 0px 0px 10px 1px $primaryLight;
+		padding: 0.4em 0.3em;
+		background-color: #fff;
+		position: absolute;
+		top: 110%;
+		@include playlistWidth;
+		&.opened {
+			display: flex;
+		}
+		&.closed {
+			display: none;
+		}
+		.container_inner {
+			height: 60vh;
+			position: relative;
+		}
+	}
+}

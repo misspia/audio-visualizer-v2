@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Track from './Track/Track.jsx';
-import './Playlist.scss';
+import Track from './track/track.jsx';
+import './playlist.scss';
 
 
 class Playlist extends Component {
