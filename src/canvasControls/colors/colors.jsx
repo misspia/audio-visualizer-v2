@@ -11,22 +11,22 @@ class Colors extends Component {
 	selectColor(color) {
 		Actions.selectColor(color);
 	}
-	renderColorOptions() {
+	renderOptions() {
 		return Object.keys(metadata).map((colorName) => {
 			const color = metadata[colorName];
-			return this.renderColorOption(color, colorName);
+			return this.renderOption(color, colorName);
 		})
 	}
-	renderColorOption(color, colorName) {
+	renderOption(color, colorName) {
 		return <button key={colorName}
 				className='button secondary'
-				onClick={()=>{this.selectColor(color.generator)}}>
-				{color.label}
+				onClick={()=>{this.selectColor(color.generator)}}
+				style={color.optionStyle}>
 			</button>;
 	}
 	render() {
 		return <div className='colors'>
-			{this.renderColorOptions()}
+			{this.renderOptions()}
 		</div>;
 	}
 };
