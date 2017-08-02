@@ -12,6 +12,10 @@ class Track extends Component {
 		this.state = { playStateIcon: "fa-play", duration: "" }
 		this.togglePlayState = this.togglePlayState.bind(this);
 	}
+	componentDidMount() {
+		this.refs.audio.src = this.props.url;
+		this.getTrackDuration();
+	}
 	componentWillReceiveProps(nextProps) {
 		if(nextProps.playlistEnded === true) { this.pauseTrack(); return; }
 		if(nextProps.playing === true) {
@@ -19,8 +23,6 @@ class Track extends Component {
 		} else {
 			this.pauseTrack();
 		}
-		this.refs.audio.src = nextProps.url;
-		this.getTrackDuration();
 	}
 	togglePlayState(e) { 
 		e.stopPropagation();
@@ -33,7 +35,7 @@ class Track extends Component {
 	}
 	render() {
 		return <div className={`track ${this.props.selected ? 'active': ''} row align_center`} onClick={this.togglePlayState}>
-			<audio ref="audio" />
+			<audio ref="audio" src=''/>
 			<button className={`button primary ${this.props.playing ? 'active' : ''}`} onClick={this.togglePlayState}>
 				<i className={`fa ${this.state.playStateIcon}`}></i>
 			</button>
