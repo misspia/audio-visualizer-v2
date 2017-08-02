@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import Actions from '../actions.js';
-import './Visualizer.scss';
-// import GL from './webgl.js';
-import Controls from './controls/controls.smart.jsx';
+import './canvas.scss';
 
 class Visualizer extends Component {
 	componentDidMount() {
 		Actions.setCanvas(this.refs.canvas);
-		// GL(ctx);
 	}
 	componentWillReceiveProps(nextProps){
 		if(nextProps.analyser === undefined) return;
@@ -19,7 +16,6 @@ class Visualizer extends Component {
 	}
 	render() {
 		return <div  className='canvas_outer'>
-			<Controls />
 			<div ref='container' className='canvas_inner'>
 				<canvas ref='canvas'></canvas>
 			</div>

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Actions from '../../actions.js';
-import './controls.scss';
+import Actions from '../actions.js';
+import './canvasControls.scss';
 
-import Visualizations from '../map.visualizations.js';
+import Visualizations from './map.visualizations.js';
 import Metadata from './controls.metadata.js';
 
 class Controls extends Component {

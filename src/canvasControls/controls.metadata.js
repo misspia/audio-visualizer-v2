@@ -1,4 +1,4 @@
-import Color from '../visualizations/color.js';
+import Color from './visualizations/color.js';
 
 const metadata = {
 	visualizations: {
