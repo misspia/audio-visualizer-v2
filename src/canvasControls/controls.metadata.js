@@ -1,5 +1,3 @@
-import Color from './visualizations/color.js';
-
 const metadata = {
 	visualizations: {
 		bar: {
@@ -18,20 +16,20 @@ const metadata = {
 			label: 'dripping'
 		}
 	},
-	colors: {
-		pink: {
-			label: 'pink',
-			generator: Color.pink
-		},
-		pinkOrange: {
-			label: 'pink orange',
-			generator: Color.pinkOrange
-		},
-		bluePink: {
-			label: 'bluePink',
-			generator: Color.bluePink
-		}
-	}
+	// colors: {
+	// 	pink: {
+	// 		label: 'pink',
+	// 		generator: Color.pink
+	// 	},
+	// 	pinkOrange: {
+	// 		label: 'pink orange',
+	// 		generator: Color.pinkOrange
+	// 	},
+	// 	bluePink: {
+	// 		label: 'bluePink',
+	// 		generator: Color.bluePink
+	// 	}
+	// }
 };
 
 module.exports = metadata;

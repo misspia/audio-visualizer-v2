@@ -4,6 +4,7 @@ import './canvasControls.scss';
 
 import Visualizations from './map.visualizations.js';
 import Metadata from './controls.metadata.js';
+import Colors from './colors/colors.smart.jsx';
 
 class Controls extends Component {
 	constructor() {
@@ -13,7 +14,6 @@ class Controls extends Component {
 	}
 	componentWillMount() {
 		Actions.selectGraph('sun');
-		Actions.selectColor(Metadata.colors.pink.generator);
 	}
 	componentWillReceiveProps(nextProps){
 		// this.setState({ ctx: this.refs.canvas.getContext('webgl') });
@@ -22,9 +22,6 @@ class Controls extends Component {
 	}
 	selectVisualization(graph) {
 		Actions.selectGraph(graph);
-	}
-	selectColor(color) {
-		Actions.selectColor(color);
 	}
 	renderVisualization(graph, color) {
 		Visualizations(graph, this.props.canvas, this.state.ctx, this.props.analyser, color);
@@ -42,27 +39,12 @@ class Controls extends Component {
 				{graph.label}
 			</button>;
 	}
-	renderColorOptions(metadata) {
-		return Object.keys(Metadata.colors).map((colorName) => {
-			const color = Metadata.colors[colorName];
-			return this.renderColorOption(color, colorName);
-		})
-	}
-	renderColorOption(color, colorName) {
-		return <button key={colorName}
-				className='button secondary'
-				onClick={()=>{this.selectColor(color.generator)}}>
-				{color.label}
-			</button>;
-	}
 	render() {
 		return <div className='visualizer_controls'>
 			<div className='visualizations'>
 				{this.renderVisualizationOptions()}
 			</div>
-			<div className='colors'>
-				{this.renderColorOptions()}
-			</div>
+			<Colors />
 		</div>;
 	}
 };

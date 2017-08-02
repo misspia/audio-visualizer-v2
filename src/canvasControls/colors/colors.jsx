@@ -1,22 +1,35 @@
 import React, { Component } from 'react';
-import Actions from '../actions.js';
+import Actions from '../../actions.js';
 import './colors.scss';
 
-// import Metadata from './controls.metadata.js';
+import metadata from './colors.metadata.js';
 
 class Colors extends Component {
 	componentWillMount() {
-
+		Actions.selectColor(metadata.pink.generator);
+	}
+	selectColor(color) {
+		Actions.selectColor(color);
 	}
 	componentWillReceiveProps(nextProps){
-		// this.setState({ ctx: this.refs.canvas.getContext('webgl') });
-		// this.setState({ ctx: nextProps.canvas.getContext('2d') });
-		// this.renderVisualization(nextProps.graph, nextProps.color);
-	}
 
+	}
+	renderColorOptions() {
+		return Object.keys(metadata).map((colorName) => {
+			const color = metadata[colorName];
+			return this.renderColorOption(color, colorName);
+		})
+	}
+	renderColorOption(color, colorName) {
+		return <button key={colorName}
+				className='button secondary'
+				onClick={()=>{this.selectColor(color.generator)}}>
+				{color.label}
+			</button>;
+	}
 	render() {
 		return <div className='colors'>
-			color options
+			{this.renderColorOptions()}
 		</div>;
 	}
 };
