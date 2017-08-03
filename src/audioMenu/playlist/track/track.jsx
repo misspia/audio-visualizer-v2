@@ -3,8 +3,6 @@ import Actions from '../../../actions.js';
 import Utils from '../../../utils.js';
 
 import './track.scss';
-// Cut off title text if too long
-// https://dribbble.com/shots/3295962-Music-App
 
 class Track extends Component {
 	constructor() {

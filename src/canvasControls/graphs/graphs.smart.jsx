@@ -1,11 +1,11 @@
 import Store from '../../store.js';
-import Controls from './controls.jsx';
+import Graphs from './graphs.jsx';
 
-module.exports = Store.createSmartComponent(Controls,
+module.exports = Store.createSmartComponent(Graphs,
 	(props) => { return {
         analyser: Store.getAnalyser(),
         canvas: Store.getVisualizer().canvas,
         graph: Store.getVisualizer().graph,
-        color: Store.getVisualizer().color,      
+        color: Store.getVisualizer().color,
     }; }
 );

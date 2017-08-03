@@ -1,4 +1,4 @@
-import Utils from '../visualizer.utils.js';
+import Utils from '../../visualizer.utils.js';
 
 function Bar (ctx, x, y, width, height, color) {
 	this.x = x;
@@ -6,8 +6,8 @@ function Bar (ctx, x, y, width, height, color) {
 	this.width = width;
 	this.height = height;
 	this.draw = () => {
-		ctx.fillStyle = color;
-		ctx.fillRect(x, y, width, height);	
+	ctx.fillStyle = color;
+		ctx.fillRect(x, y, width, height);
 	};
 }
 
@@ -22,7 +22,7 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 		analyser.getByteFrequencyData(frequencyData);
 
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
-		
+
 		const barWidth = canvas.width / frequencyData.length;
 		const maxHeight = canvas.height * 0.7;
 		let bars = [];

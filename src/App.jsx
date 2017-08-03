@@ -4,7 +4,8 @@ import './App.scss';
 
 import AudioMenu from './audioMenu/audioMenu.jsx';
 import Player from './Player/Player.smart.jsx';
-import Visualizer from './Visualizer/Visualizer.smart.jsx';
+import Canvas from './canvas/canvas.smart.jsx';
+import CanvasControls from './canvasControls/canvasControls.smart.jsx';
 
 class App extends Component {
 	componentDidMount() {
@@ -12,10 +13,12 @@ class App extends Component {
 	}
 	render() {
 		return <div className="col content_container">
-			<div id="primary_content" className="row">
+			<div id='nav'>
 				<AudioMenu />
-				<Visualizer />
-
+				<CanvasControls />
+			</div>
+			<div id="primary_content" className="row">
+				<Canvas />
 			</div>
 			<Player />
 		</div>;
@@ -23,4 +26,3 @@ class App extends Component {
 }
 
 export default App;
-// <Playlist />

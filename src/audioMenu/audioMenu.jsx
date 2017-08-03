@@ -13,7 +13,7 @@ class AudioMenu extends Component {
 		this.state = { open: true }
 		this.toggleMenu = this.toggleMenu.bind(this);
 	}
-	isMenuOpen() {
+	isOpen() {
 		return this.state.open ? 'opened' : 'closed';
 	}
 	toggleMenu() {
@@ -24,7 +24,7 @@ class AudioMenu extends Component {
 					<button className={`${icons.music} button large secondary`}
 						onClick={this.toggleMenu}
 					></button>
-					<div className={`container_outer col ${this.isMenuOpen()}`}>
+					<div className={`container_outer col ${this.isOpen()}`}>
 						<AudioUpload />
 						<div className='container_inner'>
 							<Playlist />

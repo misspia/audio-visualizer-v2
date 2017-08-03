@@ -19,7 +19,8 @@ const Utils = {
 
 	//color
 	withinRange: (variant, min, max) => {
-		return variant * ( min / max ) + max - min;
+		// return variant * ( min / max ) + max - min;
+		return Math.round(variant * ( min / max ) + max - min);
 	},
 
 };

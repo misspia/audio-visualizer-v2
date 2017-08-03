@@ -1,30 +1,25 @@
 @import '../styles/variables';
 
-@mixin playlistWidth() {
-	min-width: 300px;
-	width: 25vw;
-	max-width: 400px;
-}
 
-.audio_menu {
+.canvas_controls{
+	background-color: #fff;
 	height: 100%;
 
-	.container_outer {
+	.container {
 		box-shadow: 0px 0px 10px 1px $primaryLight;
 		padding: 0.4em 0.3em;
 		background-color: #fff;
 		position: absolute;
-		top: 110%;
-		@include playlistWidth;
+		top: 0%;
+		left: 110%;
+		width: 400px;
+		display:flex;
+		justify-content: space-between;
 		&.opened {
 			display: flex;
 		}
 		&.closed {
 			display: none;
-		}
-		.container_inner {
-			height: 60vh;
-			position: relative;
 		}
 	}
 }
