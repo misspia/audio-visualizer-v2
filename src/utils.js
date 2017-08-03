@@ -8,7 +8,12 @@ module.exports = {
 		shuffle: 'ion-ios-shuffle-strong',
 		plus: 'ion-plus-round',
 		music: 'ion-ios-musical-note',
-		brush: 'ion-paintbrush'
+		brush: 'ion-paintbrush',
+		sun: 'ion-android-sunny',
+		bars: 'ion-stats-bars',
+		pulse: 'ion-ios-pulse',
+		circle: 'ion-ios-circle-filled',
+		rain: 'ion-ios-rainy'
 	},
 	secondsToHMS: (seconds) => {
 		const h = Math.floor(seconds / 3600);

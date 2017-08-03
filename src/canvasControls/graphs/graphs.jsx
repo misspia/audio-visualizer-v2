@@ -30,10 +30,12 @@ class Graphs extends Component {
 		})
 	}
 	renderOption(graph, graphName) {
+		// {graph.label}
 		return <button key={graphName}
 				className='button secondary'
 				onClick={()=>{this.selectGraph(graph.generator)}}>
-				{graph.label}
+				<i className={graph.icon}></i>
+				
 			</button>;
 	}
 	render() {
