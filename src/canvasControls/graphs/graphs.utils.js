@@ -16,13 +16,6 @@ const Utils = {
 	circumference: (radius) => {
 		return 2 * Math.PI * radius;
 	},
-
-	//color
-	withinRange: (variant, min, max) => {
-		// return variant * ( min / max ) + max - min;
-		return Math.round(variant * ( min / max ) + max - min);
-	},
-
 };
 
 module.exports = Utils;
