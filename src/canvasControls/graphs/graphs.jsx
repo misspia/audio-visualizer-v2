@@ -10,7 +10,8 @@ class Graphs extends Component {
 		this.state = { ctx: {} }
 	}
 	componentWillMount() {
-		Actions.selectGraph(metadata.sun.generator);
+		// Actions.selectGraph(metadata.sun.generator);
+		Actions.selectGraph(metadata.chidori.generator);
 	}
 	componentWillReceiveProps(nextProps){
 		// this.setState({ ctx: this.refs.canvas.getContext('webgl') });
@@ -35,7 +36,7 @@ class Graphs extends Component {
 				className='button secondary'
 				onClick={()=>{this.selectGraph(graph.generator)}}>
 				<i className={graph.icon}></i>
-				
+
 			</button>;
 	}
 	render() {

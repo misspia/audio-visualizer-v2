@@ -69,21 +69,3 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 }
 
 module.exports = animate;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
