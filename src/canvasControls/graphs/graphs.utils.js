@@ -3,6 +3,12 @@ const Utils = {
 	upTo: (spaceSize, maxValue, value) => {
 		return value * (spaceSize / maxValue);
 	},
+	withinRange: (minRange, maxRange, maxValue, value) => {
+		const range = maxRange - minRange;
+		const valuePercent = value / maxValue;
+
+		return valuePercent * range + minRange;
+	},
 	centerCoord: (canvas) => {
 		return {
 			x: canvas.width / 2,

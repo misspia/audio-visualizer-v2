@@ -27,10 +27,11 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 
 		let circles = [];
 		const maxRadius = canvas.height / 2 * 0.5;
+		const minRadius = maxRadius * 0.6;
 		const centerCoord = Utils.centerCoord(canvas);
 
 		frequencyData.forEach((node, index) => {
-			const radius = Utils.upTo(maxRadius, Utils.maxNode, node),
+			const radius = Utils.withinRange(minRadius, maxRadius, Utils.maxNode, node),
 				color = colorGenerator(node);
 
 			circles.push( new Circle(ctx, centerCoord, radius, color) );
