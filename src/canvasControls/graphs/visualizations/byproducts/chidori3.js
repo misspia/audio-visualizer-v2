@@ -1,4 +1,4 @@
-import Utils from '../graphs.utils.js';
+import Utils from '../../graphs.utils.js';
 
 function Line( ctx, begin={}, end={}, color) {
 	this.begin = begin;
@@ -32,7 +32,6 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 	if(!analyser.frequencyBinCount) return;
 
 	const frequencyData = new Uint8Array(analyser.frequencyBinCount);
-	// const frequencyData = new Uint8Array(3);
 
 	function renderLine() {
 		requestAnimationFrame(renderLine);
@@ -42,7 +41,7 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 		const maxRadius = canvas.height / 2 * 0.5;
-		// const startRadius = maxRadius * 0.8;
+		const startRadius = maxRadius * 0.8;
 
 		const centerCoord = Utils.centerCoord(canvas);
 		const angleIncrement = 360 / frequencyData.length;
@@ -56,10 +55,9 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 			const nextNode = frequencyData[index + 1];
 			let begin = {};
 
-			const startRadius = Utils.upTo(maxRadius, Utils.maxNode, nextNode);
 			const startAngle = index * angleIncrement;
 
-			if( index === 0 || index === frequencyData.length - 1 ) {
+			if( prevEnd == {} ) {
 				begin = {
 					x: centerCoord.x + (startRadius * Math.cos(startAngle)),
 					y: centerCoord.y + (startRadius * Math.sin(startAngle))
@@ -88,10 +86,3 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 }
 
 module.exports = animate;
-
-
-
-
-
-
-

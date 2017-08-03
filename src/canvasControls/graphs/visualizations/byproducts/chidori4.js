@@ -32,7 +32,6 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 	if(!analyser.frequencyBinCount) return;
 
 	const frequencyData = new Uint8Array(analyser.frequencyBinCount);
-	// const frequencyData = new Uint8Array(3);
 
 	function renderLine() {
 		requestAnimationFrame(renderLine);
@@ -88,10 +87,3 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 }
 
 module.exports = animate;
-
-
-
-
-
-
-
