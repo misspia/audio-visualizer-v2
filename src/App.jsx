@@ -14,8 +14,9 @@ class App extends Component {
 	render() {
 		return <div className="col content_container">
 			<div id='nav'>
-				<AudioMenu />
 				<CanvasControls />
+				<AudioMenu />
+
 			</div>
 			<div id="primary_content" className="row">
 				<Canvas />

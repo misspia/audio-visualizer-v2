@@ -3,7 +3,7 @@
 
 .canvas_controls{
 	background-color: #fff;
-	height: 100%;
+	position:relative;
 
 	.container {
 		box-shadow: 0px 0px 10px 1px $primaryLight;
@@ -11,8 +11,10 @@
 		background-color: #fff;
 		position: absolute;
 		top: 0%;
-		left: 110%;
-		width: 400px;
+		left: $toggleMenuLeftPosition;
+
+		@include menuWidth();
+
 		display:flex;
 		justify-content: space-between;
 		&.opened {

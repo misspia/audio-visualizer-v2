@@ -1,21 +1,19 @@
 @import '../styles/variables';
 
-@mixin playlistWidth() {
-	min-width: 300px;
-	width: 25vw;
-	max-width: 400px;
-}
-
 .audio_menu {
-	height: 100%;
+	position:relative;
 
 	.container_outer {
 		box-shadow: 0px 0px 10px 1px $primaryLight;
 		padding: 0.4em 0.3em;
 		background-color: #fff;
 		position: absolute;
-		top: 110%;
-		@include playlistWidth;
+
+		left: $toggleMenuLeftPosition;
+		top: 0%;
+
+		@include menuWidth();
+
 		&.opened {
 			display: flex;
 		}

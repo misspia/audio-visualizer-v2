@@ -15,6 +15,18 @@ $accent: $purple;
 
 $transition: all 0.3s;
 
+$toggleMenuLeftPosition: 120%;
+
+@mixin menuWidth() {
+	width: 400px;
+}
+
+// @mixin playlistWidth() {
+// 	min-width: 300px;
+// 	width: 25vw;
+// 	max-width: 400px;
+// }
+
 @mixin fontBody() {
 	font-family: 'Nunito Sans', sans-serif;
 	font-weight: 300;
