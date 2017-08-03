@@ -75,31 +75,3 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 }
 
 module.exports = animate;
-
-
-// frequencyData.forEach((node, index) => {
-// 			const startAngle = index * angleIncrement;
-// 			const begin = {
-// 				x: centerCoord.x + (startRadius * Math.cos(startAngle)),
-// 				y: centerCoord.y + (startRadius * Math.sin(startAngle))
-// 			};
-// 			const endRadius = startRadius + Utils.upTo(maxRadius, Utils.maxNode, node);
-// 			// const endAngle = startAngle + angleIncrement;
-// 			const endAngle = startAngle + angleIncrement;
-// 			const end = {
-// 				x: centerCoord.x + (endRadius * Math.cos(endAngle)),
-// 				y: centerCoord.y + (endRadius * Math.sin(endAngle)),
-// 			}
-// 			const color = colorGenerator(node);
-
-// 			lines.push( new Line(ctx, begin, end, color) );
-// 		});
-// 		lines.forEach((line) => { line.draw(); });
-
-
-
-
-
-
-
-
