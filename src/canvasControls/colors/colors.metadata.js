@@ -1,10 +1,5 @@
 import Color from './colorShaders.js';
-
-const gradient = (colorGenerator) => {
-	const startColor = colorGenerator(0);
-	const endColor = colorGenerator(255);
-	return { background: `linear-gradient(-45deg, ${startColor}, ${endColor})`};
-};
+import {gradient} from './colors.utils.js';
 
 const metadata = {
 	pink: {

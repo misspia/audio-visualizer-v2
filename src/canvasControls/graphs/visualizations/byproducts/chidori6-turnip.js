@@ -1,12 +1,12 @@
 import Utils from '../graphs.utils.js';
 
-function Line( ctx, begin={}, end={}, lineWidth, color) {
+function Line( ctx, begin={}, end={}, color) {
 	this.begin = begin;
 	this.end = end;
 
 	this.draw = () => {
 		ctx.beginPath();
-		ctx.lineWidth = lineWidth;
+		ctx.lineWidth = "1";
 		ctx.strokeStyle = color;
 		ctx.moveTo(this.begin.x , this.begin.y);
 		ctx.lineTo(this.end.x, this.end.y);
@@ -20,8 +20,8 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 
 	const frequencyData = new Uint8Array(200);
 
-	function renderSun() {
-		requestAnimationFrame(renderSun);
+	function renderChidori() {
+		requestAnimationFrame(renderChidori);
 
 		analyser.getByteFrequencyData(frequencyData);
 
@@ -33,7 +33,6 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 		const startRadius = canvas.height / 2 * startRadiusMultiplier;
 		const maxLineHeight = canvas.height * maxLineHeightMultiplier;
 
-		const lineWidth = Utils.circumference(startRadius) / frequencyData.length;
 		const centerCoord = Utils.centerCoord(canvas);
 		const angleIncrement = 360 / frequencyData.length;
 
@@ -46,17 +45,18 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 				y: centerCoord.y + (startRadius * Math.sin(angle)),
 			};
 			const endRadius = startRadius + Utils.upTo(maxLineHeight, Utils.maxNode, node);
+			const endAngle = -(angle + angleIncrement);
 			const end = {
-				x: centerCoord.x + (endRadius * Math.cos(angle)),
-				y: centerCoord.y + (endRadius * Math.sin(angle)),
+				x: centerCoord.x + (endRadius * Math.cos(endAngle)),
+				y: centerCoord.y + (endRadius * Math.sin(endAngle)),
 			};
 			const color = colorGenerator(node);
 
-			lines.push(new Line(ctx, begin, end, lineWidth, color));
+			lines.push(new Line(ctx, begin, end, color));
 		});
 		lines.forEach((line) => { line.draw(); });
 	}
-	renderSun();
+	renderChidori();
 };
 
 module.exports = animate;

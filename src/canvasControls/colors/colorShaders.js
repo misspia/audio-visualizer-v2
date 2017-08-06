@@ -1,4 +1,4 @@
-import Utils from '../visualizer.utils.js';
+import Utils from './colors.utils.js';
 
 const Color = {
 	pink: (variant) => {

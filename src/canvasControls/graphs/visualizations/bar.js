@@ -1,4 +1,4 @@
-import Utils from '../../visualizer.utils.js';
+import Utils from '../graphs.utils.js';
 
 function Bar (ctx, x, y, width, height, color) {
 	this.x = x;

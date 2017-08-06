@@ -5,6 +5,7 @@ import Line from './visualizations/line.js';
 import SolidCircle from './visualizations/solidCircle.js';
 import Sun from './visualizations/sun.js';
 import Dripping from './visualizations/dripping.js';
+import Chidori from './visualizations/chidori.js';
 
 const metadata = {
 	bar: {
@@ -13,7 +14,7 @@ const metadata = {
 		icon: icons.bars
 	},
 	line: {
-		label: 'Line',
+	label: 'Line',
 		generator: Line,
 		icon: icons.pulse
 	},
@@ -31,6 +32,11 @@ const metadata = {
 		label: 'dripping',
 		generator: Dripping,
 		icon: icons.rain
+	},
+	chidori: {
+		label: 'chidori',
+		generator: Chidori,
+		icon: icons.circle
 	}
 };
 
