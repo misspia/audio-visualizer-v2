@@ -19,8 +19,9 @@ function Circle( ctx, center={}, radius, innerGradient, outerGradient) {
 
 	this.draw = () => {
 		const gradient = ctx.createRadialGradient(center.x, center.y, 0, center.x, center.y, radius);
-		gradient.addColorStop( 0, innerGradient);
-		gradient.addColorStop( 1, outerGradient );
+		gradient.addColorStop( 0.25, innerGradient);
+		gradient.addColorStop( 0.95, outerGradient );
+		gradient.addColorStop( 1, '#fff' );
 
 		ctx.beginPath();
 		ctx.fillStyle = gradient;
@@ -115,11 +116,11 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 
 		const outerCircles = [
 			{angleOffset: 0, minRadius: averageRadius, maxRadius: averageRadius, sparkLength: 0 },
-			{angleOffset: 0, minRadius: minRadius, maxRadius: maxRadius, sparkLength: 1  },
-			{angleOffset: 72, minRadius: minRadius - 1, maxRadius: maxRadius + 1, sparkLength: 2  },
-			{angleOffset: 144, minRadius: minRadius - 2, maxRadius: maxRadius + 2, sparkLength: 3  },
-			{angleOffset: 216, minRadius: minRadius - 3, maxRadius: maxRadius + 3, sparkLength: 2 },
-			{angleOffset: 288, minRadius: minRadius - 4, maxRadius: maxRadius + 4, sparkLength: 1 }
+			{angleOffset: 0, minRadius: minRadius, maxRadius: maxRadius, sparkLength: 3  },
+			{angleOffset: 72, minRadius: minRadius - 1, maxRadius: maxRadius + 1, sparkLength: 4  },
+			{angleOffset: 144, minRadius: minRadius - 2, maxRadius: maxRadius + 2, sparkLength: 2  },
+			{angleOffset: 216, minRadius: minRadius - 3, maxRadius: maxRadius + 3, sparkLength: 3 },
+			{angleOffset: 288, minRadius: minRadius - 4, maxRadius: maxRadius + 4, sparkLength: 4 }
 		];
 
 		outerCircles.forEach((circle) => {
@@ -131,7 +132,7 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 		const innerCircleNode = innerCircleData[0]
 		const innerRadius = Utils.upTo(minRadius, Utils.maxNode, innerCircleNode);
 		const innerGradient = colorGenerator(innerCircleNode);
-		const outerGradient = colorGenerator(innerCircleNode / 2);
+		const outerGradient = colorGenerator(innerCircleNode / 2, 0.75);
 		const innerCircle = new Circle(ctx, centerCoord, innerRadius, innerGradient, outerGradient);
 		innerCircle.draw();
 
