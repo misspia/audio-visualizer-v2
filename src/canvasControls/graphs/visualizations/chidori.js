@@ -13,13 +13,17 @@ function Line( ctx, begin={}, end={}, color) {
 		ctx.stroke();
 	};
 }
-function Circle( ctx, center={}, radius, color) {
+function Circle( ctx, center={}, radius, innerGradient, outerGradient) {
 	this.center = center;
 	this.radius = radius;
 
 	this.draw = () => {
+		const gradient = ctx.createRadialGradient(center.x, center.y, 0, center.x, center.y, radius);
+		gradient.addColorStop( 0, innerGradient);
+		gradient.addColorStop( 1, outerGradient );
+
 		ctx.beginPath();
-		ctx.fillStyle = color;
+		ctx.fillStyle = gradient;
 		ctx.arc( this.center.x, this.center.y, this.radius, 0 , 2 * Math.PI );
 		ctx.fill();
 	};
@@ -126,8 +130,9 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 
 		const innerCircleNode = innerCircleData[0]
 		const innerRadius = Utils.upTo(minRadius, Utils.maxNode, innerCircleNode);
-		const innerColor = colorGenerator(innerCircleNode);
-		const innerCircle = new Circle(ctx, centerCoord, innerRadius, innerColor);
+		const innerGradient = colorGenerator(innerCircleNode);
+		const outerGradient = colorGenerator(innerCircleNode / 2);
+		const innerCircle = new Circle(ctx, centerCoord, innerRadius, innerGradient, outerGradient);
 		innerCircle.draw();
 
 	}
