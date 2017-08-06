@@ -30,7 +30,7 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 	
 	analyser.minDecibels = -110;
 	analyser.smoothingTimeConstant = 0.9;
-	
+
 	const frequencyData = new Uint8Array(200);
 	const innerCircleData = new Uint8Array(1);
 
@@ -71,6 +71,27 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 		lines.forEach((line) => { line.draw(); });
 	};
 
+	function renderSparks(angleOffset, centerCoord, maxRadius, sparkLength) {
+		const angleIncrement = 360 / frequencyData.length;
+
+		let sparks = [];
+		
+		frequencyData.forEach((node, index) => {
+			const angle = index * angleIncrement + angleOffset;
+
+			const beginRadius = Utils.upTo(maxRadius, Utils.maxNode, node);
+			const begin = Utils.circleCoord(centerCoord, beginRadius, angle);
+
+			const endRadius = beginRadius + sparkLength;
+			const end = Utils.circleCoord(centerCoord, endRadius, angle);
+
+			const color = colorGenerator(node);
+
+			sparks.push( new Line(ctx, begin, end, color) )
+		});
+		sparks.forEach((spark) => { spark.draw(); });
+	}
+
 	function renderChidori() {
 		requestAnimationFrame(renderChidori);
 
@@ -79,33 +100,36 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-		const allocatedCanvasSpace = 0.6;
+		const sparkRadiusMultiplier = 1.3
+		const allocatedCanvasSpace = 0.5;
 		const minRadiusMultiplier = 0.2;
 		const maxRadiusMultiplier = allocatedCanvasSpace - minRadiusMultiplier;
 		const minRadius = canvas.height * minRadiusMultiplier;
 		const maxRadius = canvas.height * maxRadiusMultiplier;
 		const averageRadius = (minRadius + maxRadius) / 2;
-
 		const centerCoord = Utils.centerCoord(canvas);
+
+		const outerCircles = [
+			{angleOffset: 0, minRadius: averageRadius, maxRadius: averageRadius, sparkLength: 0 },
+			{angleOffset: 0, minRadius: minRadius, maxRadius: maxRadius, sparkLength: 1  },
+			{angleOffset: 72, minRadius: minRadius - 1, maxRadius: maxRadius + 1, sparkLength: 2  },
+			{angleOffset: 144, minRadius: minRadius - 2, maxRadius: maxRadius + 2, sparkLength: 3  },
+			{angleOffset: 216, minRadius: minRadius - 3, maxRadius: maxRadius + 3, sparkLength: 2 },
+			{angleOffset: 288, minRadius: minRadius - 4, maxRadius: maxRadius + 4, sparkLength: 1 }
+		];
+
+		outerCircles.forEach((circle) => {
+			const sparkRadius = circle.maxRadius * sparkRadiusMultiplier;
+			renderCircle(circle.angleOffset, centerCoord, circle.minRadius, circle.maxRadius);
+			renderSparks(circle.angleOffset, centerCoord, sparkRadius, circle.sparkLength);
+		});
 
 		const innerCircleNode = innerCircleData[0]
 		const innerRadius = Utils.upTo(minRadius, Utils.maxNode, innerCircleNode);
 		const innerColor = colorGenerator(innerCircleNode);
-		const innerCircle = new Circle(ctx, centerCoord, innerRadius, innerColor );
+		const innerCircle = new Circle(ctx, centerCoord, innerRadius, innerColor);
 		innerCircle.draw();
-		
-		const outerCircles = [
-			{angleOffset: 0, minRadius: averageRadius, maxRadius: averageRadius },
-			{angleOffset: 0, minRadius: minRadius, maxRadius: maxRadius },
-			{angleOffset: 72, minRadius: minRadius - 1, maxRadius: maxRadius + 1 },
-			{angleOffset: 144, minRadius: minRadius - 2, maxRadius: maxRadius + 2 },
-			{angleOffset: 216, minRadius: minRadius - 3, maxRadius: maxRadius + 3},
-			{angleOffset: 288, minRadius: minRadius - 4, maxRadius: maxRadius + 4}
-		];
 
-		outerCircles.forEach((circle) => {
-			renderCircle(circle.angleOffset, centerCoord, circle.minRadius, circle.maxRadius)
-		});
 	}
 	renderChidori();
 };
