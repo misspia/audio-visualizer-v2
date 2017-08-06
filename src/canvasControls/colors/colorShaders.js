@@ -2,28 +2,38 @@ import Utils from './colors.utils.js';
 
 const Color = {
 	pink: (variant, alpha = 1.0) => {
-		const max = 210, min = 160;
-		const gVariant = Utils.withinRange(variant, min, max);
+		const rMin = 230, rMax = 255;
+		const gMin = 95, gMax = 225;
+		const bMin = 110, bMax = 215;
+		const rVariant = Utils.withinRange(rMin, rMax, Utils.maxRGB, variant);
+		const gVariant = Utils.withinRange(gMin, gMax, Utils.maxRGB, variant);
+		const bVariant = Utils.withinRange(bMin, bMax, Utils.maxRGB, variant);
 
-		return `rgba(255, ${gVariant}, 220, ${alpha})`;
+		return `rgba(${rVariant}, ${gVariant}, ${bVariant}, ${alpha})`;
 	},
 	pinkOrange: (variant, alpha = 1.0) => {
-		const max = 175, min = 100;
-		const gVariant = Utils.withinRange(variant, min, max);
+		const gMin = 100, gMax = 195;
+		const bMin = 130, bMax = 150;
+		const gVariant = Utils.withinRange(gMin, gMax, Utils.maxRGB, variant);
+		const bVariant = Utils.withinRange(bMin, bMax, Utils.maxRGB, variant);
 
-		return `rgba(255, ${gVariant}, 150, ${alpha})`;
+		return `rgba(255, ${gVariant}, 130, ${alpha})`;
 	},
 	bluePink: (variant, alpha = 1.0) => {
-		const max = 255, min = 150;
-		const rVariant = Utils.withinRange(variant, min, max);
+		const rMin = 140, rMax = 255;
+		const gMin = 160, gMax = 210;
+		const rVariant = Utils.withinRange(rMin, rMax, Utils.maxRGB, variant);
+		const gVariant = Utils.withinRange(gMin, gMax, Utils.maxRGB, variant);
 
 		return `rgba(${rVariant}, 185, 255, ${alpha})`;
 	},
 	green: (variant, alpha=1.0) => {
-		const max = 210, min = 100;
-		const rVariant = Utils.withinRange(variant, min, max);
+		const rMin = 150, rMax = 255;
+		const gMin = 230, gMax = 235;
+		const rVariant = Utils.withinRange(rMin, rMax, Utils.maxRGB, variant);
+		const gVariant = Utils.withinRange(gMin, gMax, Utils.maxRGB, variant);
 
-		return `rgba(${rVariant}, 245, 170, ${alpha})`
+		return `rgba(${rVariant}, ${gVariant}, 180, ${alpha})`
 	}
 };
 
