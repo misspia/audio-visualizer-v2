@@ -41,8 +41,6 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 
 	function renderCircle(angleOffset, centerCoord, minRadius, maxRadius) {
 		const angleIncrement = 360 / frequencyData.length;
-		
-		let lines = [];
 
 		const firstNode = frequencyData[0];
 		const lastNode = frequencyData[frequencyData.length - 1];
@@ -71,15 +69,13 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 			}
 			color = colorGenerator(node);
 
-			lines.push(new Line(ctx, begin, end, color));
+			const line = new Line(ctx, begin, end, color);
+			line.draw();
 		};
-		lines.forEach((line) => { line.draw(); });
 	};
 
 	function renderSparks(angleOffset, centerCoord, maxRadius, sparkLength) {
 		const angleIncrement = 360 / frequencyData.length;
-
-		let sparks = [];
 		
 		frequencyData.forEach((node, index) => {
 			const angle = index * angleIncrement + angleOffset;
@@ -92,9 +88,9 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 
 			const color = colorGenerator(node);
 
-			sparks.push( new Line(ctx, begin, end, color) )
+			const spark = new Line(ctx, begin, end, color);
+			spark.draw();
 		});
-		sparks.forEach((spark) => { spark.draw(); });
 	}
 
 	function renderChidori() {
@@ -141,5 +137,3 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 };
 
 module.exports = animate;
-
-
