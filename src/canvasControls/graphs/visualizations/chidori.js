@@ -19,22 +19,9 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 
 	const frequencyData = new Uint8Array(200);
 
-	function renderChidori() {
-		requestAnimationFrame(renderChidori);
-
-		analyser.getByteFrequencyData(frequencyData);
-
-		ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-		const allocatedCanvasSpace = 0.6;
-		const minRadiusMultiplier = 0.2;
-		const maxRadiusMultiplier = allocatedCanvasSpace - minRadiusMultiplier;
-		const minRadius = canvas.height * minRadiusMultiplier;
-		const maxRadius = canvas.height * maxRadiusMultiplier;
-
-		const centerCoord = Utils.centerCoord(canvas);
+	function createCircle(angleOffset, centerCoord, minRadius, maxRadius) {
 		const angleIncrement = 360 / frequencyData.length;
-
+		
 		let lines = [];
 
 		const firstNode = frequencyData[0];
@@ -43,7 +30,7 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 		let node, nextNode, begin, end, color, beginRadius, beginAngle, endRadius, endAngle;
 
 		for(let index = 0; index < frequencyData.length; index ++) {
-			beginAngle = index * angleIncrement;
+			beginAngle = index * angleIncrement + angleOffset;
 			endAngle = beginAngle + angleIncrement;
 
 			if(index === frequencyData.length - 1) {
@@ -67,6 +54,26 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 			lines.push(new Line(ctx, begin, end, color));
 		};
 		lines.forEach((line) => { line.draw(); });
+	};
+
+	function renderChidori() {
+		requestAnimationFrame(renderChidori);
+
+		analyser.getByteFrequencyData(frequencyData);
+
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+		const allocatedCanvasSpace = 0.6;
+		const minRadiusMultiplier = 0.2;
+		const maxRadiusMultiplier = allocatedCanvasSpace - minRadiusMultiplier;
+		const minRadius = canvas.height * minRadiusMultiplier;
+		const maxRadius = canvas.height * maxRadiusMultiplier;
+
+		const centerCoord = Utils.centerCoord(canvas);
+		
+		createCircle(0, centerCoord, minRadius, maxRadius);
+		createCircle(90, centerCoord, minRadius, maxRadius);
+
 	}
 	renderChidori();
 };
