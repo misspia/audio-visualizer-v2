@@ -16,6 +16,11 @@ const metadata = {
 		label: 'bluePink',
 		generator: Color.bluePink,
 		optionStyle: gradient(Color.bluePink)
+	},
+	green: {
+		label: 'green',
+		generator: Color.green,
+		optionStyle: gradient(Color.green)
 	}
 };
 

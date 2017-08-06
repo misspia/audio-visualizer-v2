@@ -19,6 +19,12 @@ const Color = {
 
 		return `rgba(${rVariant}, 185, 255, ${alpha})`;
 	},
+	green: (variant, alpha=1.0) => {
+		const max = 210, min = 100;
+		const rVariant = Utils.withinRange(variant, min, max);
+
+		return `rgba(${rVariant}, 245, 170, ${alpha})`
+	}
 };
 
 module.exports = Color;

@@ -6,7 +6,7 @@ function Line( ctx, begin={}, end={}, color) {
 
 	this.draw = () => {
 		ctx.beginPath();
-		ctx.lineWidth = "1";
+		ctx.lineWidth = "1.5";
 		ctx.strokeStyle = color;
 		ctx.moveTo(this.begin.x , this.begin.y);
 		ctx.lineTo(this.end.x, this.end.y);
