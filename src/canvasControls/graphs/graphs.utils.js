@@ -22,6 +22,14 @@ const Utils = {
 	circumference: (radius) => {
 		return 2 * Math.PI * radius;
 	},
+	circleCoord: (centerCoord, radius, angle) => {
+		const radians = Utils.degreesToRadians(angle);
+
+		return {
+			x: centerCoord.x + radius *  Math.cos(-radians),
+			y: centerCoord.y + radius * Math.sin(-radians),
+		}
+	},
 };
 
 module.exports = Utils;

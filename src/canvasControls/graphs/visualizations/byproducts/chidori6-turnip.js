@@ -6,13 +6,14 @@ function Line( ctx, begin={}, end={}, color) {
 
 	this.draw = () => {
 		ctx.beginPath();
-		ctx.lineWidth = "1.5";
+		ctx.lineWidth = "1";
 		ctx.strokeStyle = color;
 		ctx.moveTo(this.begin.x , this.begin.y);
 		ctx.lineTo(this.end.x, this.end.y);
 		ctx.stroke();
 	};
 }
+
 
 function animate(canvas, ctx, analyser, colorGenerator) {
 	if(!analyser.frequencyBinCount) return;
@@ -26,38 +27,48 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-		const allocatedCanvasSpace = 0.5;
-		const minRadiusMultiplier = 0.2;
-		const maxRadiusMultiplier = allocatedCanvasSpace - minRadiusMultiplier;
-		const minRadius = canvas.height * minRadiusMultiplier;
-		const maxRadius = canvas.height * maxRadiusMultiplier;
+		const allocatedCanvasSpace = 0.6;
+		const startRadiusMultiplier = 0.4;
+		const maxLineHeightMultiplier = allocatedCanvasSpace - startRadiusMultiplier;
+		const startRadius = canvas.height / 2 * startRadiusMultiplier;
+		const maxLineHeight = canvas.height * maxLineHeightMultiplier;
 
 		const centerCoord = Utils.centerCoord(canvas);
 		const angleIncrement = 360 / frequencyData.length;
 
 		let lines = [];
 
-		for(let index = 0; index < frequencyData.length - 1; index ++) {
-			const node = frequencyData[index];
-			const nextNode = frequencyData[index + 1];
-
-			const beginRadius = Utils.withinRange(minRadius, maxRadius, Utils.maxNode, node);
-			const beginAngle = index * angleIncrement;
-			const begin = Utils.circleCoord(centerCoord, beginRadius, beginAngle);
-
-			const endRadius = Utils.withinRange(minRadius, maxRadius, Utils.maxNode, nextNode);
-			const endAngle = beginAngle + angleIncrement;
-			const end = Utils.circleCoord(centerCoord, endRadius, endAngle);
-
+		frequencyData.forEach((node, index) => {
+			const angle = index * angleIncrement;
+			const begin = {
+				x: centerCoord.x + (startRadius * Math.cos(angle)),
+				y: centerCoord.y + (startRadius * Math.sin(angle)),
+			};
+			const endRadius = startRadius + Utils.upTo(maxLineHeight, Utils.maxNode, node);
+			const endAngle = -(angle + angleIncrement);
+			const end = {
+				x: centerCoord.x + (endRadius * Math.cos(endAngle)),
+				y: centerCoord.y + (endRadius * Math.sin(endAngle)),
+			};
 			const color = colorGenerator(node);
 
 			lines.push(new Line(ctx, begin, end, color));
-		};
+		});
 		lines.forEach((line) => { line.draw(); });
 	}
 	renderChidori();
 };
 
 module.exports = animate;
+
+
+
+
+
+
+
+
+
+
 
 
