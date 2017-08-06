@@ -26,7 +26,7 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-		const allocatedCanvasSpace = 0.5;
+		const allocatedCanvasSpace = 0.6;
 		const minRadiusMultiplier = 0.2;
 		const maxRadiusMultiplier = allocatedCanvasSpace - minRadiusMultiplier;
 		const minRadius = canvas.height * minRadiusMultiplier;
@@ -37,19 +37,32 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 
 		let lines = [];
 
-		for(let index = 0; index < frequencyData.length - 1; index ++) {
-			const node = frequencyData[index];
-			const nextNode = frequencyData[index + 1];
+		const firstNode = frequencyData[0];
+		const lastNode = frequencyData[frequencyData.length - 1];
 
-			const beginRadius = Utils.withinRange(minRadius, maxRadius, Utils.maxNode, node);
-			const beginAngle = index * angleIncrement;
-			const begin = Utils.circleCoord(centerCoord, beginRadius, beginAngle);
+		let node, nextNode, begin, end, color, beginRadius, beginAngle, endRadius, endAngle;
 
-			const endRadius = Utils.withinRange(minRadius, maxRadius, Utils.maxNode, nextNode);
-			const endAngle = beginAngle + angleIncrement;
-			const end = Utils.circleCoord(centerCoord, endRadius, endAngle);
+		for(let index = 0; index < frequencyData.length; index ++) {
+			beginAngle = index * angleIncrement;
+			endAngle = beginAngle + angleIncrement;
 
-			const color = colorGenerator(node);
+			if(index === frequencyData.length - 1) {
+				beginRadius = Utils.withinRange(minRadius, maxRadius, Utils.maxNode, lastNode);
+				begin = Utils.circleCoord(centerCoord, beginRadius, beginAngle);
+
+				endRadius = Utils.withinRange(minRadius, maxRadius, Utils.maxNode, firstNode); 
+				end = Utils.circleCoord(centerCoord, endRadius, endAngle);
+			} else {
+				node = frequencyData[index];
+				nextNode = frequencyData[index + 1];
+
+				beginRadius = Utils.withinRange(minRadius, maxRadius, Utils.maxNode, node);
+				begin = Utils.circleCoord(centerCoord, beginRadius, beginAngle);
+
+				endRadius = Utils.withinRange(minRadius, maxRadius, Utils.maxNode, nextNode);
+				end = Utils.circleCoord(centerCoord, endRadius, endAngle);
+			}
+			color = colorGenerator(node);
 
 			lines.push(new Line(ctx, begin, end, color));
 		};
