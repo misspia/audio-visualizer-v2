@@ -6,7 +6,7 @@ function Line( ctx, begin={}, end={}, color) {
 
 	this.draw = () => {
 		ctx.beginPath();
-		ctx.lineWidth = "1.5";
+		ctx.lineWidth = "1";
 		ctx.strokeStyle = color;
 		ctx.moveTo(this.begin.x , this.begin.y);
 		ctx.lineTo(this.end.x, this.end.y);
@@ -19,7 +19,7 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 
 	const frequencyData = new Uint8Array(200);
 
-	function createCircle(angleOffset, centerCoord, minRadius, maxRadius) {
+	function renderCircle(angleOffset, centerCoord, minRadius, maxRadius) {
 		const angleIncrement = 360 / frequencyData.length;
 		
 		let lines = [];
@@ -68,12 +68,21 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 		const maxRadiusMultiplier = allocatedCanvasSpace - minRadiusMultiplier;
 		const minRadius = canvas.height * minRadiusMultiplier;
 		const maxRadius = canvas.height * maxRadiusMultiplier;
+		const averageRadius = (minRadius + maxRadius) / 2;
 
 		const centerCoord = Utils.centerCoord(canvas);
+		const circles = [
+			{angleOffset: 0, minRadius: averageRadius, maxRadius: averageRadius },
+			{angleOffset: 0, minRadius: minRadius, maxRadius: maxRadius },
+			{angleOffset: 72, minRadius: minRadius - 1, maxRadius: maxRadius + 1 },
+			{angleOffset: 144, minRadius: minRadius - 2, maxRadius: maxRadius + 2 },
+			{angleOffset: 216, minRadius: minRadius - 3, maxRadius: maxRadius + 3},
+			{angleOffset: 288, minRadius: minRadius - 4, maxRadius: maxRadius + 4}
+		];
 		
-		createCircle(0, centerCoord, minRadius, maxRadius);
-		createCircle(90, centerCoord, minRadius, maxRadius);
-
+		circles.forEach((circle) => {
+			renderCircle(circle.angleOffset, centerCoord, circle.minRadius, circle.maxRadius)
+		});
 	}
 	renderChidori();
 };
