@@ -13,11 +13,26 @@ function Line( ctx, begin={}, end={}, color) {
 		ctx.stroke();
 	};
 }
+function Circle( ctx, center={}, radius, color) {
+	this.center = center;
+	this.radius = radius;
+
+	this.draw = () => {
+		ctx.beginPath();
+		ctx.fillStyle = color;
+		ctx.arc( this.center.x, this.center.y, this.radius, 0 , 2 * Math.PI );
+		ctx.fill();
+	};
+}
 
 function animate(canvas, ctx, analyser, colorGenerator) {
 	if(!analyser.frequencyBinCount) return;
-
+	
+	analyser.minDecibels = -110;
+	analyser.smoothingTimeConstant = 0.9;
+	
 	const frequencyData = new Uint8Array(200);
+	const innerCircleData = new Uint8Array(1);
 
 	function renderCircle(angleOffset, centerCoord, minRadius, maxRadius) {
 		const angleIncrement = 360 / frequencyData.length;
@@ -60,6 +75,7 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 		requestAnimationFrame(renderChidori);
 
 		analyser.getByteFrequencyData(frequencyData);
+		analyser.getByteFrequencyData(innerCircleData);
 
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -71,7 +87,14 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 		const averageRadius = (minRadius + maxRadius) / 2;
 
 		const centerCoord = Utils.centerCoord(canvas);
-		const circles = [
+
+		const innerCircleNode = innerCircleData[0]
+		const innerRadius = Utils.upTo(minRadius, Utils.maxNode, innerCircleNode);
+		const innerColor = colorGenerator(innerCircleNode);
+		const innerCircle = new Circle(ctx, centerCoord, innerRadius, innerColor );
+		innerCircle.draw();
+		
+		const outerCircles = [
 			{angleOffset: 0, minRadius: averageRadius, maxRadius: averageRadius },
 			{angleOffset: 0, minRadius: minRadius, maxRadius: maxRadius },
 			{angleOffset: 72, minRadius: minRadius - 1, maxRadius: maxRadius + 1 },
@@ -79,8 +102,8 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 			{angleOffset: 216, minRadius: minRadius - 3, maxRadius: maxRadius + 3},
 			{angleOffset: 288, minRadius: minRadius - 4, maxRadius: maxRadius + 4}
 		];
-		
-		circles.forEach((circle) => {
+
+		outerCircles.forEach((circle) => {
 			renderCircle(circle.angleOffset, centerCoord, circle.minRadius, circle.maxRadius)
 		});
 	}
