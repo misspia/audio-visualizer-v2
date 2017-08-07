@@ -12,8 +12,8 @@ const Color = {
 		return `rgba(${rVariant}, ${gVariant}, ${bVariant}, ${alpha})`;
 	},
 	pinkOrange: (variant, alpha = 1.0) => {
-		const gMin = 100, gMax = 195;
-		const bMin = 130, bMax = 150;
+		const gMin = 100, gMax = 230;
+		const bMin = 100, bMax = 150;
 		const gVariant = Utils.withinRange(gMin, gMax, Utils.maxRGB, variant);
 		const bVariant = Utils.withinRange(bMin, bMax, Utils.maxRGB, variant);
 
@@ -33,8 +33,8 @@ const Color = {
 		const rVariant = Utils.withinRange(rMin, rMax, Utils.maxRGB, variant);
 		const gVariant = Utils.withinRange(gMin, gMax, Utils.maxRGB, variant);
 
-		return `rgba(${rVariant}, ${gVariant}, 180, ${alpha})`
-	}
+		return `rgba(${rVariant}, ${gVariant}, 180, ${alpha})`;
+	},
 };
 
 module.exports = Color;
