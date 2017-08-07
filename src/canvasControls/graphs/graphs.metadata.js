@@ -37,7 +37,7 @@ const metadata = {
 		label: 'chidori',
 		generator: Chidori,
 		icon: icons.circle
-	}
+	},
 };
 
 module.exports = metadata;

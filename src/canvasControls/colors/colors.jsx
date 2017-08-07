@@ -6,7 +6,8 @@ import metadata from './colors.metadata.js';
 
 class Colors extends Component {
 	componentWillMount() {
-		Actions.selectColor(metadata.pink.generator);
+		// Actions.selectColor(metadata.pink.generator);
+		Actions.selectColor(metadata.green.generator);
 	}
 	selectColor(color) {
 		Actions.selectColor(color);

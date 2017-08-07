@@ -1,6 +1,10 @@
 const Utils = {
-	withinRange: (variant, min, max) => {
-		return Math.round(variant * ( min / max ) + max - min);
+	maxRGB: 255,
+	withinRange: (minRange, maxRange, maxValue, variant) => {
+		const range = maxRange - minRange;
+		const variantPercent = variant / maxValue;
+
+		return Math.round(variantPercent * range + minRange);
 	},
 	gradient: (colorGenerator) => {
 		const startColor = colorGenerator(0);
