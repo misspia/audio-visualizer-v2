@@ -10,7 +10,7 @@ class Graphs extends Component {
 		this.state = { ctx: {} }
 	}
 	componentWillMount() {
-		Actions.selectGraph(metadata.chidori.generator);
+		Actions.selectGraph(metadata.sun.generator);
 	}
 	componentWillReceiveProps(nextProps){
 		// this.setState({ ctx: this.refs.canvas.getContext('webgl') });

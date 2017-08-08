@@ -17,13 +17,11 @@ const Color = {
 		const gVariant = Utils.withinRange(gMin, gMax, Utils.maxRGB, variant);
 		const bVariant = Utils.withinRange(bMin, bMax, Utils.maxRGB, variant);
 
-		return `rgba(255, ${gVariant}, 130, ${alpha})`;
+		return `rgba(255, ${gVariant}, ${bVariant}, ${alpha})`;
 	},
 	bluePink: (variant, alpha = 1.0) => {
 		const rMin = 140, rMax = 255;
-		const gMin = 160, gMax = 210;
 		const rVariant = Utils.withinRange(rMin, rMax, Utils.maxRGB, variant);
-		const gVariant = Utils.withinRange(gMin, gMax, Utils.maxRGB, variant);
 
 		return `rgba(${rVariant}, 185, 255, ${alpha})`;
 	},

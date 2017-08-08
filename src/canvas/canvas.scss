@@ -11,6 +11,9 @@
 		width: 80%;
 		box-shadow: 0px 3px 11px 2px $primaryLight;
 		border-radius: 1em;
-		// canvas {}
+		overflow: hidden;
+		canvas {
+			transition: 0.3s all;
+		}
 	}
 }
