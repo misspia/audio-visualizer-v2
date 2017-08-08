@@ -1,12 +1,12 @@
 import Utils from '../graphs.utils.js';
 
-function Line( ctx, begin={}, end={}, lineWidth, color) {
+function Line( ctx, begin={}, end={}, color) {
 	this.begin = begin;
 	this.end = end;
 
 	this.draw = () => {
 		ctx.beginPath();
-		ctx.lineWidth = lineWidth;
+		ctx.lineWidth = "1";
 		ctx.strokeStyle = color;
 		ctx.moveTo(this.begin.x , this.begin.y);
 		ctx.lineTo(this.end.x, this.end.y);
@@ -14,11 +14,60 @@ function Line( ctx, begin={}, end={}, lineWidth, color) {
 	};
 }
 
+let voidBar = 0;
 
 function animate(canvas, ctx, analyser, colorGenerator) {
 	if(!analyser.frequencyBinCount) return;
 
-	const frequencyData = new Uint8Array(200);
+	analyser.smoothingTimeConstant = 0.65;
+
+	const frequencyData = new Uint8Array(100);
+	const barPortion = frequencyData.length / 2;
+	
+	function renderLongLines(angle, radius, centerCoord, node, color) {
+		const endRadius = radius.min + Utils.upTo(radius.max, Utils.maxNode, node);
+		const beginRadius = radius.min + (endRadius - radius.min) / 2;
+		
+		const begin = Utils.circleCoord(centerCoord, beginRadius, angle);
+		const end = Utils.circleCoord(centerCoord, endRadius, angle)
+		
+		const bar = new Line(ctx, begin, end, color);
+		bar.draw();
+	}
+
+	function renderVoid(angle, radius, centerCoord, node, color) {
+		const beginRadius = radius.min;
+		const endRadius = Utils.withinRange(radius.min, radius.max, Utils.maxNode, node);
+
+		const begin = Utils.circleCoord(centerCoord, beginRadius, angle);
+		const end = Utils.circleCoord(centerCoord, endRadius, angle);
+
+		const dot = new Line(ctx, begin, end, color);
+		dot.draw();
+	}
+
+	function setColor(reverseColors, voidBar, node) {	
+		const generatedColor = colorGenerator(node);
+		let primary = generatedColor, background = '#fff', voidColor = '#000';
+
+		if(voidBar) {
+			primary = '#000';
+			voidColor = generatedColor;
+		}
+		if(reverseColors) {
+			primary = '#fff';
+			background = generatedColor;
+		}
+		if(reverseColors && voidBar) {
+			primary = '#000';
+			background = generatedColor;
+			voidColor = '#fff';
+		}
+		return {primary: primary , background: background, void: voidColor};
+	}
+	
+	let velocity = 0.1;
+	let reverseColors = false;
 
 	function renderSun() {
 		requestAnimationFrame(renderSun);
@@ -27,41 +76,41 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-		const allocatedCanvasSpace = 0.6;
-		const startRadiusMultiplier = 0.4;
-		const maxLineHeightMultiplier = allocatedCanvasSpace - startRadiusMultiplier;
-		const startRadius = canvas.height / 2 * startRadiusMultiplier;
-		const maxLineHeight = canvas.height * maxLineHeightMultiplier;
-
-		const lineWidth = Utils.circumference(startRadius) / frequencyData.length;
+		voidBar = voidBar % frequencyData.length + velocity;
+		if(Math.round(voidBar) === frequencyData.length) {
+			reverseColors = !reverseColors;
+		}
+		
+		const allocatedCanvasSpace = 0.5;
+		const minRadiusMultiplier = 0.2;
+		const maxRadiusMultiplier = allocatedCanvasSpace - minRadiusMultiplier;
+		const radius = {
+			min: canvas.height * minRadiusMultiplier,
+			max: canvas.height * maxRadiusMultiplier
+		};
 		const centerCoord = Utils.centerCoord(canvas);
-		const angleIncrement = 360 / frequencyData.length;
 
-		let lines = [];
+		const angleIncrement = 360 / frequencyData.length;
+		const rotationOffset = 90;
 
 		frequencyData.forEach((node, index) => {
-			const angle = index * angleIncrement;
-			const begin = {
-				x: centerCoord.x + (startRadius * Math.cos(angle)),
-				y: centerCoord.y + (startRadius * Math.sin(angle)),
-			};
-			const endRadius = startRadius + Utils.upTo(maxLineHeight, Utils.maxNode, node);
-			const end = {
-				x: centerCoord.x + (endRadius * Math.cos(angle)),
-				y: centerCoord.y + (endRadius * Math.sin(angle)),
-			};
-			const color = colorGenerator(node);
-
-			lines.push(new Line(ctx, begin, end, lineWidth, color));
+			const angle = index * angleIncrement + rotationOffset;
+			const color = setColor(reverseColors, index === Math.round(voidBar), node);
+			
+			canvas.style.backgroundColor = color.background;
+			
+			if(index <= barPortion) {
+				renderLongLines(angle, radius, centerCoord, node, color.primary);
+			} else {
+				renderVoid(angle, radius, centerCoord, node, color.void);
+			} 
+				
 		});
-		lines.forEach((line) => { line.draw(); });
 	}
 	renderSun();
 };
 
 module.exports = animate;
-
-
 
 
 
