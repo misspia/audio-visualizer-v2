@@ -1,20 +1,26 @@
 import Utils from '../graphs.utils.js';
 
-function Line( ctx, begin={}, end={}, color) {
+function Line( ctx, begin={}, end={}, color, lineWidth="1.2") {
 	this.begin = begin;
 	this.end = end;
 
 	this.draw = () => {
 		ctx.beginPath();
-		ctx.lineWidth = "1.2";
+		ctx.lineWidth = lineWidth;
 		ctx.strokeStyle = color;
 		ctx.moveTo(this.begin.x , this.begin.y);
 		ctx.lineTo(this.end.x, this.end.y);
 		ctx.stroke();
 	};
 }
+function Ticker(ctx, begin={}, end={}, color, lineWidth) {
+	this.begin = begin;
+	this.end = end;
 
-// let voidBar = 0;
+	this.draw = () => {
+
+	};
+}
 
 function animate(canvas, ctx, analyser, colorGenerator) {
 	if(!analyser.frequencyBinCount) return;
@@ -46,24 +52,34 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 		const dot = new Line(ctx, begin, end, color);
 		dot.draw();
 	}
+	function renderTicker(angle, radius, centerCoord, node) {
+		const beginRadius = Utils.withinRange(radius.min, radius.max , Utils.maxNode, node);
+		const endRadius = beginRadius + 2;
+
+		const begin = Utils.circleCoord(centerCoord, beginRadius, angle);
+		const end = Utils.circleCoord(centerCoord, endRadius, angle);
+
+		const ticker = new Line(ctx, begin, end, '#000');
+		ticker.draw();
+	}
 
 	function setColor(reverseColors, voidBar, node) {
 		const generatedColor = colorGenerator(node);
 		let primary = generatedColor, background = '#fff', voidColor = '#000';
 
-		if(voidBar) {
-			primary = '#000';
-			voidColor = generatedColor;
-		}
+		// if(voidBar) {
+		// 	primary = '#000';
+		// 	voidColor = generatedColor;
+		// }
 		if(reverseColors) {
 			primary = '#fff';
 			background = generatedColor;
 		}
-		if(reverseColors && voidBar) {
-			primary = '#000';
-			background = generatedColor;
-			voidColor = '#fff';
-		}
+		// if(reverseColors && voidBar) {
+		// 	primary = '#000';
+		// 	background = generatedColor;
+		// 	voidColor = '#fff';
+		// }
 		return {primary: primary , background: background, void: voidColor};
 	}
 
@@ -75,11 +91,9 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 		requestAnimationFrame(renderSun);
 
 		analyser.getByteFrequencyData(frequencyData);
-
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 		voidBar = voidBar % frequencyData.length + velocity;
-
 		if(voidBar.toFixed(1) == frequencyData.length) {
 			reverseColors = !reverseColors;
 		}
@@ -106,6 +120,9 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 				renderLongLines(angle, radius, centerCoord, node, color.primary);
 			} else {
 				renderVoid(angle, radius, centerCoord, node, color.void);
+			}
+			if(index == Math.round(voidBar)) {
+				renderTicker(angle, radius, centerCoord, node);
 			}
 
 		});
