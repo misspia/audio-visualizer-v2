@@ -13,11 +13,26 @@ function Line( ctx, begin={}, end={}, color, lineWidth="1.2") {
 		ctx.stroke();
 	};
 }
-function Ticker(ctx, begin={}, end={}, color, lineWidth) {
+
+function Ticker(ctx, begin={}, midLeft, midRight, end, color, lineWidth="1") {
 	this.begin = begin;
 	this.end = end;
+	this.midLeft = midLeft;
+	this.midRight = midRight;
 
 	this.draw = () => {
+		ctx.beginPath();
+		ctx.lineWidth = lineWidth;
+		ctx.strokeStyle = color;
+		ctx.moveTo(this.begin.x, this.begin.y);
+		ctx.lineTo(this.midLeft.x, this.midLeft.y);
+		ctx.lineTo(this.end.x, this.end.y);
+		ctx.lineTo(this.midRight.x, this.midRight.y);
+		// ctx.lineTo(this.end.x, this.end.y);
+		ctx.lineTo(this.begin.x, this.begin.y);
+
+		ctx.closePath();
+		ctx.stroke();
 
 	};
 }
@@ -53,13 +68,17 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 		dot.draw();
 	}
 	function renderTicker(angle, radius, centerCoord, node) {
-		const beginRadius = Utils.withinRange(radius.min, radius.max , Utils.maxNode, node);
-		const endRadius = beginRadius + 2;
+		const tickerLength = 50;
+		const beginRadius = Utils.upTo(radius.min, Utils.maxNode, node) - tickerLength;
+		const endRadius = beginRadius + tickerLength;
+		const midRadius = beginRadius * 0.8 + endRadius * 0.2;
 
 		const begin = Utils.circleCoord(centerCoord, beginRadius, angle);
+		const midLeft = Utils.circleCoord(centerCoord, midRadius, angle - 5);
+		const midRight = Utils.circleCoord(centerCoord, midRadius, angle + 5);
 		const end = Utils.circleCoord(centerCoord, endRadius, angle);
 
-		const ticker = new Line(ctx, begin, end, '#000');
+		const ticker = new Ticker(ctx, begin, midLeft, midRight, end, '#000');
 		ticker.draw();
 	}
 
