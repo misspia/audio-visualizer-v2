@@ -1,54 +1,73 @@
 import Utils from '../graphs.utils.js';
 
-function Line( ctx, begin={}, end={}, lineWidth, color) {
+function Line( ctx, begin={}, end={}, color) {
 	this.begin = begin;
 	this.end = end;
 
 	this.draw = () => {
 		ctx.beginPath();
-		ctx.lineWidth = lineWidth;
-		ctx.strokeStyle = color === 0 ? '#000' : color;
+		ctx.lineWidth = "1";
+		ctx.strokeStyle = color;
 		ctx.moveTo(this.begin.x , this.begin.y);
 		ctx.lineTo(this.end.x, this.end.y);
 		ctx.stroke();
 	};
 }
 
-let barPortion = 0;
+let voidBar = 0;
 
 function animate(canvas, ctx, analyser, colorGenerator) {
-	// console.log(canvas.style);
 	if(!analyser.frequencyBinCount) return;
 
 	analyser.smoothingTimeConstant = 0.65;
 
 	const frequencyData = new Uint8Array(100);
+	const barPortion = frequencyData.length / 2;
 	
-	function renderLongLines(angle, minRadius, maxRadius, centerCoord, node, lineWidth) {
-		const endRadius = minRadius + Utils.upTo(maxRadius, Utils.maxNode, node);
-		const beginRadius = minRadius + (endRadius - minRadius) / 2;
+	function renderLongLines(angle, radius, centerCoord, node, color) {
+		const endRadius = radius.min + Utils.upTo(radius.max, Utils.maxNode, node);
+		const beginRadius = radius.min + (endRadius - radius.min) / 2;
 		
-		const begin = Utils.circleCoord(centerCoord, minRadius, angle);
+		const begin = Utils.circleCoord(centerCoord, beginRadius, angle);
 		const end = Utils.circleCoord(centerCoord, endRadius, angle)
-		const color = colorGenerator(node);
 		
-		const bar = new Line(ctx, begin, end, lineWidth, color);
+		const bar = new Line(ctx, begin, end, color);
 		bar.draw();
 	}
 
-	function renderVoid(angle, minRadius, maxRadius, centerCoord, node, lineWidth) {
-		const beginRadius = minRadius;
-		const endRadius = Utils.withinRange(minRadius, maxRadius, Utils.maxNode, node);
+	function renderVoid(angle, radius, centerCoord, node, color) {
+		const beginRadius = radius.min;
+		const endRadius = Utils.withinRange(radius.min, radius.max, Utils.maxNode, node);
 
 		const begin = Utils.circleCoord(centerCoord, beginRadius, angle);
 		const end = Utils.circleCoord(centerCoord, endRadius, angle);
 
-		const dot = new Line(ctx, begin, end, lineWidth, 0);
+		const dot = new Line(ctx, begin, end, color);
 		dot.draw();
 	}
-	
+
+	function setColor(reverseColors, voidBar, node) {	
+		const generatedColor = colorGenerator(node);
+		let primary = generatedColor, background = '#fff', voidColor = '#000';
+
+		if(voidBar) {
+			primary = '#000';
+			voidColor = generatedColor;
+		}
+		if(reverseColors) {
+			primary = '#fff';
+			background = generatedColor;
+		}
+		if(reverseColors && voidBar) {
+			primary = '#000';
+			background = generatedColor;
+			voidColor = '#fff';
+		}
+		return {primary: primary , background: background, void: voidColor};
+	}
 	
 	let velocity = 0.1;
+	let reverseColors = false;
 
 	function renderSun() {
 		requestAnimationFrame(renderSun);
@@ -57,30 +76,33 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-		if(barPortion > frequencyData.length || barPortion < 0) {
-			velocity = -velocity;
-			canvas.style.backgroundColor = '#000';
+		voidBar = voidBar % frequencyData.length + velocity;
+		if(Math.round(voidBar) === frequencyData.length) {
+			reverseColors = !reverseColors;
 		}
-		barPortion += velocity;
 		
 		const allocatedCanvasSpace = 0.5;
 		const minRadiusMultiplier = 0.2;
 		const maxRadiusMultiplier = allocatedCanvasSpace - minRadiusMultiplier;
-		const minRadius = canvas.height * minRadiusMultiplier;
-		const maxRadius = canvas.height * maxRadiusMultiplier;
+		const radius = {
+			min: canvas.height * minRadiusMultiplier,
+			max: canvas.height * maxRadiusMultiplier
+		};
 		const centerCoord = Utils.centerCoord(canvas);
 
-		const lineWidth = 1;		
 		const angleIncrement = 360 / frequencyData.length;
 		const rotationOffset = 90;
 
 		frequencyData.forEach((node, index) => {
 			const angle = index * angleIncrement + rotationOffset;
+			const color = setColor(reverseColors, index === Math.round(voidBar), node);
+			
+			canvas.style.backgroundColor = color.background;
 			
 			if(index <= barPortion) {
-				renderLongLines(angle, minRadius, maxRadius, centerCoord, node, lineWidth);
+				renderLongLines(angle, radius, centerCoord, node, color.primary);
 			} else {
-				renderVoid(angle, minRadius,maxRadius, centerCoord, node, lineWidth );
+				renderVoid(angle, radius, centerCoord, node, color.void);
 			} 
 				
 		});
