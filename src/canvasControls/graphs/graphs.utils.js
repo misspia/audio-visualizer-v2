@@ -18,6 +18,10 @@ const Utils = {
 	degreesToRadians: (degrees) => {
 		return degrees * Math.PI / 180;
 	},
+	newColorAlpha: (rgba, alpha) => {
+		const newColor = rgba.replace(/[^,]+(?=\))/, alpha);
+		return newColor;
+	},
 	// circles
 	circumference: (radius) => {
 		return 2 * Math.PI * radius;
