@@ -1,7 +1,6 @@
 import Utils from '../graphs.utils.js';
 
 function Line( ctx, begin={}, end={}, color, lineWidth="1.2") {
-	// console.log(ctx, begin, end, color);
 	this.begin = begin;
 	this.end = end;
 
@@ -22,15 +21,16 @@ function Circle( ctx, center={}, radius, color) {
 	this.draw = () => {
 		const gradient = ctx.createRadialGradient(center.x, center.y, 0, center.x, center.y, radius);
 		gradient.addColorStop( 0.25, Utils.newColorAlpha(color, 0.9));
-		gradient.addColorStop( 0.3, Utils.newColorAlpha(color, 0.7));
-		gradient.addColorStop( 0.4, Utils.newColorAlpha(color, 0.5));
+		gradient.addColorStop( 0.5, Utils.newColorAlpha(color, 0.7));
+		gradient.addColorStop( 0.75, Utils.newColorAlpha(color, 0.5));
 		gradient.addColorStop( 1, Utils.newColorAlpha(color, 0.2));
 
 		ctx.beginPath();
 		
 		ctx.arc( this.center.x, this.center.y, this.radius, 0 , 2 * Math.PI );
-		ctx.fillStyle = gradient;
-		ctx.fill();
+		ctx.stroke();
+		// ctx.fillStyle = gradient;
+		// ctx.fill();
 	};
 }
 
@@ -88,17 +88,12 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 
 			canvas.style.backgroundColor = color.background;
 
-			const glowCenterCoord = Utils.circleCoord(centerCoord, radius.min, angle);
-			const glowRadius = Utils.withinRange(1, 20, Utils.maxNode, node);
+			const glowCenterCoord = Utils.circleCoord(centerCoord, radius.max, angle);
+			const glowRadius = Utils.withinRange(10, 50, Utils.maxNode, node);
 			const glow = new Circle(ctx, glowCenterCoord, glowRadius, color.primary);
 			glow.draw();
 
-			const begin = Utils.circleCoord(centerCoord, radius.min + 30, angle);
-			const lineLength = Utils.withinRange(radius.min + 30, radius.max, Utils.maxNode, node);
-			const end = Utils.circleCoord(centerCoord, lineLength, angle);
 
-			const line = new Line(ctx, begin, end, color.primary);
-			line.draw();
 
 		});
 	}
@@ -106,13 +101,3 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 };
 
 module.exports = animate;
-
-
-
-
-
-
-
-
-
-
