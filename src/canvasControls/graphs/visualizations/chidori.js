@@ -32,7 +32,7 @@ function Circle( ctx, center={}, radius, innerGradient, outerGradient) {
 
 function animate(canvas, ctx, analyser, colorGenerator) {
 	if(!analyser.frequencyBinCount) return;
-	
+
 	analyser.minDecibels = -110;
 	analyser.smoothingTimeConstant = 0.9;
 
@@ -55,7 +55,7 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 				beginRadius = Utils.withinRange(minRadius, maxRadius, Utils.maxNode, lastNode);
 				begin = Utils.circleCoord(centerCoord, beginRadius, beginAngle);
 
-				endRadius = Utils.withinRange(minRadius, maxRadius, Utils.maxNode, firstNode); 
+				endRadius = Utils.withinRange(minRadius, maxRadius, Utils.maxNode, firstNode);
 				end = Utils.circleCoord(centerCoord, endRadius, endAngle);
 			} else {
 				node = frequencyData[index];
@@ -76,7 +76,7 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 
 	function renderSparks(angleOffset, centerCoord, maxRadius, sparkLength) {
 		const angleIncrement = 360 / frequencyData.length;
-		
+
 		frequencyData.forEach((node, index) => {
 			const angle = index * angleIncrement + angleOffset;
 
