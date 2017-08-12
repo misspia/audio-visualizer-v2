@@ -1,32 +1,24 @@
 import Utils from '../graphs.utils.js';
 
-function Shard(ctx, begin={}, midLeft, midRight, end, color, lineWidth="0.5") {
+function Ray(ctx, begin={}, end={}, color, opacity, lineWidth="20") {
 	this.begin = begin;
 	this.end = end;
-	this.midLeft = midLeft;
-	this.midRight = midRight;
-
 	this.draw = () => {
-		const gradient = ctx.createLinearGradient(this.begin.x, this.begin.y, this.end.x, this.end.y);
-		const startColor = Utils.newColorAlpha(color, 0.3);
-		const endColor = Utils.newColorAlpha(color, 0.1);
-		gradient.addColorStop(0.2, startColor);
-		gradient.addColorStop(0.5, endColor);
-
+		ctx.save();
 		ctx.beginPath();
-		ctx.lineWidth = lineWidth;
-		ctx.strokeStyle = color;
-		ctx.moveTo(this.begin.x, this.begin.y);
-		ctx.lineTo(this.midLeft.x, this.midLeft.y);
-		ctx.lineTo(this.end.x, this.end.y);
-		ctx.lineTo(this.midRight.x, this.midRight.y);
-		ctx.lineTo(this.begin.x, this.begin.y);
-		ctx.fillStyle = gradient;
-		ctx.fill();
 
+		ctx.shadowBlur = 80
+		ctx.shadowColor = color;
+
+		ctx.lineWidth = lineWidth;
+		ctx.strokeStyle = Utils.newColorAlpha(color, opacity);
+
+		ctx.moveTo(this.begin.x, this.begin.y);
+		ctx.lineTo(this.end.x, this.end.y);
 		ctx.closePath();
 		ctx.stroke();
-	};
+		ctx.restore();
+	}
 }
 function Circle( ctx, center={}, radius, color) {
 	this.center = center;
@@ -59,18 +51,23 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 		const glow = new Circle(ctx, glowCenterCoord, glowRadius, color);
 		glow.draw();
 	}
-	function renderShard(centerCoord, radius, angle, shardWidth, node, color) {
+
+	function renderRay(centerCoord, radius, angle, shardWidth, node, color, opacity) {
 		const beginRadius = radius.min;
 		const endRadius = Utils.withinRange(radius.min, radius.max, Utils.maxNode, node);
-		const midRadius = endRadius * 0.2 + beginRadius * 0.8;
 
 		const begin = Utils.circleCoord(centerCoord, beginRadius, angle);
 		const end = Utils.circleCoord(centerCoord, endRadius, angle);
-		const midLeft = Utils.circleCoord(centerCoord, midRadius, angle - shardWidth);
-		const midRight = Utils.circleCoord(centerCoord, midRadius, angle + shardWidth);
 
-		const shard = new Shard(ctx, begin, midLeft, midRight, end, color);
+		const shard = new Ray(ctx, begin, end, color, opacity);
 		shard.draw();
+	}
+	function renderBackRay(centerCoord, radius, angle, node, color, opacity) {
+		const begin = Utils.circleCoord(centerCoord, radius.min, angle);
+		const end = Utils.circleCoord(centerCoord, radius.max, angle);
+
+		const ray = new Ray(ctx, begin, end, color, opacity);
+		ray.draw();
 	}
 
 	function renderSun() {
@@ -79,23 +76,38 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 		analyser.getByteFrequencyData(frequencyData);
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-
 		const innerRadius = {
 			min: canvas.height * 0.12,
 			max: canvas.height * 0.15
 		};
-		const outerRadius1 = {
-			min: innerRadius.max * 1.01,
-			max: canvas.height * 0.35
+		const rayLong = {
+			radius: {
+				min: innerRadius.max * 1.01,
+				max: canvas.height * 0.7
+			},
+			opacity: 0.03,
 		};
-		const outerRadius2 = {
-			min: outerRadius1.min,
-			max: outerRadius1.max * 0.5
+		const rayMid = {
+			radius: {
+				min: rayLong.radius.min,
+				max: rayLong.radius.max * 0.8
+			},
+			opacity: 0.01,
 		};
-		const outerRadius3 = {
-			min: outerRadius1.min,
-			max: outerRadius1.max * 0.7
+		const rayShort = {
+			radius: {
+				min: rayLong.min,
+				max: rayLong.max * 0.9
+			},
+			opacity: 0.01		
 		};
+		const backRay = {
+			radius: {
+				min: rayLong.radius.min,
+				max: canvas.width	
+			},
+			opacity: 0.01
+		}
 		const glowRadius = innerRadius.max - innerRadius.min;
 		const shardWidth = 2.5; 
 
@@ -107,11 +119,12 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 		frequencyData.forEach((node, index) => {
 			const angle = index * angleIncrement + rotationOffset;
 			const color = colorGenerator(node);
-
+			
+			renderBackRay(centerCoord, backRay.radius, angle, node, color, backRay.opacity);
 			renderGlow(centerCoord, innerRadius, glowRadius, angle, node, color);
-			renderShard(centerCoord, outerRadius1, angle, shardWidth, node, color);
-			renderShard(centerCoord, outerRadius2, angle, shardWidth, node, color);
-			renderShard(centerCoord, outerRadius3, angle, shardWidth, node, color);
+			renderRay(centerCoord, rayLong.radius, angle, shardWidth, node, color, rayLong.opacity);
+			renderRay(centerCoord, rayMid.radius, angle, shardWidth, node, color, rayMid.opacity);
+			renderRay(centerCoord, rayShort, angle, shardWidth, node, color, 0.01);
 
 		});
 	}
@@ -119,13 +132,4 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 };
 
 module.exports = animate;
-
-
-
-
-
-
-
-
-
 

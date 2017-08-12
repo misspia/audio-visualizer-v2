@@ -196,7 +196,7 @@ module.exports = animate;
 // 	};
 // }
 
-// function Shard(ctx, begin={}, midLeft, midRight, end, color, lineWidth="0.5") {
+// function Shard(ctx, begin={}, midLeft={}, midRight={}, end={}, color, lineWidth="0.5") {
 // 	this.begin = begin;
 // 	this.end = end;
 // 	this.midLeft = midLeft;
@@ -224,6 +224,7 @@ module.exports = animate;
 // 		ctx.stroke();
 // 	};
 // }
+
 
 // function animate(canvas, ctx, analyser, colorGenerator) {
 // 	if(!analyser.frequencyBinCount) return;
