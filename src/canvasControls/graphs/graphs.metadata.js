@@ -1,22 +1,15 @@
 import {icons} from '../../utils.js';
 
-import Bar from './visualizations/bar.js';
-import Line from './visualizations/line.js';
-import SolidCircle from './visualizations/solidCircle.js';
+
 import Sun from './visualizations/sun.js';
-import Dripping from './visualizations/dripping.js';
+import Mirror from './visualizations/mirror.js'
 import Chidori from './visualizations/chidori.js';
 
 const metadata = {
-	bar: {
-		label: 'Bar',
-		generator: Bar,
+	mirror: {
+		label: 'Mirror',
+		generator: Mirror,
 		icon: icons.bars
-	},
-	line: {
-	label: 'Line',
-		generator: Line,
-		icon: icons.pulse
 	},
 	sun: {
 		label: 'sun',

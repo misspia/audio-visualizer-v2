@@ -5,12 +5,8 @@ import './graphs.scss';
 import metadata from './graphs.metadata.js';
 
 class Graphs extends Component {
-	constructor() {
-		super();
-		this.state = { ctx: {} }
-	}
 	componentWillMount() {
-		Actions.selectGraph(metadata.sun.generator);
+		Actions.selectGraph(metadata.mirror.generator);
 	}
 	componentWillReceiveProps(nextProps){
 		this.renderGraph(nextProps.canvas, nextProps.graph, nextProps.color);
