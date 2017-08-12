@@ -18,20 +18,10 @@ const metadata = {
 		generator: Line,
 		icon: icons.pulse
 	},
-	solidCircle: {
-		label: 'beat',
-		generator: SolidCircle,
-		icon: icons.circle
-	},
 	sun: {
 		label: 'sun',
 		generator:Sun,
 		icon: icons.sun
-	},
-	dripping: {
-		label: 'dripping',
-		generator: Dripping,
-		icon: icons.rain
 	},
 	chidori: {
 		label: 'chidori',
