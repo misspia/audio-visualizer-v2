@@ -55,8 +55,4 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 	renderMirror();
 }
 
-
-
-
-
 module.exports = animate;

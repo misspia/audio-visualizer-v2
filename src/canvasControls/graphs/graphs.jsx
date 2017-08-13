@@ -6,17 +6,17 @@ import metadata from './graphs.metadata.js';
 
 class Graphs extends Component {
 	componentWillMount() {
-		Actions.selectGraph(metadata.tenseigan.generator);
+		const graph = metadata.orichalcos;
+		Actions.selectGraph(graph.generator, graph.context);
 	}
 	componentWillReceiveProps(nextProps){
-		this.renderGraph(nextProps.canvas, nextProps.graph, nextProps.color);
+		this.renderGraph(nextProps.canvas, nextProps.context, nextProps.graph, nextProps.color);
 	}
-	selectGraph(graph) {
-		Actions.selectGraph(graph);
+	selectGraph(graph, context) {
+		Actions.selectGraph(graph, context);
 	}
-	renderGraph(canvas, graph, color) {
-		// const ctx = canvas.getContext('webgl');
-		const ctx = canvas.getContext('2d');
+	renderGraph(canvas, context, graph, color) {
+		const ctx = canvas.getContext(context);
 		graph(this.props.canvas, ctx, this.props.analyser, color);
 	}
  	renderOptions() {
@@ -28,7 +28,7 @@ class Graphs extends Component {
 	renderOption(graph, graphName) {
 		return <button key={graphName}
 				className='button secondary'
-				onClick={()=>{this.selectGraph(graph.generator)}}>
+				onClick={()=>{this.selectGraph(graph.generator, graph.context)}}>
 				<i className={graph.icon}></i>
 
 			</button>;

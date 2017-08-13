@@ -13,6 +13,7 @@ let State = {
 	visualizer: {
 		canvas: {},
 		graph: 'bar',
+		context: '2d',
 		color:'pink'
 	}
 };
@@ -118,8 +119,9 @@ const Store = flux.createStore({
 	SET_CANVAS: (canvas) => {
 		State.visualizer.canvas = canvas;
 	},
-	SELECT_GRAPH: (graph) => {
+	SELECT_GRAPH: (graph, context) => {
 		State.visualizer.graph = graph;
+		State.visualizer.context = context;
 	},
 	SELECT_COLOR: (color) => {
 		State.visualizer.color = color;

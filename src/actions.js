@@ -32,8 +32,8 @@ const Actions = {
 	setCanvas: (canvas) => {
 		dispatch('SET_CANVAS', canvas);
 	},
-	selectGraph: (graph) => {
-		dispatch('SELECT_GRAPH', graph);
+	selectGraph: (graph, context) => {
+		dispatch('SELECT_GRAPH', graph, context);
 	},
 	selectColor: (color) => {
 		dispatch('SELECT_COLOR', color);
