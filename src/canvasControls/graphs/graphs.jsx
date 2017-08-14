@@ -6,7 +6,7 @@ import metadata from './graphs.metadata.js';
 
 class Graphs extends Component {
 	componentWillMount() {
-		Actions.selectGraph(metadata.mirror.generator);
+		Actions.selectGraph(metadata.tenseigan.generator);
 	}
 	componentWillReceiveProps(nextProps){
 		this.renderGraph(nextProps.canvas, nextProps.graph, nextProps.color);
