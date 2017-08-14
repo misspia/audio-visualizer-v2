@@ -1,9 +1,8 @@
 import {icons} from '../../utils.js';
 
-
-import Sun from './visualizations/sun.js';
 import Mirror from './visualizations/mirror.js'
 import Chidori from './visualizations/chidori.js';
+import Tenseigan from './visualizations/tenseigan.js';
 
 const metadata = {
 	mirror: {
@@ -11,10 +10,10 @@ const metadata = {
 		generator: Mirror,
 		icon: icons.bars
 	},
-	sun: {
-		label: 'sun',
-		generator:Sun,
-		icon: icons.sun
+	tenseigan: {
+		label: 'tenseigan',
+		generator: Tenseigan,
+		icon: icons.leaf
 	},
 	chidori: {
 		label: 'chidori',

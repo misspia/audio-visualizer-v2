@@ -13,7 +13,9 @@ module.exports = {
 		bars: 'ion-stats-bars',
 		pulse: 'ion-ios-pulse',
 		circle: 'ion-ios-circle-filled',
-		rain: 'ion-ios-rainy'
+		rain: 'ion-ios-rainy',
+		leaf: 'ion-leaf',
+		flower: 'ion-ios-flower-outline'
 	},
 	secondsToHMS: (seconds) => {
 		const h = Math.floor(seconds / 3600);
