@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Actions from '../../actions.js';
 import {icons} from '../../utils.js';
 
-import './Controls.scss';
+import './Controls.css';
 
 class Controls extends Component {
 	constructor() {
@@ -36,7 +36,7 @@ class Controls extends Component {
 	playPrevTrack() {
 		Actions.playPrevTrack(this.props.track.url);
 	}
-	togglePlayState() { 
+	togglePlayState() {
 		Actions.playTrack(this.props.track.url);
 	}
 	handlePlayStateIcon() {
@@ -52,7 +52,7 @@ class Controls extends Component {
 				<button className={`button primary large ${this.props.shuffle ? 'active' : ''}`} onClick={this.shufflePlaylist}>
 					<i className={icons.shuffle}></i>
 				</button>
-				
+
 				<button className="button primary large" onClick={this.playPrevTrack}>
 					<i className={icons.prev}></i>
 				</button>
@@ -62,12 +62,12 @@ class Controls extends Component {
 				<button className="button primary large" onClick={this.playNextTrack}>
 					<i className={icons.next}></i>
 				</button>
-				<button className={`button primary large ${this.props.track.loop ? 'active' : ''}`} 
+				<button className={`button primary large ${this.props.track.loop ? 'active' : ''}`}
 				onClick={this.loopTrack}>
 					<i className={icons.loop}></i>
 				</button>
 			</div>
-		);		
+		);
 	}
 }
 

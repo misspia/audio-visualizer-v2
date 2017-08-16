@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import './audioMenu.scss';
+import './audioMenu.css';
 
 import AudioUpload from './audioUpload/audioUpload.smart.jsx';
 import Playlist from './playlist/playlist.smart.jsx';

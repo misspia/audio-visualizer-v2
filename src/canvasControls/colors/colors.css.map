@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AACC,eAAQ;EACP,MAAM,EAAE,OAAO;EAEf,YAAY,EAAE,CAAC",
+"sources": ["colors.scss"],
+"names": [],
+"file": "colors.css"
+}

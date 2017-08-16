@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Track from './track/track.jsx';
-import './playlist.scss';
+import './playlist.css';
 
 
 class Playlist extends Component {
@@ -10,7 +10,7 @@ class Playlist extends Component {
 	}
 	populateList(files) {
 		let audio = files.map( (file, index) => {
-			return <Track key={index} name={file.name} url={file.url} 
+			return <Track key={index} name={file.name} url={file.url}
 					playing={file.playing} selected={file.selected}
 					loop={file.loop}
 					playlistEnded={this.props.playlist.ended}/>

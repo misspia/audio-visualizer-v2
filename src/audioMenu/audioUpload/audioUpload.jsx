@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Actions from '../../actions.js';
 import {icons} from '../../utils.js';
 
-import './audioUpload.scss';
+import './audioUpload.css';
 
 class AudioUpload extends Component {
 	constructor() {

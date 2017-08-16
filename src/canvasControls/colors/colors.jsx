@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Actions from '../../actions.js';
-import './colors.scss';
+import './colors.css';
 
 import metadata from './colors.metadata.js';
 

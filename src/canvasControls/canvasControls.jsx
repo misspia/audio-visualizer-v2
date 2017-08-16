@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './canvasControls.scss';
+import './canvasControls.css';
 
 import Graphs from './graphs/graphs.smart.jsx';
 import Colors from './colors/colors.smart.jsx';

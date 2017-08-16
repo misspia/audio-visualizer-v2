@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 
-import './App.scss';
+import './App.css';
 
 import AudioMenu from './audioMenu/audioMenu.jsx';
 import Player from './Player/Player.smart.jsx';
 import Canvas from './canvas/canvas.smart.jsx';
 import CanvasControls from './canvasControls/canvasControls.smart.jsx';
 
+// sass --watch src
 class App extends Component {
 	componentDidMount() {
 
