@@ -4,7 +4,7 @@ import DurationTime from './ProgressDisplay/Duration.jsx';
 import ProgressTime from './ProgressDisplay/Progress.jsx';
 import ProgressBar from './ProgressDisplay/ProgressBar.jsx';
 import Actions from '../actions.js';
-import './Player.scss';
+import './Player.css';
 
 
 class Player extends Component {
@@ -42,8 +42,8 @@ class Player extends Component {
 		files.forEach((file)=>{ if(file.selected) { selected = file; } });
 		return selected;
 	}
-	playAudio() { 
-		this.refs.audio.oncanplay = () => { return this.refs.audio.play(); };	
+	playAudio() {
+		this.refs.audio.oncanplay = () => { return this.refs.audio.play(); };
 		if(this.refs.audio.readyState > 3) return this.refs.audio.play();
 	}
 	pauseAudio() { this.refs.audio.pause(); }
@@ -99,7 +99,7 @@ class Player extends Component {
 					<input ref="seek" type="range" step="0.1" min="0" max={this.state.duration}
 						onChange={this.updateAudioPosition} />
 				</div>
-				<DurationTime duration={this.state.duration} 
+				<DurationTime duration={this.state.duration}
 					progress={this.state.currentTime}
 					ended={this.refs.audio ? this.refs.audio.ended : false} />
 			</div>

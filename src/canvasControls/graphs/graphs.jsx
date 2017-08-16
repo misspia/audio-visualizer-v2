@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Actions from '../../actions.js';
-import './graphs.scss';
+import './graphs.css';
 
 import metadata from './graphs.metadata.js';
 

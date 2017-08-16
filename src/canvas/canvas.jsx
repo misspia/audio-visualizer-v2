@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Actions from '../actions.js';
-import './canvas.scss';
+import './canvas.css';
 
 class Visualizer extends Component {
 	componentDidMount() {

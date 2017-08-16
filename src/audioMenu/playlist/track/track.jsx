@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Actions from '../../../actions.js';
 import Utils from '../../../utils.js';
 
-import './track.scss';
+import './track.css';
 
 class Track extends Component {
 	constructor() {
