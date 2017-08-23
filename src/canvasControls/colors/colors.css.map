@@ -1,6 +1,6 @@
 {
 "version": 3,
-"mappings": "AACC,eAAQ;EACP,MAAM,EAAE,OAAO;EAEf,YAAY,EAAE,CAAC",
+"mappings": "AACC,eAAQ;EACP,MAAM,EAAE,OAAO;EAEf,YAAY,EAAE,CAAC;EACf,sBAAS;IACR,UAAU,EAAE,qBAAgC",
 "sources": ["colors.scss"],
 "names": [],
 "file": "colors.css"

@@ -5,14 +5,19 @@ import './graphs.css';
 import metadata from './graphs.metadata.js';
 
 class Graphs extends Component {
+	constructor() {
+		super();
+		this.state = { selected: ''};
+	}
 	componentWillMount() {
-		Actions.selectGraph(metadata.tenseigan.generator);
+		this.selectGraph(metadata.tenseigan);
 	}
 	componentWillReceiveProps(nextProps){
 		this.renderGraph(nextProps.canvas, nextProps.graph, nextProps.color);
 	}
 	selectGraph(graph) {
-		Actions.selectGraph(graph);
+		Actions.selectGraph(graph.generator);
+		this.setState({selected: graph.id})
 	}
 	renderGraph(canvas, graph, color) {
 		// const ctx = canvas.getContext('webgl');
@@ -27,8 +32,8 @@ class Graphs extends Component {
 	}
 	renderOption(graph, graphName) {
 		return <button key={graphName}
-				className='button secondary'
-				onClick={()=>{this.selectGraph(graph.generator)}}>
+				className={`button secondary ${graph.id === this.state.selected ? 'active' : ''}`}
+				onClick={()=>{this.selectGraph(graph)}}>
 				<i className={graph.icon}></i>
 
 			</button>;

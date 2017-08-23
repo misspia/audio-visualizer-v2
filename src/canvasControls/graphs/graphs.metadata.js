@@ -6,17 +6,17 @@ import Tenseigan from './visualizations/tenseigan.js';
 
 const metadata = {
 	mirror: {
-		label: 'Mirror',
+		id: 'Mirror',
 		generator: Mirror,
 		icon: icons.bars
 	},
 	tenseigan: {
-		label: 'tenseigan',
+		id: 'tenseigan',
 		generator: Tenseigan,
 		icon: icons.leaf
 	},
 	chidori: {
-		label: 'chidori',
+		id: 'chidori',
 		generator: Chidori,
 		icon: icons.circle
 	},

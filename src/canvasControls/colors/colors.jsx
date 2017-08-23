@@ -5,11 +5,16 @@ import './colors.css';
 import metadata from './colors.metadata.js';
 
 class Colors extends Component {
+	constructor() {
+		super();
+		this.state = { selected: ''};
+	}
 	componentWillMount() {
-		Actions.selectColor(metadata.pink.generator);
+		this.selectColor(metadata.pink);
 	}
 	selectColor(color) {
-		Actions.selectColor(color);
+		Actions.selectColor(color.generator);
+		this.setState({ selected: color.id})
 	}
 	renderOptions() {
 		return Object.keys(metadata).map((colorName) => {
@@ -19,8 +24,8 @@ class Colors extends Component {
 	}
 	renderOption(color, colorName) {
 		return <button key={colorName}
-				className='button secondary'
-				onClick={()=>{this.selectColor(color.generator)}}
+				className={`button secondary ${color.id === this.state.selected ? 'active' : ''}`}
+				onClick={()=>{this.selectColor(color)}}
 				style={color.optionStyle}>
 			</button>;
 	}
