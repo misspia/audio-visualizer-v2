@@ -17,7 +17,7 @@ class Graphs extends Component {
 	}
 	selectGraph(graph) {
 		Actions.selectGraph(graph.generator);
-		this.setState({selected: graph.label})
+		this.setState({selected: graph.id})
 	}
 	renderGraph(canvas, graph, color) {
 		// const ctx = canvas.getContext('webgl');
@@ -32,7 +32,7 @@ class Graphs extends Component {
 	}
 	renderOption(graph, graphName) {
 		return <button key={graphName}
-				className={`button secondary ${graph.label == this.state.selected ? 'active' : ''}`}
+				className={`button secondary ${graph.id === this.state.selected ? 'active' : ''}`}
 				onClick={()=>{this.selectGraph(graph)}}>
 				<i className={graph.icon}></i>
 

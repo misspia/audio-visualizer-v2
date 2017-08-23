@@ -3,22 +3,22 @@ import {gradient} from './colors.utils.js';
 
 const metadata = {
 	bluePink: {
-		label: 'bluePink',
+		id: 'bluePink',
 		generator: Color.bluePink,
 		optionStyle: gradient(Color.bluePink)
 	},
 	pink: {
-		label: 'pink',
+		id: 'pink',
 		generator: Color.pink,
 		optionStyle: gradient(Color.pink)
 	},
 	pinkOrange: {
-		label: 'pink orange',
+		id: 'pink orange',
 		generator: Color.pinkOrange,
 		optionStyle: gradient(Color.pinkOrange)
 	},
 	green: {
-		label: 'green',
+		id: 'green',
 		generator: Color.green,
 		optionStyle: gradient(Color.green)
 	},

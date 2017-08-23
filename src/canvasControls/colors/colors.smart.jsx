@@ -3,6 +3,6 @@ import Colors from './colors.jsx';
 
 module.exports = Store.createSmartComponent(Colors,
 	(props) => { return {
-        color: Store.getVisualizer().color,
-    }; }
-);
+		color: Store.getVisualizer().color,
+	}; }
+	);
