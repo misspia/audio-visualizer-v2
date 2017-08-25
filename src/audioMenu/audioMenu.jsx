@@ -21,7 +21,7 @@ class AudioMenu extends Component {
 	}
 	render() {
 		return <div className="audio_menu col">
-					<button className={`${icons.music} button large secondary`}
+					<button className={`${icons.music} button large secondary ${this.state.open ? 'active' : ''}`}
 						onClick={this.toggleMenu}
 					></button>
 					<div className={`container_outer col ${this.isOpen()}`}>
