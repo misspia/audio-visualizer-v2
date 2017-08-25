@@ -19,7 +19,7 @@ class Controls extends Component {
 	}
 	render() {
 		return <div className='canvas_controls row'>
-			<button className={`${icons.brush} button large secondary`}
+			<button className={`${icons.brush} button large secondary ${this.state.open ? 'active' : ''}`}
 				onClick={this.toggleControls}
 			></button>
 			<div className={`container ${this.isOpen()}`}>
