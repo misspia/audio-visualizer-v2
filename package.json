@@ -47,7 +47,6 @@
     "whatwg-fetch": "2.0.2"
   },
   "dependencies": {
-    "jsmediatags": "^3.6.1",
     "node-sass-chokidar": "0.0.3",
     "npm-run-all": "^4.0.2",
     "pico-flux": "^2.1.2",
