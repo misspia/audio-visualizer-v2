@@ -9,8 +9,40 @@ class AudioUpload extends Component {
 		super();
 		this.handleFileUpload = this.handleFileUpload.bind(this)
 	}
+
+	componentDidMount() {
+		var xhr = new XMLHttpRequest();
+		const that = this;
+		xhr.addEventListener('progress', function(e) {
+		    if (e.lengthComputable) {
+		        var percentComplete = e.loaded / e.total;
+		        console.log('Downloading: ' + percentComplete + '%');
+		    }
+		});
+
+		xhr.addEventListener('load', function(blob) {
+		    if (xhr.status == 200) {
+						var theBlob = xhr.response;
+						theBlob.lastModifiedDate = new Date();
+						theBlob.name = "Skyrim 8-bit.mp3";
+						const files = [theBlob];
+						console.log(files)
+						Actions.addFile(files)
+		        //audioLink.src = window.URL.createObjectURL(xhr.response);
+		    }
+		});
+
+		xhr.open('GET', '/assets/skyrim-8bit.mp3');
+		xhr.responseType = 'blob';
+		xhr.send(null);
+
+
+
+
+	}
 	handleFileUpload(e) {
 		const files = e.target.files;
+		console.log(files)
 		Actions.addFile(files);
 	}
 	render() {
