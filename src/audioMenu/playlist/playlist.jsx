@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Track from './track/track.jsx';
 import './playlist.css';
 
-
 class Playlist extends Component {
 	constructor() {
 		super();

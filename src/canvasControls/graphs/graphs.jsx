@@ -10,7 +10,7 @@ class Graphs extends Component {
 		this.state = { selected: ''};
 	}
 	componentWillMount() {
-		this.selectGraph(metadata.tenseigan);
+		this.selectGraph(metadata.chidori);
 	}
 	componentWillReceiveProps(nextProps){
 		this.renderGraph(nextProps.canvas, nextProps.graph, nextProps.color);
@@ -20,7 +20,6 @@ class Graphs extends Component {
 		this.setState({selected: graph.id})
 	}
 	renderGraph(canvas, graph, color) {
-		// const ctx = canvas.getContext('webgl');
 		const ctx = canvas.getContext('2d');
 		graph(this.props.canvas, ctx, this.props.analyser, color);
 	}

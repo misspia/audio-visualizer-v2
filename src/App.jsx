@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import './App.css';
 
 import AudioMenu from './audioMenu/audioMenu.jsx';
@@ -9,9 +8,6 @@ import CanvasControls from './canvasControls/canvasControls.smart.jsx';
 
 // sass --watch src
 class App extends Component {
-	componentDidMount() {
-
-	}
 	render() {
 		return <div className="col content_container">
 			<div id='nav'>
