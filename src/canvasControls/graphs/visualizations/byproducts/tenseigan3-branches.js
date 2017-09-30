@@ -1,5 +1,10 @@
-import Utils from '../graphs.utils.js';
-
+import Utils from '../../graphs.utils.js';
+// Utils.circleCoordNoRadians = (centerCoord, radius, angle) => {
+// 	return {
+// 		x: centerCoord.x + radius *  Math.cos(-angle),
+// 		y: centerCoord.y + radius * Math.sin(-angle),
+// 	}
+// },
 function Ray(ctx, begin={}, end={}, color={}, lineWidth="1") {
 	this.begin = begin;
 	this.end = end;
@@ -38,11 +43,10 @@ function Circle( ctx, center={}, radius, color) {
 
 function animate(canvas, ctx, analyser, colorGenerator) {
 	if(!analyser.frequencyBinCount) return;
-	
-	analyser.minDecibels = -80;
-	analyser.smoothingTimeConstant = 0.9;
 
-	const frequencyData = new Uint8Array(180);
+	// analyser.smoothingTimeConstant = 0.6;
+
+	const frequencyData = new Uint8Array(200);
 
 	function renderGlowCircle(centerCoord, baseRadiusMin, baseRadiusMax, glowRadius, angleIncrement, beatNode) {
 		frequencyData.forEach((node, index) => {
@@ -61,19 +65,23 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 		const glow = new Circle(ctx, glowCenterCoord, glowRadius, color);
 		glow.draw();
 	}
-	function renderRays(centerCoord, radius, angleIncrement, lineWidth) {
+	function renderRays(centerCoord, ray, angleIncrement, lineWidth) {
 		frequencyData.forEach((node, index) => {
 			const angle = index * angleIncrement;
+			// const color = {
+			// 	begin: colorGenerator(node, ray.opacity.begin),
+			// 	end: colorGenerator(node, ray.opacity.end)
+			// };
 			const color = {
 				begin: colorGenerator(node),
 				end: colorGenerator(node)
 			}
 			
-			renderRay(centerCoord, radius, angle, lineWidth, node, color);
+			renderRay(centerCoord, ray.radius, angle, lineWidth, node, color);
 		});
 	}
 	function renderRay(centerCoord, radius, angle, lineWidth, node, color) {
-		const begin = Utils.circleCoord(centerCoord, radius.min, angle);
+		const begin = Utils.circleCoordNoRadians(centerCoord, radius.min, angle);
 		const radiusEnd = Utils.withinRange(radius.min, radius.max, Utils.maxNode, node);
 		const end = Utils.circleCoord(centerCoord, radiusEnd, angle);
 
@@ -90,11 +98,17 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 		min: innerRadiusMin.min * 1.1,
 		max: innerRadiusMin.max * 1.1,
 	}
-	const rayRadius = {
-		min: innerRadiusMax.max * 1.01,
-		max: canvas.height * 0.4	
+	const ray = {
+		radius: {
+			min: innerRadiusMax.max * 1.05,
+			max: canvas.height * 0.5	
+		},
+		opacity: {
+			begin: 0.05,
+			end: 0.01
+		}
 	}
-	const lineWidth = Utils.circumference(rayRadius.min) / frequencyData.length;
+	const lineWidth = Utils.circumference(ray.radius.min) / frequencyData.length;
 	const glowRadius = innerRadiusMin.max - innerRadiusMin.min;
 	const angleIncrement = 360 / frequencyData.length;
 
@@ -105,7 +119,7 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 		analyser.getByteFrequencyData(frequencyData);
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		
-		renderRays(centerCoord, rayRadius, angleIncrement, lineWidth);
+		renderRays(centerCoord, ray, angleIncrement, lineWidth);
 		renderGlowCircle(centerCoord, innerRadiusMin, innerRadiusMax, glowRadius, angleIncrement, beatNode);
 		
 	}

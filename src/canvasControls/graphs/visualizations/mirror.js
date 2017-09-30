@@ -18,7 +18,6 @@ function Line( ctx, begin={}, end={}, color, lineWidth = '2', lineCap='butt') {
 function animate(canvas, ctx, analyser, colorGenerator) {
 	if(!analyser.frequencyBinCount) return;
 	
-	// analyser.fftSize = 256;
 	const frequencyData = new Uint8Array(110);
 	
 	function renderBars(xSpread, barWidth, maxHeight, node, index, color) {

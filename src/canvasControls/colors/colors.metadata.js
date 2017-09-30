@@ -17,10 +17,10 @@ const metadata = {
 		generator: Color.pinkOrange,
 		optionStyle: gradient(Color.pinkOrange)
 	},
-	green: {
-		id: 'green',
-		generator: Color.green,
-		optionStyle: gradient(Color.green)
+	heaven: {
+		id: 'heaven',
+		generator: Color.heaven,
+		optionStyle: gradient(Color.heaven)
 	},
 	
 };

@@ -25,13 +25,13 @@ const Color = {
 
 		return `rgba(${rVariant}, 185, 255, ${alpha})`;
 	},
-	green: (variant, alpha=1.0) => {
+	heaven: (variant, alpha=1.0) => {
 		const rMin = 150, rMax = 255;
 		const gMin = 230, gMax = 235;
 		const rVariant = Utils.withinRange(rMin, rMax, Utils.maxRGB, variant);
 		const gVariant = Utils.withinRange(gMin, gMax, Utils.maxRGB, variant);
 
-		return `rgba(${rVariant}, ${gVariant}, 180, ${alpha})`;
+		return `rgba(${rVariant}, ${gVariant}, 224, ${alpha})`;
 	},
 };
 

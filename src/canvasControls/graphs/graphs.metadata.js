@@ -11,22 +11,21 @@ const metadata = {
 		generator: Chidori,
 		icon: icons.circle
 	},
-	mirror: {
-		id: 'Mirror',
-		generator: Mirror,
-		icon: icons.bars
+	tenseigan: {
+		id: 'tenseigan',
+		generator: Tenseigan,
+		icon: icons.sun
 	},
 	star: {
 		id: 'star',
 		generator: Star,
 		icon: icons.star
 	},
-	tenseigan: {
-		id: 'tenseigan',
-		generator: Tenseigan,
-		icon: icons.leaf
+	mirror: {
+		id: 'Mirror',
+		generator: Mirror,
+		icon: icons.bars
 	},
-	
 };
 
 module.exports = metadata;
