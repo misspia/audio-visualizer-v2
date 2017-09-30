@@ -1,4 +1,4 @@
-import Utils from '../graphs.utils.js';
+import Utils from '../../graphs.utils.js';
 
 function Line( ctx, begin={}, end={}, color, lineWidth="1.2") {
 	this.begin = begin;

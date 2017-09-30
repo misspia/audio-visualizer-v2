@@ -99,8 +99,6 @@ function animate(canvas, ctx, analyser, colorGenerator) {
 	const frequencyData = new Uint8Array(100);
 	const petalData = new Uint8Array(12);
 
-	// canvas.style.backgroundColor = colorGenerator(0);
-
 	function renderGlowCircle(centerCoord, baseRadiusMin, baseRadiusMax, glowRadius, angleIncrement, beatNode) {
 		frequencyData.forEach((node, index) => {
 			const angle = index * angleIncrement;

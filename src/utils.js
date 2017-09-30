@@ -15,7 +15,8 @@ module.exports = {
 		circle: 'ion-ios-circle-filled',
 		rain: 'ion-ios-rainy',
 		leaf: 'ion-leaf',
-		flower: 'ion-ios-flower-outline'
+		flower: 'ion-ios-flower-outline',
+		star: 'ion-android-star'
 	},
 	secondsToHMS: (seconds) => {
 		const h = Math.floor(seconds / 3600);
