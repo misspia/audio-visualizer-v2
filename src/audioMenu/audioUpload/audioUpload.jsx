@@ -12,7 +12,8 @@ class AudioUpload extends Component {
 		this.handleFileUpload = this.handleFileUpload.bind(this)
 	}
 	componentDidMount() {
-		DefaultAudio();
+		DefaultAudio({name: 'mossy - Warpaint', file: 'Warpaint.mp3'});
+		DefaultAudio({name: 'TheFatRat - Fly Away', file: 'FlyAway.mp3'});
 	}
 	handleFileUpload(e) {
 		const files = e.target.files;

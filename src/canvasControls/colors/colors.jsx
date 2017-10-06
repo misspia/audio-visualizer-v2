@@ -10,7 +10,7 @@ class Colors extends Component {
 		this.state = { selected: ''};
 	}
 	componentWillMount() {
-		this.selectColor(metadata.pink);
+		this.selectColor(metadata.heaven);
 	}
 	selectColor(color) {
 		Actions.selectColor(color.generator);
